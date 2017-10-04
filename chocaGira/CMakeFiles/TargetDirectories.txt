@@ -1,0 +1,14 @@
+/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/CMakeFiles/install.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/CMakeFiles/list_install_components.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/CMakeFiles/install/strip.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/CMakeFiles/install/local.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/CMakeFiles/rebuild_cache.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/CMakeFiles/edit_cache.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/install.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/list_install_components.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/rebuild_cache.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/chocagira.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/install/strip.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/install/local.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/edit_cache.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/chocagira_automoc.dir

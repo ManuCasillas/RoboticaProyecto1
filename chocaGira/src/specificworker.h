@@ -58,17 +58,42 @@ private:
 	   QMutexLocker ml(&mutex);
 	    clicked = false; 
 	 };
+	 bool getClicked(){
+	   return clicked;
+	 };
+	 std::pair<float, float> getValues (){
+	    QMutexLocker ml(&mutex);
+	    return std::make_pair<>(x, z);	    
+	 };
+	 void setX(float _x) {
+	   x = _x;
+	 };
+	 void setZ(float _z) {
+	   z = _z;
+	 };
+	 void setFinish(bool f)
+	 {
+	   QMutexLocker ml(&mutex);
+	    finish = f; 
+	 };
+	 bool getFinish()
+	 {
+	   QMutexLocker ml(&mutex);
+	   return finish;
+	 };
+	 
 	  float x = 0;
 	  float y = 0;
 	  float z = 0;
 	  bool clicked = false;
+	  bool finish = false;
 	  QMutex mutex;
        };
 
+         Coordinate coor;
 public slots:
 	void compute(); 	
 
-private:
 	
 };
 

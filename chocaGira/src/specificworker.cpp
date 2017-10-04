@@ -23,7 +23,7 @@
 */
 SpecificWorker::SpecificWorker(MapPrx& mprx) : GenericWorker(mprx)
 {
-
+  
 }
 
 /**
@@ -52,16 +52,16 @@ void SpecificWorker::compute()
      // qDebug() << d.angle << d.dist;
     //qDebug() << "---------------------------";
     
-    if(Coordinate.clicked){
+      TBaseState state;
+      differentialrobot_proxy->getBaseState(state);
+      InnerModel innermodel;
+      innermodel.updateTransformValuesS("robot", state.x, 0, state.z, 0, state.alpha, 0);
+      if(coor.getClicked()){
+	
+     
+   //  differentialrobot_proxy->setSpeedBase();
       
-  qDebug()<< "------------------------";
-  qDebug() << "EJE X - COMPUTE" << Coordinate.x;
-  qDebug() << "EJE y" << Coordinate.y;  
-  qDebug() << "EJE Z" << Coordinate.z;
-  qDebug()<< "------------------------";
-      
-      
-	Coordinate.clicked = false;
+
     }
 
     
@@ -80,28 +80,13 @@ void SpecificWorker::compute()
 
 void SpecificWorker::setPick(const Pick &myPick)
 {
-
   
-  
-  if(!Coordinate.clicked){
-    Coordinate.activate();
-    
-    Coordinate.x = myPick.x;
-    Coordinate.y = myPick.y;
-    Coordinate.z = myPick.z;
-    
-  }
-  
-//el meotod que va a llamar el ice middleware
-  qDebug()<< "------------------------";
-  qDebug() << "EJE X" << myPick.x;
-  qDebug() << "EJE y" << myPick.y;  
-  qDebug() << "EJE Z" << myPick.z;
-  qDebug()<< "------------------------";
-  
-  
-  
-  
+  if(!coor.getClicked()){
+     
+    coor.setX(myPick.x);
+    coor.setZ(myPick.z);
+    coor.activate();
+  }  
   
 }
 
