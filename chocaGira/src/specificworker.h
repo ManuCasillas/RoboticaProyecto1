@@ -43,6 +43,7 @@ public:
 	~SpecificWorker();
 	bool setParams(RoboCompCommonBehavior::ParameterList params);
         void setPick(const Pick &myPick);
+	float gaus(float Vrot, float Vx, float h);
 private:
        
        struct Coordinate 
@@ -66,10 +67,18 @@ private:
 	    return std::make_pair<>(x, z);	    
 	 };
 	 void setX(float _x) {
+	   QMutexLocker ml(&mutex);
 	   x = _x;
 	 };
 	 void setZ(float _z) {
+	   QMutexLocker ml(&mutex);
 	   z = _z;
+	 };
+	 float getX(){
+	   return x;
+	 };
+	 float getZ(){
+	   return z;
 	 };
 	 void setFinish(bool f)
 	 {
@@ -88,7 +97,10 @@ private:
 	  bool clicked = false;
 	  bool finish = false;
 	  QMutex mutex;
+	  QVec vec;
+	  
        };
+       InnerModel *innermodel;
 
          Coordinate coor;
 public slots:

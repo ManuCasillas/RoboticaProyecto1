@@ -36,36 +36,92 @@ SpecificWorker::~SpecificWorker()
 
 bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 {
-
-	timer.start(Period);	
-
+	innermodel = new InnerModel("/home/salabeta/robocomp/files/innermodel/simpleworld.xml");
+	timer.start(Period);
 	return true;
 }
 
 
 void SpecificWorker::compute()
 {
-    //qDebug() << "asdasd";
+
+    
+    float angle, distTarget, vadv, vrot;
+    const float MaxAdv = 400;
+    const float MaxRot = 0.5;
+    const float e = 2.71828;
     TLaserData data = laser_proxy->getLaserData();
     std::sort(data.begin()+20, data.end()-20, [](auto a,auto b){return a.dist < b.dist;});
-    //for (auto d:data)
-     // qDebug() << d.angle << d.dist;
-    //qDebug() << "---------------------------";
+
     
-      TBaseState state;
+      RoboCompDifferentialRobot::TBaseState state;
       differentialrobot_proxy->getBaseState(state);
-      InnerModel innermodel;
-      innermodel.updateTransformValuesS("robot", state.x, 0, state.z, 0, state.alpha, 0);
-      if(coor.getClicked()){
+      innermodel->updateTransformValues("base", state.x, 0, state.z, 0, state.alpha, 0);
+      
+       if(coor.getClicked()){  
 	
-     
-   //  differentialrobot_proxy->setSpeedBase();
+	 QVec dist = innermodel->transform("base",QVec::vec3(coor.getX(), 0, coor.getZ()), "world" );
+	 angle = atan2(dist.x(), dist.z());
+	 distTarget = dist.norm2();
+	 if (distTarget < 50 ){
+	   coor.disable();
+	   differentialrobot_proxy->setSpeedBase(0, 0);
+	 } else {
+	   vadv = distTarget;
+	   vrot = angle;
+	   if(vrot > angle){
+	     vrot = MaxRot;
+	   }
+	   if (vadv > distTarget){
+	     vadv = (1/(1+e)-0.5);
+	     vadv = vadv * (e
+	   }
+	   if (angle != 0){
+	     differentialrobot_proxy->setSpeedBase(vadv, vrot);
+	   } else {
+	     differentialrobot_proxy->setSpeedBase(vadv, 0);
+	   }
+	 }   
       
 
     }
+      
+      
+      
+/*     if(coor.getClicked()){  
+	
+	 QVec dist = innermodel->transform("base",QVec::vec3(coor.getX(), 0, coor.getZ()), "world" );
+	 angle = atan2(dist.x(), dist.z());
+	 distTarget = dist.norm2();
+	 if (distTarget < 50 ){
+	   coor.disable();
+	   differentialrobot_proxy->setSpeedBase(0, 0);
+	 } else {
+	   vadv = distTarget;
+	   vrot = angle;
+	   if(vrot > angle){
+	     vrot = MaxRot;
+	   }
+	   if (vadv > distTarget){
+	     vadv = MaxAdv;
+	   }
+	   if (angle != 0){
+	     differentialrobot_proxy->setSpeedBase(vadv, vrot);
+	   } else {
+	     differentialrobot_proxy->setSpeedBase(vadv, 0);
+	   }
+	 }   
+      
 
+    }
+*/
     
     //NO BORRRRRRRRRRAAAAAAAAAAAAAARRRRRRRRRRR
+        //for (auto d:data)
+     // qDebug() << d.angle << d.dist;
+    //qDebug() << "---------------------------";
+    
+    
 //     qDebug() << "PRIMERO" << data[20].dist;
 //     differentialrobot_proxy->setSpeedBase(400, 0);
 //     if (data[20].dist < 210){
@@ -76,6 +132,12 @@ void SpecificWorker::compute()
 //     }
      
 
+}
+
+float SpecificWorker::gaus(float Vrot, float Vx, float h){ //vx = 0.3 h = 0.5
+  const float e = 2.71828;
+  float L = (Vx * Vx)/log(h);
+  
 }
 
 void SpecificWorker::setPick(const Pick &myPick)
