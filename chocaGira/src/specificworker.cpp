@@ -44,8 +44,46 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 
 void SpecificWorker::compute()
 {
+  RoboCompDifferentialRobot::TBaseState bState;
+  differentialrobot_proxy->getBaseState(bState);
 
-    
+   TLaserData laserData = laser_proxy->getLaserData();
+
+  innermodel->updateTranslationPointers("base", bState.x, 0, bState.z ,0, bState.alpha, 0);
+//   innermodel->updateTransformValues("base", bState.x, 0, bState.z, 0, bState.alpha, 0);
+
+  switch( state )
+ {
+
+   case State::IDLE:
+
+    if ( coor.getClicked())
+     state = State::GOTO;
+   
+    break;
+
+   case State::GOTO:
+
+    gotoTarget();
+
+    break;
+   
+   case State::ROTATE:     
+   break;
+   
+   case State::BORDER:
+   break;
+   
+   case State::FINISH:
+   break;
+   
+  }
+
+
+  
+  
+  
+   /* ----------------------ENTREGA CAMINO RECTO------------------------------
     float angle, distTarget, vadv, vrot;
     const float MaxAdv = 400;
     const float MaxRot = 0.5;
@@ -54,41 +92,44 @@ void SpecificWorker::compute()
     std::sort(data.begin()+20, data.end()-20, [](auto a,auto b){return a.dist < b.dist;});
 
     
-      RoboCompDifferentialRobot::TBaseState state;
-      differentialrobot_proxy->getBaseState(state);
-      innermodel->updateTransformValues("base", state.x, 0, state.z, 0, state.alpha, 0);
+    RoboCompDifferentialRobot::TBaseState state;
+    differentialrobot_proxy->getBaseState(state);
+    innermodel->updateTransformValues("base", state.x, 0, state.z, 0, state.alpha, 0);
       
-       if(coor.getClicked()){  
+    if(coor.getClicked())
+    {
+      QVec dist = innermodel->transform("base",QVec::vec3(coor.getX(), 0, coor.getZ()), "world" );
+      angle = atan2(dist.x(), dist.z());
+      distTarget = dist.norm2();
+  
+      if (distTarget < 50 )
+      {
+	coor.disable();
+	differentialrobot_proxy->setSpeedBase(0, 0);  
+      } 
+      else 
+      {
 	
-	 QVec dist = innermodel->transform("base",QVec::vec3(coor.getX(), 0, coor.getZ()), "world" );
-	 angle = atan2(dist.x(), dist.z());
-	 distTarget = dist.norm2();
-	 if (distTarget < 50 ){
-	   coor.disable();
-	   differentialrobot_proxy->setSpeedBase(0, 0);
-	 } else {
-	   vadv = distTarget;
-	   vrot = angle;
-	   if(vrot > angle){
-	     vrot = MaxRot;
-	   }
-	   if (vadv > distTarget){
-	     vadv = (1/(1+e)-0.5);
-	     vadv = vadv * (e
-	   }
-	   if (angle != 0){
-	     differentialrobot_proxy->setSpeedBase(vadv, vrot);
-	   } else {
-	     differentialrobot_proxy->setSpeedBase(vadv, 0);
-	   }
-	 }   
-      
+      vadv = distTarget;
+      vrot = angle;
+      if(vrot > angle)
+      {
+	vrot = MaxRot;
+      }
 
+	vadv = (1/(1+pow(e, -distTarget))-0.5); //Cambiar el dist.x() por X
+	vadv = vadv * gaus(vrot, 0.3, 0.5) * MaxAdv;
+
+	differentialrobot_proxy->setSpeedBase(vadv, vrot);
+
+       } 
     }
+    
+      */
       
-      
-      
-/*     if(coor.getClicked()){  
+ 
+/*    -------------------------ENTREGA CAMINO CURVO---------------------------
+ * if(coor.getClicked()){  
 	
 	 QVec dist = innermodel->transform("base",QVec::vec3(coor.getX(), 0, coor.getZ()), "world" );
 	 angle = atan2(dist.x(), dist.z());
@@ -114,30 +155,35 @@ void SpecificWorker::compute()
       
 
     }
+
+    
+    NO BORRRRRRRRRRAAAAAAAAAAAAAARRRRRRRRRRR
+        for (auto d:data)
+     qDebug() << d.angle << d.dist;
+    qDebug() << "---------------------------";
+    
+    
+    qDebug() << "PRIMERO" << data[20].dist;
+    differentialrobot_proxy->setSpeedBase(400, 0);
+    if (data[20].dist < 210){
+     qDebug() << "PELIGRO"; 
+     differentialrobot_proxy->setSpeedBase(0, 1);
+     
+     sleep(1);
+    }
 */
-    
-    //NO BORRRRRRRRRRAAAAAAAAAAAAAARRRRRRRRRRR
-        //for (auto d:data)
-     // qDebug() << d.angle << d.dist;
-    //qDebug() << "---------------------------";
-    
-    
-//     qDebug() << "PRIMERO" << data[20].dist;
-//     differentialrobot_proxy->setSpeedBase(400, 0);
-//     if (data[20].dist < 210){
-//      qDebug() << "PELIGRO"; 
-//      differentialrobot_proxy->setSpeedBase(0, 1);
-//      
-//      sleep(1);
-//     }
      
 
 }
 
-float SpecificWorker::gaus(float Vrot, float Vx, float h){ //vx = 0.3 h = 0.5
+float SpecificWorker::gaus(float Vrot, float Vx, float h)
+{ //vx = 0.3 h = 0.5
   const float e = 2.71828;
-  float L = (Vx * Vx)/log(h);
-  
+  float L = -(Vx * Vx)/log(h);
+  float result = pow(e, (-(Vrot * Vrot)/L));
+
+  return result;
+
 }
 
 void SpecificWorker::setPick(const Pick &myPick)
@@ -152,7 +198,59 @@ void SpecificWorker::setPick(const Pick &myPick)
   
 }
 
+void SpecificWorker::gotoTarget()
+ {
+float vrot;
+    
+    if( obstacle == true)   // If ther is an obstacle ahead, then transit to BUG
+   {
 
+      state = State::ROTATE;
+
+      return;
+
+   }
+
+    QVec rt = innermodel->transform("base", QVec::vec3(coor.getX(), 0, coor.getZ()), "world");
+
+    float dist = rt.norm2();
+
+    float ang  = atan2(rt.x(), rt.z());
+
+   if(dist < 100)          // If close to obstacle stop and transit to IDLE
+  {
+
+    state = State::IDLE;
+    coor.activate();
+
+   return;
+  }
+
+  float adv = dist;
+
+  if ( fabs( vrot) > 0.05 )
+
+   adv = 0;
+
+ }
+ 
+void SpecificWorker::bug()
+
+{
+
+}
+
+bool SpecificWorker::obstacle()
+
+{
+
+}
+
+bool SpecificWorker::targetAtSight()
+
+{
+
+}
 
 
 

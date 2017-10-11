@@ -34,6 +34,9 @@
 #include <genericworker.h>
 #include <innermodel/innermodel.h>
 #include <vector>
+#include <Laser.h>
+
+
 
 class SpecificWorker : public GenericWorker
 {
@@ -44,7 +47,15 @@ public:
 	bool setParams(RoboCompCommonBehavior::ParameterList params);
         void setPick(const Pick &myPick);
 	float gaus(float Vrot, float Vx, float h);
+	void gotoTarget();
+	void bug();
+	bool obstacle();
+	bool targetAtSight();
+	
+	
 private:
+       enum class State{IDLE, GOTO, ROTATE, BORDER, FINISH};
+       State state = State::IDLE;
        
        struct Coordinate 
        {
@@ -101,6 +112,7 @@ private:
 	  
        };
        InnerModel *innermodel;
+       
 
          Coordinate coor;
 public slots:
