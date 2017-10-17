@@ -50,7 +50,9 @@ public:
 	void gotoTarget();
 	void bug();
 	bool obstacle();
-	bool targetAtSight();
+	bool targetAtSight();	
+	void finish();
+	void border();
 	
 	
 private:
