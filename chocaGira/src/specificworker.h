@@ -49,7 +49,8 @@ public:
 	float gaus(float Vrot, float Vx, float h);
 	void gotoTarget();
 	void bug();
-	bool obstacle();
+	bool obstacle(int umbral);
+	bool obstacleBug();
 	bool targetAtSight();	
 	void finish();
 	void border();

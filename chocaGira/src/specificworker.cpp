@@ -72,7 +72,8 @@ void SpecificWorker::compute()
    break;
    
    case State::BORDER:
-      finish();
+//       finish();
+     border();
    break;
    
    case State::FINISH:
@@ -82,9 +83,6 @@ void SpecificWorker::compute()
   }
 
 
-  
-  
-  
    /* ----------------------ENTREGA CAMINO RECTO------------------------------
     float angle, distTarget, vadv, vrot;
     const float MaxAdv = 400;
@@ -206,7 +204,7 @@ void SpecificWorker::gotoTarget()
 float vrot,dist,vadv,ang;
 const float MaxAdv = 400, MaxRot = 0.5, e = 2.71828;
     
-    if( obstacle())   // If ther is an obstacle ahead, then transit to BUG
+    if( obstacle(30))   // If ther is an obstacle ahead, then transit to BUG
    {
 
       state = State::ROTATE;
@@ -222,17 +220,20 @@ const float MaxAdv = 400, MaxRot = 0.5, e = 2.71828;
 
    if(dist < 50)          // If close to obstacle stop and transit to IDLE
   {
-
-    state = State::IDLE;
-    coor.activate();
+  
+    finish();
+//     state = State::IDLE;
+//     coor.activate();
 
    return;
+
   }
    else 
       {
 	
       vadv = dist;
       vrot = ang;
+   
       if(vrot > ang)
       {
 	vrot = MaxRot;
@@ -242,8 +243,10 @@ const float MaxAdv = 400, MaxRot = 0.5, e = 2.71828;
 	vadv = vadv * gaus(vrot, 0.3, 0.5) * MaxAdv;
 
 	differentialrobot_proxy->setSpeedBase(vadv, vrot);
-
+	 
        } 
+  
+  
   
  }
  
@@ -252,34 +255,46 @@ void SpecificWorker::bug()
   
   qDebug() <<"ENTRA EN BUG";   
   
-    
-  if(obstacle() == false)
+// hay obstaculo
+  
+  differentialrobot_proxy->setSpeedBase(0, 0);  
+  
+  if(obstacle(20) == false)
    {
      state = State::BORDER;
       return;
   }
   
-	 differentialrobot_proxy->setSpeedBase(0, -0.5);
+  differentialrobot_proxy->setSpeedBase(0, -1);  
   
-//      gotoTarget();
-
 
 }
 
-bool SpecificWorker::obstacle()
+bool SpecificWorker:: obstacle(int umbral)
 {
    qDebug() <<"ENTRA EN obstacle";   
     TLaserData data = laser_proxy->getLaserData();
-    std::sort(data.begin()+40, data.end()-40, [](auto a,auto b){return a.dist < b.dist;});
-  
-    if (data[40].dist < 210)
+    std::sort(data.begin()+umbral, data.end()-umbral, [](auto a,auto b){return a.dist < b.dist;});
+ 
+    if (data[umbral].dist < 260)
+      return true;
+    else	
+      return false;
+}
+
+bool SpecificWorker::obstacleBug()
+{
+   qDebug() <<"ENTRA EN obstacle";   
+    TLaserData data = laser_proxy->getLaserData();
+   // std::sort(data.begin()+30, data.end()-30, [](auto a,auto b){return a.dist < b.dist;});
+ 
+    if (data[30].dist < 260)
       return true;
     else	
       return false;
 }
 
 bool SpecificWorker::targetAtSight()
-
 {
    
 }
@@ -293,7 +308,22 @@ void  SpecificWorker::finish()
 void  SpecificWorker::border()
 {
   
+//   if(targetAtSight())
+   qDebug() <<"ENTRA EN border";   
+   TLaserData data = laser_proxy->getLaserData();
   
+//    differentialrobot_proxy->setSpeedBase(0, 0);  
+   
+    if (data[data.size()-20].dist < 400)
+      differentialrobot_proxy->setSpeedBase(100 , -0.5);
+      
+//     differentialrobot_proxy->setSpeedBase(0, 0);  
+    
+    std::sort(data.begin()+20, data.end()-50, [](auto a,auto b){return a.dist < b.dist;});
+    
+     if (data[data.size()+21].dist > 500)
+      differentialrobot_proxy->setSpeedBase(100 , +0.5);
+   
   
 }
 	
