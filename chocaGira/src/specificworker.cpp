@@ -201,8 +201,8 @@ void SpecificWorker::setPick(const Pick &myPick)
 void SpecificWorker::gotoTarget()
  {
     qDebug() <<"ENTRA EN gotoTarget";   
-float vrot,dist,vadv,ang;
-const float MaxAdv = 400, MaxRot = 0.5, e = 2.71828;
+    float vrot,dist,vadv,ang;
+    const float MaxAdv = 400, MaxRot = 0.5, e = 2.71828;
     
     if( obstacle(30))   // If ther is an obstacle ahead, then transit to BUG
    {
@@ -256,11 +256,20 @@ void SpecificWorker::bug()
   qDebug() <<"ENTRA EN BUG";   
   
 // hay obstaculo
-  
+  TLaserData data = laser_proxy->getLaserData();
   differentialrobot_proxy->setSpeedBase(0, 0);  
   
   if(obstacle(20) == false)
    {
+     
+    if (data[20].dist < 380)
+    {
+      qDebug() << "-------------------FUERA BUG------------------";
+     qDebug() << data[data.size()-20].dist;
+      differentialrobot_proxy->setSpeedBase(100 , -0.6);
+       
+    }
+     
      state = State::BORDER;
       return;
   }
@@ -296,7 +305,24 @@ bool SpecificWorker::obstacleBug()
 
 bool SpecificWorker::targetAtSight()
 {
+  
    
+ 
+ 
+  TLaserData data = laser_proxy->getLaserData();
+  QPolygonF polygon;
+  
+  for (auto l:data)
+  {
+    QVec lr = innermodel->laserTo("world", "laser", l.dist, l.angle);
+//     QVec rt = innermodel->transform("base", QVec::vec3(coor.getX(), 0, coor.getZ()), "world");
+    polygon << QPointF(lr.x(), lr.z());
+  }
+  
+  QVec t = QVec::vec3(coor.getX(), 0, coor.getZ());
+//   inhibit = 80;
+  return  polygon.containsPoint( QPointF(t.x(), t.z() ), Qt::WindingFill );
+ 
 }
 
 void  SpecificWorker::finish()
@@ -307,23 +333,33 @@ void  SpecificWorker::finish()
 }
 void  SpecificWorker::border()
 {
+ 
+  qDebug() << "---------------> Valor de inhibit " << inhibit;
+   if(targetAtSight() == true && inhibit < 0)
+   {
+     qDebug() << " -----------------------TARGET AT SIGHT--------------";
+     inhibit = INHIBIT;
+      state = State::GOTO;
+  }
   
-//   if(targetAtSight())
+  
+  
    qDebug() <<"ENTRA EN border";   
    TLaserData data = laser_proxy->getLaserData();
-  
-//    differentialrobot_proxy->setSpeedBase(0, 0);  
-   
-    if (data[data.size()-20].dist < 400)
-      differentialrobot_proxy->setSpeedBase(100 , -0.5);
-      
-//     differentialrobot_proxy->setSpeedBase(0, 0);  
+     
+   differentialrobot_proxy->setSpeedBase(80, -0.6);  
     
-    std::sort(data.begin()+20, data.end()-50, [](auto a,auto b){return a.dist < b.dist;});
+
+    //bordear objeto -- derecha
+     if (data[data.size()-81].dist > 500)
+     {
+      std::sort(data.begin()+20, data.end()-50, [](auto a,auto b){return a.dist < b.dist;});
+      qDebug() << "entra y cosas raras";
+      differentialrobot_proxy->setSpeedBase(100 , +0.19);
+     
+    }
     
-     if (data[data.size()+21].dist > 500)
-      differentialrobot_proxy->setSpeedBase(100 , +0.5);
-   
+     inhibit --;
   
 }
 	
