@@ -215,7 +215,9 @@ void SpecificWorker::gotoTarget()
 
     QVec rt = innermodel->transform("base", QVec::vec3(coor.getX(), 0, coor.getZ()), "world");
     dist = rt.norm2();
-    ang  = atan2(rt.x(), rt.z());
+    ang  = atan2(rt.x(), rt.z()); // con respecto al target
+    
+    distTarget = dist;
     
 
    if(dist < 50)          // If close to obstacle stop and transit to IDLE
@@ -253,7 +255,6 @@ void SpecificWorker::gotoTarget()
 void SpecificWorker::bug()
 {
   
-  qDebug() <<"ENTRA EN BUG";   
   
 // hay obstaculo
   TLaserData data = laser_proxy->getLaserData();
@@ -264,11 +265,11 @@ void SpecificWorker::bug()
      
     if (data[20].dist < 380)
     {
-      qDebug() << "-------------------FUERA BUG------------------";
      qDebug() << data[data.size()-20].dist;
       differentialrobot_proxy->setSpeedBase(100 , -0.6);
        
     }
+    
      
      state = State::BORDER;
       return;
@@ -281,7 +282,6 @@ void SpecificWorker::bug()
 
 bool SpecificWorker:: obstacle(int umbral)
 {
-   qDebug() <<"ENTRA EN obstacle";   
     TLaserData data = laser_proxy->getLaserData();
     std::sort(data.begin()+umbral, data.end()-umbral, [](auto a,auto b){return a.dist < b.dist;});
  
@@ -293,7 +293,6 @@ bool SpecificWorker:: obstacle(int umbral)
 
 bool SpecificWorker::obstacleBug()
 {
-   qDebug() <<"ENTRA EN obstacle";   
     TLaserData data = laser_proxy->getLaserData();
    // std::sort(data.begin()+30, data.end()-30, [](auto a,auto b){return a.dist < b.dist;});
  
@@ -333,34 +332,48 @@ void  SpecificWorker::finish()
 }
 void  SpecificWorker::border()
 {
+  bool entra = true;
+  
+  QVec rt = innermodel->transform("base", QVec::vec3(coor.getX(), 0, coor.getZ()), "world");
+  float dist = rt.norm2();
+  float angle  = atan2(rt.x(), rt.z()); // con respecto al target
  
-  qDebug() << "---------------> Valor de inhibit " << inhibit;
-   if(targetAtSight() == true && inhibit < 0)
-   {
-     qDebug() << " -----------------------TARGET AT SIGHT--------------";
-     inhibit = INHIBIT;
-      state = State::GOTO;
+  qDebug() <<" ------------distancia " << distTarget; 
+  
+  if(dist <= distTarget)
+  {
+    distTarget = dist;
+    
+  }else {
+    
+    if(distTarget < 285){
+      entra = false;
+      state = State::FINISH;
+//       return;
+    }
   }
   
+   if((!obstacle(30) || targetAtSight() == true) && -0.025 < angle < 0.025)
+   {
+     qDebug() << " -----------------------TARGET AT SIGHT--------------";
+      state = State::GOTO;
+    }
   
   
-   qDebug() <<"ENTRA EN border";   
+  
    TLaserData data = laser_proxy->getLaserData();
      
    differentialrobot_proxy->setSpeedBase(80, -0.6);  
     
 
     //bordear objeto -- derecha
-     if (data[data.size()-81].dist > 500)
+     if (data[data.size()-81].dist > 500 && entra==true)
      {
       std::sort(data.begin()+20, data.end()-50, [](auto a,auto b){return a.dist < b.dist;});
-      qDebug() << "entra y cosas raras";
       differentialrobot_proxy->setSpeedBase(100 , +0.19);
      
     }
-    
-     inhibit --;
-  
+      
 }
 	
 

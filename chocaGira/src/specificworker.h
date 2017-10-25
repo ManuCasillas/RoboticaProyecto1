@@ -36,7 +36,6 @@
 #include <vector>
 #include <Laser.h>
 
-#define INHIBIT 150
 
 class SpecificWorker : public GenericWorker
 {
@@ -115,8 +114,7 @@ private:
 	  
        };
        InnerModel *innermodel;
-       
-	  int inhibit = INHIBIT;
+	 float distTarget;
          Coordinate coor;
 public slots:
 	void compute(); 	
