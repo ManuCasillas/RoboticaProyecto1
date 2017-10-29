@@ -364,10 +364,15 @@ void  SpecificWorker::border()
    TLaserData data = laser_proxy->getLaserData();
      
    differentialrobot_proxy->setSpeedBase(80, -0.6);  
-    
+	
+   if (obstacle(30))
+   {
+     qDebug() << "Obstaculo";
+     differentialrobot_proxy->setSpeedBase(80, -0.6); 
+   }	
 
     //bordear objeto -- derecha
-     if (data[data.size()-81].dist > 500 && entra==true)
+     if (data[data.size()-81].dist > 500 && entra==true && !obstacle(30))
      {
       std::sort(data.begin()+20, data.end()-50, [](auto a,auto b){return a.dist < b.dist;});
       differentialrobot_proxy->setSpeedBase(100 , +0.19);
