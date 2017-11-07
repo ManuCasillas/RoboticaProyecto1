@@ -45,6 +45,13 @@ public:
 	~SpecificWorker();
 	bool setParams(RoboCompCommonBehavior::ParameterList params);
         void setPick(const Pick &myPick);
+	
+	void go(const string &nodo, const float x, const float y, const float alpha);
+	void turn(const float speed);
+	bool atTarget();
+	void stop();
+	
+	
 	float gaus(float Vrot, float Vx, float h);
 	void gotoTarget();
 	void bug();
@@ -53,6 +60,7 @@ public:
 	bool targetAtSight();	
 	void finish();
 	void border();
+	bool shock();
 	
 	
 private:

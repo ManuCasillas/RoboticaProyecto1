@@ -55,7 +55,7 @@ include src/CMakeFiles/chocagira_automoc.dir/progress.make
 
 src/CMakeFiles/chocagira_automoc:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic moc for target chocagira"
-	cd /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src && /usr/bin/cmake -E cmake_autogen /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/chocagira_automoc.dir/ Debug
+	cd /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src && /usr/bin/cmake -E cmake_autogen /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/chocagira_automoc.dir/ ""
 
 chocagira_automoc: src/CMakeFiles/chocagira_automoc
 chocagira_automoc: src/CMakeFiles/chocagira_automoc.dir/build.make

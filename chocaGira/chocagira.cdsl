@@ -1,6 +1,7 @@
-import "/robocomp/interfaces/IDSLs/Laser.idsl";
-import "/robocomp/interfaces/IDSLs/DifferentialRobot.idsl";
-import "/robocomp/interfaces/IDSLs/RCISMousePicker.idsl";
+import "Laser.idsl";
+import "DifferentialRobot.idsl";
+import "RCISMousePicker.idsl";
+import "GotoPoint.idsl";
 
 Component chocagira
 {
@@ -8,6 +9,7 @@ Component chocagira
 	{
 		requires Laser, DifferentialRobot;
 		subscribesTo RCISMousePicker;
+		implements GotoPoint;
 	};
 	language Cpp;
 	gui Qt(QWidget);

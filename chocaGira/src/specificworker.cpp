@@ -44,7 +44,7 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 
 void SpecificWorker::compute()
 {
-  RoboCompDifferentialRobot::TBaseState bState;
+  RoboCompGenericBase::TBaseState bState;
   differentialrobot_proxy->getBaseState(bState);
 
    TLaserData laserData = laser_proxy->getLaserData();
@@ -204,6 +204,14 @@ void SpecificWorker::gotoTarget()
     float vrot,dist,vadv,ang;
     const float MaxAdv = 400, MaxRot = 0.5, e = 2.71828;
     
+    
+   if(shock()){
+      qDebug() << "-------------- SE HA CHOCAO-------------";
+      differentialrobot_proxy->setSpeedBase(-10, 0);
+      
+   }
+    
+    
     if( obstacle(30))   // If ther is an obstacle ahead, then transit to BUG
    {
 
@@ -291,6 +299,24 @@ bool SpecificWorker:: obstacle(int umbral)
       return false;
 }
 
+bool SpecificWorker:: shock()
+{
+  
+  int umbral = 10;
+    TLaserData data = laser_proxy->getLaserData();
+    std::sort(data.begin()+umbral, data.end()-umbral, [](auto a,auto b){return a.dist < b.dist;});
+ 
+    qDebug() << "----------distancia de choque: "<< data[umbral].dist;
+    
+    
+    if (data[umbral].dist <= 30)
+      return true;
+    else	
+      return false;
+}
+
+
+
 bool SpecificWorker::obstacleBug()
 {
     TLaserData data = laser_proxy->getLaserData();
@@ -332,6 +358,14 @@ void  SpecificWorker::finish()
 }
 void  SpecificWorker::border()
 {
+  
+  if(shock()){
+      qDebug() << " SE HA CHOCAO";
+      differentialrobot_proxy->setSpeedBase(-10, 0);
+      
+   }
+  
+  
   bool entra = true;
   
   QVec rt = innermodel->transform("base", QVec::vec3(coor.getX(), 0, coor.getZ()), "world");
@@ -379,6 +413,33 @@ void  SpecificWorker::border()
      
     }
       
+}
+
+void SpecificWorker::go(const string &nodo, const float x, const float y, const float alpha)
+{
+     
+    coor.setX(x);
+    coor.setZ(y);
+    coor.activate();  
+  
+}
+void SpecificWorker::turn(const float speed)
+{
+  differentialrobot_proxy->setSpeedBase(0 , speed);
+}
+bool SpecificWorker::atTarget()
+{
+  
+  if (distTarget < 200)
+    return true;
+  else
+    return false; 
+ 
+}
+void SpecificWorker::stop()
+{
+  differentialrobot_proxy->setSpeedBase(0 , 0);
+  
 }
 	
 

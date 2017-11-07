@@ -1,5 +1,5 @@
 /*
- *    Copyright (C)2017 by YOUR NAME HERE
+ *    Copyright (C) 2017 by YOUR NAME HERE
  *
  *    This file is part of RoboComp
  *
@@ -16,30 +16,35 @@
  *    You should have received a copy of the GNU General Public License
  *    along with RoboComp.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef RCISMOUSEPICKER_H
-#define RCISMOUSEPICKER_H
+#include "gotopointI.h"
 
-// Ice includes
-#include <Ice/Ice.h>
-#include <RCISMousePicker.h>
-
-#include <config.h>
-#include "genericworker.h"
-
-using namespace RoboCompRCISMousePicker;
-
-class RCISMousePickerI : public virtual RoboCompRCISMousePicker::RCISMousePicker
+GotoPointI::GotoPointI(GenericWorker *_worker)
 {
-public:
-RCISMousePickerI(GenericWorker *_worker);
-	~RCISMousePickerI();
+	worker = _worker;
+}
 
-	void setPick(const Pick  &myPick, const Ice::Current&);
 
-private:
+GotoPointI::~GotoPointI()
+{
+}
 
-	GenericWorker *worker;
+void GotoPointI::go(const string  &nodo, const float  x, const float  y, const float  alpha, const Ice::Current&)
+{
+	worker->go(nodo, x, y, alpha);
+}
 
-};
+void GotoPointI::turn(const float  speed, const Ice::Current&)
+{
+	worker->turn(speed);
+}
 
-#endif
+bool GotoPointI::atTarget(const Ice::Current&)
+{
+	return worker->atTarget();
+}
+
+void GotoPointI::stop(const Ice::Current&)
+{
+	worker->stop();
+}
+
