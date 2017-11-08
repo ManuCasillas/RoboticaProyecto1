@@ -1,5 +1,5 @@
 /*
- *    Copyright (C)2017 by YOUR NAME HERE
+ *    Copyright (C) 2017 by YOUR NAME HERE
  *
  *    This file is part of RoboComp
  *
@@ -19,6 +19,9 @@
 #ifndef GOTOPOINT_H
 #define GOTOPOINT_H
 
+// QT includes
+#include <QtCore/QObject>
+
 // Ice includes
 #include <Ice/Ice.h>
 #include <GotoPoint.h>
@@ -28,20 +31,24 @@
 
 using namespace RoboCompGotoPoint;
 
-class GotoPointI : public virtual RoboCompGotoPoint::GotoPoint
+class GotoPointI : public QObject , public virtual RoboCompGotoPoint::GotoPoint
 {
+Q_OBJECT
 public:
-GotoPointI(GenericWorker *_worker);
+	GotoPointI( GenericWorker *_worker, QObject *parent = 0 );
 	~GotoPointI();
-
+	
 	void go(const string  &nodo, const float  x, const float  y, const float  alpha, const Ice::Current&);
 	void turn(const float  speed, const Ice::Current&);
 	bool atTarget(const Ice::Current&);
 	void stop(const Ice::Current&);
 
+	QMutex *mutex;
 private:
 
 	GenericWorker *worker;
+public slots:
+
 
 };
 

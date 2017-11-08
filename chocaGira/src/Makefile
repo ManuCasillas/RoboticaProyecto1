@@ -238,33 +238,6 @@ DifferentialRobot.cpp.s:
 	cd /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira && $(MAKE) -f src/CMakeFiles/chocagira.dir/build.make src/CMakeFiles/chocagira.dir/DifferentialRobot.cpp.s
 .PHONY : DifferentialRobot.cpp.s
 
-GenericBase.o: GenericBase.cpp.o
-
-.PHONY : GenericBase.o
-
-# target to build an object file
-GenericBase.cpp.o:
-	cd /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira && $(MAKE) -f src/CMakeFiles/chocagira.dir/build.make src/CMakeFiles/chocagira.dir/GenericBase.cpp.o
-.PHONY : GenericBase.cpp.o
-
-GenericBase.i: GenericBase.cpp.i
-
-.PHONY : GenericBase.i
-
-# target to preprocess a source file
-GenericBase.cpp.i:
-	cd /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira && $(MAKE) -f src/CMakeFiles/chocagira.dir/build.make src/CMakeFiles/chocagira.dir/GenericBase.cpp.i
-.PHONY : GenericBase.cpp.i
-
-GenericBase.s: GenericBase.cpp.s
-
-.PHONY : GenericBase.s
-
-# target to generate assembly for a file
-GenericBase.cpp.s:
-	cd /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira && $(MAKE) -f src/CMakeFiles/chocagira.dir/build.make src/CMakeFiles/chocagira.dir/GenericBase.cpp.s
-.PHONY : GenericBase.cpp.s
-
 GotoPoint.o: GotoPoint.cpp.o
 
 .PHONY : GotoPoint.o
@@ -535,33 +508,6 @@ home/salabeta/robocomp/classes/rapplication/rapplication.cpp.s:
 	cd /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira && $(MAKE) -f src/CMakeFiles/chocagira.dir/build.make src/CMakeFiles/chocagira.dir/home/salabeta/robocomp/classes/rapplication/rapplication.cpp.s
 .PHONY : home/salabeta/robocomp/classes/rapplication/rapplication.cpp.s
 
-home/salabeta/robocomp/classes/sigwatch/sigwatch.o: home/salabeta/robocomp/classes/sigwatch/sigwatch.cpp.o
-
-.PHONY : home/salabeta/robocomp/classes/sigwatch/sigwatch.o
-
-# target to build an object file
-home/salabeta/robocomp/classes/sigwatch/sigwatch.cpp.o:
-	cd /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira && $(MAKE) -f src/CMakeFiles/chocagira.dir/build.make src/CMakeFiles/chocagira.dir/home/salabeta/robocomp/classes/sigwatch/sigwatch.cpp.o
-.PHONY : home/salabeta/robocomp/classes/sigwatch/sigwatch.cpp.o
-
-home/salabeta/robocomp/classes/sigwatch/sigwatch.i: home/salabeta/robocomp/classes/sigwatch/sigwatch.cpp.i
-
-.PHONY : home/salabeta/robocomp/classes/sigwatch/sigwatch.i
-
-# target to preprocess a source file
-home/salabeta/robocomp/classes/sigwatch/sigwatch.cpp.i:
-	cd /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira && $(MAKE) -f src/CMakeFiles/chocagira.dir/build.make src/CMakeFiles/chocagira.dir/home/salabeta/robocomp/classes/sigwatch/sigwatch.cpp.i
-.PHONY : home/salabeta/robocomp/classes/sigwatch/sigwatch.cpp.i
-
-home/salabeta/robocomp/classes/sigwatch/sigwatch.s: home/salabeta/robocomp/classes/sigwatch/sigwatch.cpp.s
-
-.PHONY : home/salabeta/robocomp/classes/sigwatch/sigwatch.s
-
-# target to generate assembly for a file
-home/salabeta/robocomp/classes/sigwatch/sigwatch.cpp.s:
-	cd /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira && $(MAKE) -f src/CMakeFiles/chocagira.dir/build.make src/CMakeFiles/chocagira.dir/home/salabeta/robocomp/classes/sigwatch/sigwatch.cpp.s
-.PHONY : home/salabeta/robocomp/classes/sigwatch/sigwatch.cpp.s
-
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -690,9 +636,6 @@ help:
 	@echo "... DifferentialRobot.o"
 	@echo "... DifferentialRobot.i"
 	@echo "... DifferentialRobot.s"
-	@echo "... GenericBase.o"
-	@echo "... GenericBase.i"
-	@echo "... GenericBase.s"
 	@echo "... GotoPoint.o"
 	@echo "... GotoPoint.i"
 	@echo "... GotoPoint.s"
@@ -723,9 +666,6 @@ help:
 	@echo "... home/salabeta/robocomp/classes/rapplication/rapplication.o"
 	@echo "... home/salabeta/robocomp/classes/rapplication/rapplication.i"
 	@echo "... home/salabeta/robocomp/classes/rapplication/rapplication.s"
-	@echo "... home/salabeta/robocomp/classes/sigwatch/sigwatch.o"
-	@echo "... home/salabeta/robocomp/classes/sigwatch/sigwatch.i"
-	@echo "... home/salabeta/robocomp/classes/sigwatch/sigwatch.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

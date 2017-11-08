@@ -41,8 +41,9 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 	return true;
 }
 
+//COMPUTE CLICK
 
-void SpecificWorker::compute()
+ void SpecificWorker::compute()
 {
   RoboCompGenericBase::TBaseState bState;
   differentialrobot_proxy->getBaseState(bState);
@@ -175,6 +176,9 @@ void SpecificWorker::compute()
      
 
 }
+
+
+
 
 float SpecificWorker::gaus(float Vrot, float Vx, float h)
 { //vx = 0.3 h = 0.5
@@ -316,18 +320,6 @@ bool SpecificWorker:: shock()
 }
 
 
-
-bool SpecificWorker::obstacleBug()
-{
-    TLaserData data = laser_proxy->getLaserData();
-   // std::sort(data.begin()+30, data.end()-30, [](auto a,auto b){return a.dist < b.dist;});
- 
-    if (data[30].dist < 260)
-      return true;
-    else	
-      return false;
-}
-
 bool SpecificWorker::targetAtSight()
 {
   
@@ -414,39 +406,3 @@ void  SpecificWorker::border()
     }
       
 }
-
-void SpecificWorker::go(const string &nodo, const float x, const float y, const float alpha)
-{
-     
-    coor.setX(x);
-    coor.setZ(y);
-    coor.activate();  
-  
-}
-void SpecificWorker::turn(const float speed)
-{
-  differentialrobot_proxy->setSpeedBase(0 , speed);
-}
-bool SpecificWorker::atTarget()
-{
-  
-  if (distTarget < 200)
-    return true;
-  else
-    return false; 
- 
-}
-void SpecificWorker::stop()
-{
-  differentialrobot_proxy->setSpeedBase(0 , 0);
-  
-}
-	
-
-
-
-
-
-
-
-

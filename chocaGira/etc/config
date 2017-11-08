@@ -6,6 +6,7 @@ DifferentialRobotProxy = differentialrobot:tcp -h localhost -p 10004
 LaserProxy = laser:tcp -h localhost -p 10003
 RCISMousePickerTopic.Endpoints=tcp -p 15000
 TopicManager.Proxy=IceStorm/TopicManager:default -p 9999
+GotoPoint.Endpoints=tcp -p 10005
 
 
 

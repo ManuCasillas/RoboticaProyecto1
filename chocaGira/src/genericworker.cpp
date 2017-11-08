@@ -1,5 +1,5 @@
 /*
- *    Copyright (C)2017 by YOUR NAME HERE
+ *    Copyright (C) 2017 by YOUR NAME HERE
  *
  *    This file is part of RoboComp
  *
@@ -31,6 +31,9 @@ QObject()
 	differentialrobot_proxy = (*(DifferentialRobotPrx*)mprx["DifferentialRobotProxy"]);
 	laser_proxy = (*(LaserPrx*)mprx["LaserProxy"]);
 
+	topicmanager_proxy = (*(IceStorm::TopicManagerPrx*)mprx["topicManager"]);
+
+
 	mutex = new QMutex(QMutex::Recursive);
 
 	#ifdef USE_QTGUI
@@ -39,6 +42,10 @@ QObject()
 	#endif
 	Period = BASIC_PERIOD;
 	connect(&timer, SIGNAL(timeout()), this, SLOT(compute()));
+	connect(&storm_timer, SIGNAL(timeout()), this, SLOT(check_storm()));
+	storm_timer.start(storm_period);
+
+
 // 	timer.start(Period);
 }
 
@@ -63,5 +70,15 @@ void GenericWorker::setPeriod(int p)
 	rDebug("Period changed"+QString::number(p));
 	Period = p;
 	timer.start(Period);
+}
+
+
+void GenericWorker::check_storm()
+{
+	try {
+		topicmanager_proxy->ice_ping();
+	} catch(const Ice::Exception& ex) {
+		cout <<"Exception: STORM not running: " << ex << endl;
+	}
 }
 
