@@ -209,23 +209,23 @@ void SpecificWorker::gotoTarget()
     const float MaxAdv = 400, MaxRot = 0.5, e = 2.71828;
     
     
-   if(shock()){
-      qDebug() << "-------------- SE HA CHOCAO-------------";
-      differentialrobot_proxy->setSpeedBase(-10, 0);
-      
-   }
+//    if(shock()){
+//       qDebug() << "-------------- SE HA CHOCAO-------------";
+//       differentialrobot_proxy->setSpeedBase(-10, 0);
+//       
+//    }
     
     
     if( obstacle(30))   // If ther is an obstacle ahead, then transit to BUG
    {
-
       state = State::ROTATE;
 
       return;
 
    }
 
-    QVec rt = innermodel->transform("base", QVec::vec3(coor.getX(), 0, coor.getZ()), "world");
+    //QVec rt = innermodel->transform("base", QVec::vec3(coor.getX(), 0, coor.getZ()), "world");
+    QVec rt = innermodel->transform("base", QVec::vec3(tag.getTX(), 0, tag.getTZ()), "world"); // Coordenadas del target
     dist = rt.norm2();
     ang  = atan2(rt.x(), rt.z()); // con respecto al target
     
@@ -259,8 +259,7 @@ void SpecificWorker::gotoTarget()
 	differentialrobot_proxy->setSpeedBase(vadv, vrot);
 	 
        } 
-  
-  
+
   
  }
  
@@ -348,6 +347,7 @@ void  SpecificWorker::finish()
   coor.disable();
   state = State::IDLE;
 }
+
 void  SpecificWorker::border()
 {
   
@@ -406,3 +406,42 @@ void  SpecificWorker::border()
     }
       
 }
+
+
+void SpecificWorker::go(const string &nodo, const float x, const float y, const float alpha)
+{
+     
+    tag.setTX(x);
+    tag.setTZ(y);
+    //tag.activate();  
+    
+    
+    
+  
+}
+void SpecificWorker::turn(const float speed)
+{GotoPoint
+  differentialrobot_proxy->setSpeedBase(0 , speed);
+  if(tag.id == current){
+     gotoTarget();
+      stateTag = StateTag::WAIT;
+  }
+}
+bool SpecificWorker::atTarget()
+{
+  
+  if (distTarget < 200)
+    return true;
+  else
+    return false; 
+ 
+}
+void SpecificWorker::stop()
+{
+  differentialrobot_proxy->setSpeedBase(0 , 0);
+  
+}
+
+
+
+

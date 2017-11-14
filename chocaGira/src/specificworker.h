@@ -69,6 +69,7 @@ private:
        
        struct Coordinate 
        {
+
 	 Coordinate(){};
 	 void activate()
 	 {
@@ -83,7 +84,10 @@ private:
 	 bool getClicked(){
 	   return clicked;
 	 };
-	 std::pair<float, float> getValues (){
+	 std::pair<float, float> getValues (){ int current = 1;//make the robot turn until the tag.id == current
+	 Tag tag;
+       
+       
 	    QMutexLocker ml(&mutex);
 	    return std::make_pair<>(x, z);	    
 	 };
@@ -92,7 +96,10 @@ private:
 	   x = _x;
 	 };
 	 void setZ(float _z) {
-	   QMutexLocker ml(&mutex);
+	   QMutexLocker ml(&mutex); int current = 1;//make the robot turn until the tag.id == current
+	 Tag tag;
+       
+       
 	   z = _z;
 	 };
 	 float getX(){
@@ -122,8 +129,11 @@ private:
 	  
        };
        InnerModel *innermodel;
-	 float distTarget;
-         Coordinate coor;
+
+	Tag tag;
+	float distTarget;
+	Coordinate coor;
+	 
 public slots:
 	void compute(); 	
 
