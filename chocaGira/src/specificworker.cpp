@@ -45,12 +45,11 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 
  void SpecificWorker::compute()
 {
-  RoboCompGenericBase::TBaseState bState;
+  RoboCompDifferentialRobot::TBaseState bState;
   differentialrobot_proxy->getBaseState(bState);
 
    TLaserData laserData = laser_proxy->getLaserData();
 
-//   innermodel->updateTranslationValues("base", bState.x, 0, bState.z ,0, bState.alpha, 0);
    innermodel->updateTransformValues("base", bState.x, 0, bState.z, 0, bState.alpha, 0);
 
   switch( state )
@@ -225,7 +224,7 @@ void SpecificWorker::gotoTarget()
    }
 
     //QVec rt = innermodel->transform("base", QVec::vec3(coor.getX(), 0, coor.getZ()), "world");
-    QVec rt = innermodel->transform("base", QVec::vec3(tag.getTX(), 0, tag.getTZ()), "world"); // Coordenadas del target
+    QVec rt = innermodel->transform("base", QVec::vec3(coor.getX(), 0, coor.getZ()), "world"); // Coordenadas del target
     dist = rt.norm2();
     ang  = atan2(rt.x(), rt.z()); // con respecto al target
     
@@ -410,22 +409,15 @@ void  SpecificWorker::border()
 
 void SpecificWorker::go(const string &nodo, const float x, const float y, const float alpha)
 {
-     
-    tag.setTX(x);
-    tag.setTZ(y);
-    //tag.activate();  
+    coor.setX(x);
+    coor.setZ(y);
     
     
-    
-  
 }
 void SpecificWorker::turn(const float speed)
-{GotoPoint
+{
   differentialrobot_proxy->setSpeedBase(0 , speed);
-  if(tag.id == current){
-     gotoTarget();
-      stateTag = StateTag::WAIT;
-  }
+ 
 }
 bool SpecificWorker::atTarget()
 {

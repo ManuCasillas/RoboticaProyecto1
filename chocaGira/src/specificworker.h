@@ -84,9 +84,7 @@ private:
 	 bool getClicked(){
 	   return clicked;
 	 };
-	 std::pair<float, float> getValues (){ int current = 1;//make the robot turn until the tag.id == current
-	 Tag tag;
-       
+	 std::pair<float, float> getValues (){ 
        
 	    QMutexLocker ml(&mutex);
 	    return std::make_pair<>(x, z);	    
@@ -96,9 +94,7 @@ private:
 	   x = _x;
 	 };
 	 void setZ(float _z) {
-	   QMutexLocker ml(&mutex); int current = 1;//make the robot turn until the tag.id == current
-	 Tag tag;
-       
+	   QMutexLocker ml(&mutex);
        
 	   z = _z;
 	 };
@@ -130,7 +126,7 @@ private:
        };
        InnerModel *innermodel;
 
-	Tag tag;
+	//Tag tag;
 	float distTarget;
 	Coordinate coor;
 	 
