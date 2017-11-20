@@ -1,0 +1,14 @@
+/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/CMakeFiles/install.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/CMakeFiles/list_install_components.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/CMakeFiles/install/strip.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/CMakeFiles/install/local.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/CMakeFiles/rebuild_cache.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/CMakeFiles/edit_cache.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/install.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/list_install_components.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/rebuild_cache.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/Supervisor.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/install/strip.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/install/local.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/edit_cache.dir
+/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/Supervisor_automoc.dir

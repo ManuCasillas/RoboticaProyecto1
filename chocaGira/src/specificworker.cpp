@@ -72,7 +72,6 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
    break;
    
    case State::BORDER:
-//       finish();
      border();
    break;
    
@@ -254,7 +253,6 @@ void SpecificWorker::gotoTarget()
 
 	vadv = (1/(1+pow(e, -dist))-0.5); //Cambiar el dist.x() por X
 	vadv = vadv * gaus(vrot, 0.3, 0.5) * MaxAdv;
-
 	differentialrobot_proxy->setSpeedBase(vadv, vrot);
 	 
        } 
@@ -308,7 +306,7 @@ bool SpecificWorker:: shock()
     TLaserData data = laser_proxy->getLaserData();
     std::sort(data.begin()+umbral, data.end()-umbral, [](auto a,auto b){return a.dist < b.dist;});
  
-    qDebug() << "----------distancia de choque: "<< data[umbral].dist;
+//     qDebug() << "----------distancia de choque: "<< data[umbral].dist;
     
     
     if (data[umbral].dist <= 30)
@@ -320,9 +318,7 @@ bool SpecificWorker:: shock()
 
 bool SpecificWorker::targetAtSight()
 {
-  
-   
- 
+
  
   TLaserData data = laser_proxy->getLaserData();
   QPolygonF polygon;
@@ -350,11 +346,11 @@ void  SpecificWorker::finish()
 void  SpecificWorker::border()
 {
   
-  if(shock()){
-      qDebug() << " SE HA CHOCAO";
-      differentialrobot_proxy->setSpeedBase(-10, 0);
-      
-   }
+//   if(shock()){
+//       qDebug() << " SE HA CHOCAO";
+//       differentialrobot_proxy->setSpeedBase(-10, 0);
+//       
+//    }
   
   
   bool entra = true;
@@ -411,7 +407,11 @@ void SpecificWorker::go(const string &nodo, const float x, const float y, const 
 {
     coor.setX(x);
     coor.setZ(y);
-    
+    qDebug() << "VALOR X EN GO" << x;
+    qDebug() << "VALOR Y EN GO" << y;
+    coor.disable();
+    coor.activate();
+    gotoTarget();
     
 }
 void SpecificWorker::turn(const float speed)
@@ -421,8 +421,9 @@ void SpecificWorker::turn(const float speed)
 }
 bool SpecificWorker::atTarget()
 {
+  qDebug() << "Distancia al objetivo: ---------------" << distTarget;
   
-  if (distTarget < 200)
+  if (distTarget < 100)
     return true;
   else
     return false; 
@@ -430,6 +431,8 @@ bool SpecificWorker::atTarget()
 }
 void SpecificWorker::stop()
 {
+
+
   differentialrobot_proxy->setSpeedBase(0 , 0);
   
 }

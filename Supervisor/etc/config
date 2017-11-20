@@ -1,4 +1,4 @@
-CommonBehavior.Endpoints=tcp -p 12000
+CommonBehavior.Endpoints=tcp -p 13000
 AprilTagsTopic.Endpoints=tcp -p 10008
 
 # Proxies for required interfaces
@@ -6,12 +6,10 @@ LaserProxy = laser:tcp -h localhost -p 10003
 DifferentialRobotProxy = differentialrobot:tcp -h localhost -p 10004
 RCISMousePickerTopic.Endpoints=tcp -p 15000
 TopicManager.Proxy=IceStorm/TopicManager:default -p 9999
-GotoPointProxy = gotopoint:tcp -h localhost -p 10006
+GotoPointProxy = gotopoint:tcp -h localhost -p 10005
 
 Ice.Warn.Connections=0
 Ice.Trace.Network=0
 Ice.Trace.Protocol=0
 Ice.ACM.Client=10
 Ice.ACM.Server=10
-
-
