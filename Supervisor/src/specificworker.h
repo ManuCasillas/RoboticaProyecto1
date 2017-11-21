@@ -106,7 +106,7 @@ private:
 	float distTarget;
 	int current = 0;//make the robot turn until the tag.id == current
 	Tag tag;
-	bool parar = false;
+	bool entra = false;
 	
 public slots:
 	void compute(); 	

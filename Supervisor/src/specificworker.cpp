@@ -45,11 +45,11 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 //COMPUTE TAG	
 void SpecificWorker::compute()
 {
-  RoboCompDifferentialRobot::TBaseState bState;
-  differentialrobot_proxy->getBaseState(bState);
-  
-  
-  innermodel->updateTransformValues("base", bState.x, 0, bState.z, 0, bState.alpha, 0);
+//   RoboCompDifferentialRobot::TBaseState bState;
+//   differentialrobot_proxy->getBaseState(bState);
+//   
+//   
+//   innermodel->updateTransformValues("base", bState.x, 0, bState.z, 0, bState.alpha, 0);
   
   
    
@@ -86,18 +86,29 @@ void SpecificWorker::compute()
 void SpecificWorker::newAprilTag(const tagsList& tags)
 { 
  
- if(!parar){
- tag.setID(tags.front().id);
+
+//   if(!entra){
+    
+  tag.setID(tags.front().id);
   tag.setTX(tags.front().tx);
   tag.setTZ(tags.front().tz);
-  innermodel->transform("world", QVec::vec3(tag.getTX(), 0, tag.getTZ()), "rgbd");  
- }
+  
+//   qDebug() << "ID: " << tag.getID() << " TX: " << tag.getTX() << " TZ: " << tag.getTZ();
+  
+ innermodel->transform("world", QVec::vec3(tag.getTX(), 0, tag.getTZ()), "rgbd");  
+ 
+//  if(tag.getID() == current)
+//    entra = true;
+//  
+//  
+//   }
+ 
 }
 
 void SpecificWorker::initial()
 {
   current = 0;
-  qDebug() << "entra-a-a-a-a-a-a-a-a-";
+  entra = false;
   stateTag = StateTag::SEARCH;
 }
 
@@ -110,13 +121,13 @@ void SpecificWorker::search()
     } 
     catch(const Ice::Exception &e)  { std::cout << e << std::endl;}
     
-    qDebug()<< " tagid "<< tag.getID()<< " current id " << current;
+    qDebug()<< " --------tagid "<< tag.getID()<< " current id -------" << current;
     
     if(tag.getID() == current)
     {
+      entra = true;
       try 
       {
-      parar = true;
       gotopoint_proxy->stop(); 
 	
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
@@ -124,16 +135,16 @@ void SpecificWorker::search()
       stateTag = StateTag::GOTO;
      }
      
-     
-     
 }
 
 void SpecificWorker::gotoT()
 {
   try 
       {
-      qDebug() << " -------X Despues: " << tag.getTX();
-      qDebug() << " -------Z Despues: " << tag.getTZ();
+	gotopoint_proxy->stop(); 
+	
+//       qDebug() << " -------X Despues: " << tag.getTX();
+//       qDebug() << " -------Z Despues: " << tag.getTZ();
       
       gotopoint_proxy->go("", tag.getTX(), tag.getTZ(),0);
 	
@@ -151,8 +162,7 @@ void SpecificWorker::wait()
       {
       aux = gotopoint_proxy->atTarget();
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
- 
-  qDebug() <<"---------------" << aux;
+
   
   if(aux == true){
     
@@ -164,9 +174,9 @@ void SpecificWorker::wait()
     current++;
   if(current == 4){
     stateTag = StateTag::INITIAL;
-     parar = false;
   }else{
     stateTag = StateTag::SEARCH;
+    entra = false;
   }
 }
      

@@ -13,9 +13,9 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/commonbehaviorI.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/Supervisor.dir/commonbehaviorI.cpp.o"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/genericmonitor.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/Supervisor.dir/genericmonitor.cpp.o"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/genericworker.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/Supervisor.dir/genericworker.cpp.o"
+  "/home/salabeta/robocomp/classes/qlog/qlog.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/Supervisor.dir/home/salabeta/robocomp/classes/qlog/qlog.cpp.o"
+  "/home/salabeta/robocomp/classes/rapplication/rapplication.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/Supervisor.dir/home/salabeta/robocomp/classes/rapplication/rapplication.cpp.o"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/main.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/Supervisor.dir/main.cpp.o"
-  "/opt/robocomp/classes/qlog/qlog.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/Supervisor.dir/opt/robocomp/classes/qlog/qlog.cpp.o"
-  "/opt/robocomp/classes/rapplication/rapplication.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/Supervisor.dir/opt/robocomp/classes/rapplication/rapplication.cpp.o"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/specificmonitor.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/Supervisor.dir/specificmonitor.cpp.o"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/specificworker.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/CMakeFiles/Supervisor.dir/specificworker.cpp.o"
   )
@@ -42,9 +42,9 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/opt/robocomp/include"
   "/classes"
   "."
-  "/opt/robocomp/classes"
-  "/opt/robocomp/libs"
-  "/opt/robocomp/interfaces"
+  "/home/salabeta/robocomp/classes"
+  "/home/salabeta/robocomp/libs"
+  "/home/salabeta/robocomp/interfaces"
   "/include"
   )
 

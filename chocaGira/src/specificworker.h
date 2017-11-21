@@ -75,14 +75,27 @@ private:
 	 {
 	   QMutexLocker ml(&mutex);
 	    clicked = true; 
-	 }; 
+	 };
+	 void activateTag()
+	 {
+	   QMutexLocker ml(&mutex);
+	    tag = true;
+	 };
 	void disable()
 	 {
 	   QMutexLocker ml(&mutex);
 	    clicked = false; 
 	 };
+	void disableTag()
+	 {
+	   QMutexLocker ml(&mutex);
+	    tag = false; 
+	 };
 	 bool getClicked(){
 	   return clicked;
+	 };
+	 bool getTag(){
+	   return tag;
 	 };
 	 std::pair<float, float> getValues (){ 
        
@@ -119,6 +132,7 @@ private:
 	  float y = 0;
 	  float z = 0;
 	  bool clicked = false;
+	  bool tag = false;
 	  bool finish = false;
 	  QMutex mutex;
 	  QVec vec;

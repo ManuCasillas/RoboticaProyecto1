@@ -63,19 +63,23 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
     break;
 
    case State::GOTO:
+     qDebug() << "GOTO";
     gotoTarget();
 
     break;
    
    case State::ROTATE:
+      qDebug() << "ROTATE";
     bug();     
    break;
    
    case State::BORDER:
+      qDebug() << "BORDER";
      border();
    break;
    
    case State::FINISH:
+      qDebug() << "FINISH";
      finish();
    break;
    
@@ -190,7 +194,7 @@ float SpecificWorker::gaus(float Vrot, float Vx, float h)
 
 void SpecificWorker::setPick(const Pick &myPick)
 {
-  
+  qDebug() << " NO DEBERIA DE ENTRAR-----------------_";
   if(!coor.getClicked()){
      
     coor.setX(myPick.x);
@@ -219,23 +223,25 @@ void SpecificWorker::gotoTarget()
       state = State::ROTATE;
 
       return;
-
    }
 
-    //QVec rt = innermodel->transform("base", QVec::vec3(coor.getX(), 0, coor.getZ()), "world");
-    QVec rt = innermodel->transform("base", QVec::vec3(coor.getX(), 0, coor.getZ()), "world"); // Coordenadas del target
+    QVec rt;
+
+     rt = innermodel->transform("base", QVec::vec3(coor.getX(), 0, coor.getZ()), "world"); // Coordenadas del target
+
+//     qDebug() << "coor.getX(): " << coor.getX() << "coor.getZ(): " << coor.getZ();
+//     
     dist = rt.norm2();
+    qDebug() << "DIST: " << dist;
+    
     ang  = atan2(rt.x(), rt.z()); // con respecto al target
     
     distTarget = dist;
     
 
-   if(dist < 50)          // If close to obstacle stop and transit to IDLE
+   if(distTarget < 250)          // If close to obstacle stop and transit to IDLE
   {
-  
-    finish();
-//     state = State::IDLE;
-//     coor.activate();
+    state = State::FINISH;
 
    return;
 
@@ -257,12 +263,12 @@ void SpecificWorker::gotoTarget()
 	 
        } 
 
-  
+   distTarget = dist;
  }
  
 void SpecificWorker::bug()
 {
-  
+  qDebug() <<"ENTRA EN bug";   
   
 // hay obstaculo
   TLaserData data = laser_proxy->getLaserData();
@@ -273,7 +279,7 @@ void SpecificWorker::bug()
      
     if (data[20].dist < 380)
     {
-     qDebug() << data[data.size()-20].dist;
+//      qDebug() << data[data.size()-20].dist;
       differentialrobot_proxy->setSpeedBase(100 , -0.6);
        
     }
@@ -340,11 +346,13 @@ void  SpecificWorker::finish()
 {
   differentialrobot_proxy->setSpeedBase(0, 0);
   coor.disable();
+  coor.disableTag();
   state = State::IDLE;
 }
 
 void  SpecificWorker::border()
 {
+    qDebug() <<"ENTRA EN border";   
   
 //   if(shock()){
 //       qDebug() << " SE HA CHOCAO";
@@ -359,7 +367,7 @@ void  SpecificWorker::border()
   float dist = rt.norm2();
   float angle  = atan2(rt.x(), rt.z()); // con respecto al target
  
-  qDebug() <<" ------------distancia " << distTarget; 
+//   qDebug() <<" ------------distancia " << distTarget; 
   
   if(dist <= distTarget)
   {
@@ -376,7 +384,7 @@ void  SpecificWorker::border()
   
    if((!obstacle(30) || targetAtSight() == true) && -0.025 < angle < 0.025)
    {
-     qDebug() << " -----------------------TARGET AT SIGHT--------------";
+//      qDebug() << " -----------------------TARGET AT SIGHT--------------";
       state = State::GOTO;
     }
   
@@ -388,7 +396,7 @@ void  SpecificWorker::border()
 	
    if (obstacle(30))
    {
-     qDebug() << "Obstaculo";
+//      qDebug() << "Obstaculo";
      differentialrobot_proxy->setSpeedBase(80, -0.6); 
    }	
 
@@ -407,11 +415,12 @@ void SpecificWorker::go(const string &nodo, const float x, const float y, const 
 {
     coor.setX(x);
     coor.setZ(y);
-    qDebug() << "VALOR X EN GO" << x;
-    qDebug() << "VALOR Y EN GO" << y;
-    coor.disable();
+//     qDebug() << "VALOR X EN GO" << x;
+//     qDebug() << "VALOR Y EN GO" << y;
+    coor.activateTag();
     coor.activate();
-    gotoTarget();
+    state = State::IDLE;
+//     gotoTarget();
     
 }
 void SpecificWorker::turn(const float speed)
@@ -421,18 +430,25 @@ void SpecificWorker::turn(const float speed)
 }
 bool SpecificWorker::atTarget()
 {
-  qDebug() << "Distancia al objetivo: ---------------" << distTarget;
+  QVec rt;
+//   innermodel->transform("world", QVec::vec3(coor.getX(), 0, coor.getZ()), "rgbd");
+  rt = innermodel->transform("base", QVec::vec3(coor.getX(), 0, coor.getZ()), "world");
+  float dist = rt.norm2();
   
-  if (distTarget < 100)
+
+  qDebug() << "Distancia al objetivo: ---------------" << dist;
+  
+  if (dist < 250){
     return true;
-  else
+    
+    state = State::FINISH;
+    
+  }else
     return false; 
  
 }
 void SpecificWorker::stop()
 {
-
-
   differentialrobot_proxy->setSpeedBase(0 , 0);
   
 }
