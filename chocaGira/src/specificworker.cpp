@@ -206,6 +206,7 @@ void SpecificWorker::setPick(const Pick &myPick)
 
 void SpecificWorker::gotoTarget()
  {
+   coor.disable();
     qDebug() <<"ENTRA EN gotoTarget";   
     float vrot,dist,vadv,ang;
     const float MaxAdv = 400, MaxRot = 0.5, e = 2.71828;
@@ -239,7 +240,7 @@ void SpecificWorker::gotoTarget()
     distTarget = dist;
     
 
-   if(distTarget < 250)          // If close to obstacle stop and transit to IDLE
+   if(distTarget < 220)          // If close to obstacle stop and transit to IDLE
   {
     state = State::FINISH;
 
@@ -375,7 +376,7 @@ void  SpecificWorker::border()
     
   }else {
     
-    if(distTarget < 285){
+    if(distTarget < 400){
       entra = false;
       state = State::FINISH;
 //       return;
@@ -419,8 +420,6 @@ void SpecificWorker::go(const string &nodo, const float x, const float y, const 
 //     qDebug() << "VALOR Y EN GO" << y;
     coor.activateTag();
     coor.activate();
-    state = State::IDLE;
-//     gotoTarget();
     
 }
 void SpecificWorker::turn(const float speed)
@@ -438,7 +437,7 @@ bool SpecificWorker::atTarget()
 
   qDebug() << "Distancia al objetivo: ---------------" << dist;
   
-  if (dist < 250){
+  if (dist < 230){
     return true;
     
     state = State::FINISH;

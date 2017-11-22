@@ -45,11 +45,11 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 //COMPUTE TAG	
 void SpecificWorker::compute()
 {
-//   RoboCompDifferentialRobot::TBaseState bState;
-//   differentialrobot_proxy->getBaseState(bState);
+  RoboCompDifferentialRobot::TBaseState bState;
+  differentialrobot_proxy->getBaseState(bState);
 //   
 //   
-//   innermodel->updateTransformValues("base", bState.x, 0, bState.z, 0, bState.alpha, 0);
+  innermodel->updateTransformValues("base", bState.x, 0, bState.z, 0, bState.alpha, 0);
   
   
    
@@ -88,14 +88,14 @@ void SpecificWorker::newAprilTag(const tagsList& tags)
  
 
 //   if(!entra){
-    
+  QMutexLocker ml(&mutexCam);  
   tag.setID(tags.front().id);
   tag.setTX(tags.front().tx);
   tag.setTZ(tags.front().tz);
   
 //   qDebug() << "ID: " << tag.getID() << " TX: " << tag.getTX() << " TZ: " << tag.getTZ();
   
- innermodel->transform("world", QVec::vec3(tag.getTX(), 0, tag.getTZ()), "rgbd");  
+ rt = innermodel->transform("world", QVec::vec3(tag.getTX(), 0, tag.getTZ()), "base");  
  
 //  if(tag.getID() == current)
 //    entra = true;
@@ -146,7 +146,7 @@ void SpecificWorker::gotoT()
 //       qDebug() << " -------X Despues: " << tag.getTX();
 //       qDebug() << " -------Z Despues: " << tag.getTZ();
       
-      gotopoint_proxy->go("", tag.getTX(), tag.getTZ(),0);
+      gotopoint_proxy->go("", rt.x(), rt.z(),0);
 	
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
       
@@ -165,7 +165,6 @@ void SpecificWorker::wait()
 
   
   if(aux == true){
-    
     try 
       {
 	gotopoint_proxy->stop();

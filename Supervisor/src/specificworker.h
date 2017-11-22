@@ -100,8 +100,8 @@ private:
 		QMutex mutex;
 	};
 	
-	
-       
+	QVec rt;
+	QMutex mutexCam;
 	InnerModel *innermodel;
 	float distTarget;
 	int current = 0;//make the robot turn until the tag.id == current
