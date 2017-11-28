@@ -104,7 +104,7 @@ private:
 	QMutex mutexCam;
 	InnerModel *innermodel;
 	float distTarget;
-	int current = 0;//make the robot turn until the tag.id == current
+	int current = 10;//make the robot turn until the tag.id == current
 	Tag tag;
 	bool entra = false;
 	

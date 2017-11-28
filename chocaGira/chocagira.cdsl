@@ -10,6 +10,7 @@ Component chocagira
 		requires Laser, DifferentialRobot;
 		subscribesTo RCISMousePicker;
 		implements GotoPoint;
+
 	};
 	language Cpp;
 	gui Qt(QWidget);

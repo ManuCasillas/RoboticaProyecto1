@@ -36,7 +36,7 @@ SpecificWorker::~SpecificWorker()
 
 bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 {
-	innermodel = new InnerModel("/home/salabeta/robocomp/files/innermodel/simpleworld.xml");
+	innermodel = new InnerModel("/home/salabeta/robocomp/files/innermodel/betaWorldArm.xml");
 	timer.start(Period);
 	return true;
 }
@@ -50,7 +50,7 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 
    TLaserData laserData = laser_proxy->getLaserData();
 
-   innermodel->updateTransformValues("base", bState.x, 0, bState.z, 0, bState.alpha, 0);
+   innermodel->updateTransformValues("robot", bState.x, 0, bState.z, 0, bState.alpha, 0);
 
   switch( state )
  {
@@ -228,7 +228,7 @@ void SpecificWorker::gotoTarget()
 
     QVec rt;
 
-     rt = innermodel->transform("base", QVec::vec3(coor.getX(), 0, coor.getZ()), "world"); // Coordenadas del target
+     rt = innermodel->transform("robot", QVec::vec3(coor.getX(), 0, coor.getZ()), "world"); // Coordenadas del target
 
 //     qDebug() << "coor.getX(): " << coor.getX() << "coor.getZ(): " << coor.getZ();
 //     
@@ -354,7 +354,7 @@ void  SpecificWorker::finish()
 void  SpecificWorker::border()
 {
     qDebug() <<"ENTRA EN border";   
-  
+     TLaserData data = laser_proxy->getLaserData();
 //   if(shock()){
 //       qDebug() << " SE HA CHOCAO";
 //       differentialrobot_proxy->setSpeedBase(-10, 0);
@@ -364,7 +364,7 @@ void  SpecificWorker::border()
   
   bool entra = true;
   
-  QVec rt = innermodel->transform("base", QVec::vec3(coor.getX(), 0, coor.getZ()), "world");
+  QVec rt = innermodel->transform("robot", QVec::vec3(coor.getX(), 0, coor.getZ()), "world");
   float dist = rt.norm2();
   float angle  = atan2(rt.x(), rt.z()); // con respecto al target
  
@@ -389,11 +389,7 @@ void  SpecificWorker::border()
       state = State::GOTO;
     }
   
-  
-  
-   TLaserData data = laser_proxy->getLaserData();
-     
-   differentialrobot_proxy->setSpeedBase(80, -0.6);  
+
 	
    if (obstacle(30))
    {
@@ -431,7 +427,7 @@ bool SpecificWorker::atTarget()
 {
   QVec rt;
 //   innermodel->transform("world", QVec::vec3(coor.getX(), 0, coor.getZ()), "rgbd");
-  rt = innermodel->transform("base", QVec::vec3(coor.getX(), 0, coor.getZ()), "world");
+  rt = innermodel->transform("robot", QVec::vec3(coor.getX(), 0, coor.getZ()), "world");
   float dist = rt.norm2();
   
 

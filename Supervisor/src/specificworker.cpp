@@ -36,7 +36,7 @@ SpecificWorker::~SpecificWorker()
 
 bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 {
-	innermodel = new InnerModel("/home/salabeta/robocomp/files/innermodel/simpleworld.xml");
+	innermodel = new InnerModel("/home/salabeta/robocomp/files/innermodel/betaWorldArm.xml");
 	timer.start(Period);
 	return true;
 }
@@ -49,7 +49,7 @@ void SpecificWorker::compute()
   differentialrobot_proxy->getBaseState(bState);
 //   
 //   
-  innermodel->updateTransformValues("base", bState.x, 0, bState.z, 0, bState.alpha, 0);
+  innermodel->updateTransformValues("robot", bState.x, 0, bState.z, 0, bState.alpha, 0);
   
   
    
@@ -88,14 +88,36 @@ void SpecificWorker::newAprilTag(const tagsList& tags)
  
 
 //   if(!entra){
-  QMutexLocker ml(&mutexCam);  
-  tag.setID(tags.front().id);
-  tag.setTX(tags.front().tx);
-  tag.setTZ(tags.front().tz);
+  QVec rt;
+  QMutexLocker ml(&mutexCam);
+  int auxID;
+  float auxTX,dist, auxTZ, distancia  = 99999;
+
+
+for (auto d:tags){
+  if (d.id >= 10){
+  qDebug()<<" Holaalsdhjaoi`sdjuaoisdja´posjas´dp9jaus´dpjasdpjasjasasoidjaoisdjoaisjdoñiasjdoas";
+    rt = innermodel->transform("world", QVec::vec3(d.tx, 0, d.tz), "robot");
+    dist = rt.norm2();
+    
+    if(dist < distancia && dist > 250){
+      distancia = dist;
+      auxID = d.id;
+      auxTX = d.tx;
+      auxTZ = d.tz;
+    }
+    
+  }
+}
+  
+  tag.setID(auxID);
+  tag.setTX(auxTX);
+  tag.setTZ(auxTZ);
+  
   
 //   qDebug() << "ID: " << tag.getID() << " TX: " << tag.getTX() << " TZ: " << tag.getTZ();
   
- rt = innermodel->transform("world", QVec::vec3(tag.getTX(), 0, tag.getTZ()), "base");  
+ rt = innermodel->transform("world", QVec::vec3(tag.getTX(), 0, tag.getTZ()), "robot");  
  
 //  if(tag.getID() == current)
 //    entra = true;
@@ -107,7 +129,7 @@ void SpecificWorker::newAprilTag(const tagsList& tags)
 
 void SpecificWorker::initial()
 {
-  current = 0;
+  current = 10;
   entra = false;
   stateTag = StateTag::SEARCH;
 }
@@ -123,7 +145,7 @@ void SpecificWorker::search()
     
     qDebug()<< " --------tagid "<< tag.getID()<< " current id -------" << current;
     
-    if(tag.getID() == current)
+    if(tag.getID() >= current)
     {
       entra = true;
       try 
@@ -171,8 +193,8 @@ void SpecificWorker::wait()
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
     
     current++;
-  if(current == 4){
-    stateTag = StateTag::INITIAL;
+  if(current == 13){
+    gotopoint_proxy->stop();
   }else{
     stateTag = StateTag::SEARCH;
     entra = false;
