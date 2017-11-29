@@ -50,13 +50,15 @@ public:
 	
 private:
      
-        enum class StateTag{INITIAL, SEARCH, GOTO, WAIT};
+        enum class StateTag{INITIAL, SEARCH,SEARCH_CORNER, GOTO, WAIT};
        StateTag stateTag = StateTag::INITIAL; 
       
 	void initial();
 	void search();
+	void searchCorner();
 	void gotoT();
 	void wait();
+	bool visitado(int id);
      
          struct Tag{
 	 Tag(){};
@@ -104,9 +106,13 @@ private:
 	QMutex mutexCam;
 	InnerModel *innermodel;
 	float distTarget;
-	int current = 10;//make the robot turn until the tag.id == current
+// 	int current = 10;//make the robot turn until the tag.id == current
 	Tag tag;
-	bool entra = false;
+// 	bool entra = false;
+	int primeraCaja = 10; //para resetear mas facilmente
+	int basurero = 3; //AprilTags que servira como basurero
+	bool goBasurero = false;
+	int cajasRecogidas[10];
 	
 public slots:
 	void compute(); 	

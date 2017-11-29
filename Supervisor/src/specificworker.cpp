@@ -67,10 +67,18 @@ void SpecificWorker::compute()
 
     break;
     
+    case StateTag::SEARCH_CORNER:
+     qDebug() << "SEARCH_CORNER";
+     searchCorner();
+
+    break;
+    
    case StateTag::GOTO:
      qDebug() << "GOTO";
      gotoT();
    break;
+   
+   
 
    case StateTag::WAIT:
      qDebug() << "WAIT";
@@ -85,52 +93,70 @@ void SpecificWorker::compute()
 	
 void SpecificWorker::newAprilTag(const tagsList& tags)
 { 
- 
-
-//   if(!entra){
-  QVec rt;
+  
   QMutexLocker ml(&mutexCam);
-  int auxID;
-  float auxTX,dist, auxTZ, distancia  = 99999;
+  int auxID = 0;
+  float auxTX  = 0 ,dist = 0, auxTZ = 0, distancia  = 99999;
+//   bool aux = false;
 
 
-for (auto d:tags){
-  if (d.id >= 10){
-  qDebug()<<" Holaalsdhjaoi`sdjuaoisdja´posjas´dp9jaus´dpjasdpjasjasasoidjaoisdjoaisjdoñiasjdoas";
+ for (auto d:tags){
+   
+  if(d.id == basurero && goBasurero == true){ // 
     rt = innermodel->transform("world", QVec::vec3(d.tx, 0, d.tz), "robot");
-    dist = rt.norm2();
+    auxID = d.id;
+    auxTX = d.tx;
+    auxTZ = d.tz;
+//     aux = true;
+    
+    
+    tag.setID(auxID);
+	tag.setTX(auxTX);
+	tag.setTZ(auxTZ);
+      
+      
+      rt = innermodel->transform("world", QVec::vec3(tag.getTX(), 0, tag.getTZ()), "robot");  
+
+  }else  if (d.id >= 10 && goBasurero == false && visitado(d.id) == false){
+//   qDebug()<<"Tags mostrados  " << d.id;
+   QVec rd  = innermodel->transform("world", QVec::vec3(d.tx, 0, d.tz), "robot");
+    dist = rd.norm2();
     
     if(dist < distancia && dist > 250){
       distancia = dist;
       auxID = d.id;
       auxTX = d.tx;
       auxTZ = d.tz;
+      
+       tag.setID(auxID);
+	tag.setTX(auxTX);
+	tag.setTZ(auxTZ);
+      
+      
+      rt = innermodel->transform("world", QVec::vec3(tag.getTX(), 0, tag.getTZ()), "robot");  
+ 
+      
     }
-    
   }
 }
+//   tag.setID(auxID);
+//   tag.setTX(auxTX);
+//   tag.setTZ(auxTZ);
   
-  tag.setID(auxID);
-  tag.setTX(auxTX);
-  tag.setTZ(auxTZ);
-  
-  
-//   qDebug() << "ID: " << tag.getID() << " TX: " << tag.getTX() << " TZ: " << tag.getTZ();
-  
- rt = innermodel->transform("world", QVec::vec3(tag.getTX(), 0, tag.getTZ()), "robot");  
+//   rt = innermodel->transform("world", QVec::vec3(tag.getTX(), 0, tag.getTZ()), "robot");  
  
-//  if(tag.getID() == current)
-//    entra = true;
-//  
-//  
-//   }
  
 }
 
 void SpecificWorker::initial()
 {
-  current = 10;
-  entra = false;
+//   current = 10;
+  /*entra= false;*/ 
+  
+  for(int i  = 0; i < 10 ; i++){
+    cajasRecogidas[i] = 0;
+  }
+  
   stateTag = StateTag::SEARCH;
 }
 
@@ -143,11 +169,23 @@ void SpecificWorker::search()
     } 
     catch(const Ice::Exception &e)  { std::cout << e << std::endl;}
     
-    qDebug()<< " --------tagid "<< tag.getID()<< " current id -------" << current;
     
-    if(tag.getID() >= current)
+    
+    if(tag.getID() >= primeraCaja && visitado(tag.getID()) == false)
     {
-      entra = true;
+      
+       bool entra = false;
+   for(int i  = 0;i < 10 && !entra; i++){
+     
+      if(cajasRecogidas[i] == 0 && !entra){
+	cajasRecogidas[i] = tag.getID();
+	entra = true;
+      }
+      qDebug()<< " --------cajas recodigas "<< cajasRecogidas[i];
+  }
+      
+      qDebug()<< " --------tagid "<< tag.getID();
+  	
       try 
       {
       gotopoint_proxy->stop(); 
@@ -159,14 +197,56 @@ void SpecificWorker::search()
      
 }
 
+bool SpecificWorker::visitado(int id){
+  
+  
+  for(int i  = 0; i < 10 ; i++){
+    
+    if(cajasRecogidas[i] == id)
+      return true;
+  }
+  return false;
+  
+  
+}
+
+
+ 
+void SpecificWorker::searchCorner()
+{
+ 
+  
+   try
+    { 
+    gotopoint_proxy->turn(1);
+    } 
+    catch(const Ice::Exception &e)  { std::cout << e << std::endl;}
+    
+    qDebug()<< " --------tagid Corner "<< tag.getID();
+    
+    if(tag.getID() == basurero)
+    {
+
+      try 
+      {
+      gotopoint_proxy->stop(); 
+	
+      } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
+      
+      stateTag = StateTag::GOTO;
+     }
+     
+}
+
+
+
+
+
 void SpecificWorker::gotoT()
 {
   try 
       {
 	gotopoint_proxy->stop(); 
-	
-//       qDebug() << " -------X Despues: " << tag.getTX();
-//       qDebug() << " -------Z Despues: " << tag.getTZ();
       
       gotopoint_proxy->go("", rt.x(), rt.z(),0);
 	
@@ -192,13 +272,14 @@ void SpecificWorker::wait()
 	gotopoint_proxy->stop();
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
     
-    current++;
-  if(current == 13){
-    gotopoint_proxy->stop();
-  }else{
+   goBasurero = !goBasurero;
+ 
+   if(goBasurero == false)
     stateTag = StateTag::SEARCH;
-    entra = false;
+   else
+    stateTag = StateTag::SEARCH_CORNER;
+   
+//     entra = false;
   }
 }
      
-}
