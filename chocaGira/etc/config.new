@@ -10,6 +10,7 @@ RCISMousePickerTopic.Endpoints=tcp -p 0
 
 
 # Proxies for required interfaces
+JointMotorProxy = jointmotor:tcp -h localhost -p 0
 LaserProxy = laser:tcp -h localhost -p 0
 DifferentialRobotProxy = differentialrobot:tcp -h localhost -p 0
 

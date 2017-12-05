@@ -240,7 +240,7 @@ void SpecificWorker::gotoTarget()
     distTarget = dist;
     
 
-   if(distTarget < 220)          // If close to obstacle stop and transit to IDLE
+   if(distTarget < 400)          // If close to obstacle stop and transit to IDLE
   {
     state = State::FINISH;
 
@@ -278,7 +278,7 @@ void SpecificWorker::bug()
   if(obstacle(20) == false)
    {
      
-    if (data[20].dist < 380)
+    if (data[20].dist < 400)
     {
 //      qDebug() << data[data.size()-20].dist;
       differentialrobot_proxy->setSpeedBase(100 , -0.6);
@@ -300,7 +300,7 @@ bool SpecificWorker:: obstacle(int umbral)
     TLaserData data = laser_proxy->getLaserData();
     std::sort(data.begin()+umbral, data.end()-umbral, [](auto a,auto b){return a.dist < b.dist;});
  
-    if (data[umbral].dist < 260)
+    if (data[umbral].dist < 230)
       return true;
     else	
       return false;
@@ -433,7 +433,7 @@ bool SpecificWorker::atTarget()
 
   qDebug() << "Distancia al objetivo: ---------------" << dist;
   
-  if (dist < 230){
+  if (dist < 400){
     return true;
     
     state = State::FINISH;
@@ -445,6 +445,16 @@ bool SpecificWorker::atTarget()
 void SpecificWorker::stop()
 {
   differentialrobot_proxy->setSpeedBase(0 , 0);
+  
+}
+
+void SpecificWorker::picking_box()
+{
+//   jointmotor_proxy->setPosition(2,0);
+}
+
+void SpecificWorker::releasing_box()
+{
   
 }
 

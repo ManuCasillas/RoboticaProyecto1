@@ -10,6 +10,9 @@ src/CMakeFiles/chocagira.dir/DifferentialRobot.cpp.o
 src/CMakeFiles/chocagira.dir/GotoPoint.cpp.o
  /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/GotoPoint.cpp
  src/GotoPoint.h
+src/CMakeFiles/chocagira.dir/JointMotor.cpp.o
+ /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/JointMotor.cpp
+ src/JointMotor.h
 src/CMakeFiles/chocagira.dir/Laser.cpp.o
  /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/Laser.cpp
  src/DifferentialRobot.h
@@ -477,6 +480,7 @@ src/CMakeFiles/chocagira.dir/chocagira_automoc.cpp.o
  src/CommonBehavior.h
  src/DifferentialRobot.h
  src/GotoPoint.h
+ src/JointMotor.h
  src/Laser.h
  src/RCISMousePicker.h
  src/config.h
@@ -915,6 +919,7 @@ src/CMakeFiles/chocagira.dir/commonbehaviorI.cpp.o
  src/CommonBehavior.h
  src/DifferentialRobot.h
  src/GotoPoint.h
+ src/JointMotor.h
  src/Laser.h
  src/RCISMousePicker.h
  src/config.h
@@ -1353,6 +1358,7 @@ src/CMakeFiles/chocagira.dir/genericmonitor.cpp.o
  src/CommonBehavior.h
  src/DifferentialRobot.h
  src/GotoPoint.h
+ src/JointMotor.h
  src/Laser.h
  src/RCISMousePicker.h
  src/ui_mainUI.h
@@ -1789,6 +1795,7 @@ src/CMakeFiles/chocagira.dir/genericworker.cpp.o
  src/CommonBehavior.h
  src/DifferentialRobot.h
  src/GotoPoint.h
+ src/JointMotor.h
  src/Laser.h
  src/RCISMousePicker.h
  src/ui_mainUI.h
@@ -2225,6 +2232,7 @@ src/CMakeFiles/chocagira.dir/gotopointI.cpp.o
  src/CommonBehavior.h
  src/DifferentialRobot.h
  src/GotoPoint.h
+ src/JointMotor.h
  src/Laser.h
  src/RCISMousePicker.h
  src/config.h
@@ -3033,6 +3041,7 @@ src/CMakeFiles/chocagira.dir/main.cpp.o
  src/CommonBehavior.h
  src/DifferentialRobot.h
  src/GotoPoint.h
+ src/JointMotor.h
  src/Laser.h
  src/RCISMousePicker.h
  src/gotopointI.h
@@ -3471,6 +3480,7 @@ src/CMakeFiles/chocagira.dir/rcismousepickerI.cpp.o
  src/CommonBehavior.h
  src/DifferentialRobot.h
  src/GotoPoint.h
+ src/JointMotor.h
  src/Laser.h
  src/RCISMousePicker.h
  src/config.h
@@ -3910,6 +3920,7 @@ src/CMakeFiles/chocagira.dir/specificmonitor.cpp.o
  src/CommonBehavior.h
  src/DifferentialRobot.h
  src/GotoPoint.h
+ src/JointMotor.h
  src/Laser.h
  src/RCISMousePicker.h
  src/ui_mainUI.h
@@ -4360,6 +4371,7 @@ src/CMakeFiles/chocagira.dir/specificworker.cpp.o
  src/CommonBehavior.h
  src/DifferentialRobot.h
  src/GotoPoint.h
+ src/JointMotor.h
  src/Laser.h
  src/RCISMousePicker.h
  src/config.h

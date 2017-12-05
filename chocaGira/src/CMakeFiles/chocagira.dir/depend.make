@@ -10,6 +10,9 @@ src/CMakeFiles/chocagira.dir/DifferentialRobot.cpp.o: src/DifferentialRobot.h
 src/CMakeFiles/chocagira.dir/GotoPoint.cpp.o: src/GotoPoint.cpp
 src/CMakeFiles/chocagira.dir/GotoPoint.cpp.o: src/GotoPoint.h
 
+src/CMakeFiles/chocagira.dir/JointMotor.cpp.o: src/JointMotor.cpp
+src/CMakeFiles/chocagira.dir/JointMotor.cpp.o: src/JointMotor.h
+
 src/CMakeFiles/chocagira.dir/Laser.cpp.o: src/Laser.cpp
 src/CMakeFiles/chocagira.dir/Laser.cpp.o: src/DifferentialRobot.h
 src/CMakeFiles/chocagira.dir/Laser.cpp.o: src/Laser.h
@@ -476,6 +479,7 @@ src/CMakeFiles/chocagira.dir/chocagira_automoc.cpp.o: /usr/include/qt4/QtGui/qws
 src/CMakeFiles/chocagira.dir/chocagira_automoc.cpp.o: src/CommonBehavior.h
 src/CMakeFiles/chocagira.dir/chocagira_automoc.cpp.o: src/DifferentialRobot.h
 src/CMakeFiles/chocagira.dir/chocagira_automoc.cpp.o: src/GotoPoint.h
+src/CMakeFiles/chocagira.dir/chocagira_automoc.cpp.o: src/JointMotor.h
 src/CMakeFiles/chocagira.dir/chocagira_automoc.cpp.o: src/Laser.h
 src/CMakeFiles/chocagira.dir/chocagira_automoc.cpp.o: src/RCISMousePicker.h
 src/CMakeFiles/chocagira.dir/chocagira_automoc.cpp.o: src/config.h
@@ -914,6 +918,7 @@ src/CMakeFiles/chocagira.dir/commonbehaviorI.cpp.o: /usr/include/qt4/QtGui/qwsem
 src/CMakeFiles/chocagira.dir/commonbehaviorI.cpp.o: src/CommonBehavior.h
 src/CMakeFiles/chocagira.dir/commonbehaviorI.cpp.o: src/DifferentialRobot.h
 src/CMakeFiles/chocagira.dir/commonbehaviorI.cpp.o: src/GotoPoint.h
+src/CMakeFiles/chocagira.dir/commonbehaviorI.cpp.o: src/JointMotor.h
 src/CMakeFiles/chocagira.dir/commonbehaviorI.cpp.o: src/Laser.h
 src/CMakeFiles/chocagira.dir/commonbehaviorI.cpp.o: src/RCISMousePicker.h
 src/CMakeFiles/chocagira.dir/commonbehaviorI.cpp.o: src/config.h
@@ -1352,6 +1357,7 @@ src/CMakeFiles/chocagira.dir/genericmonitor.cpp.o: /usr/include/qt4/QtGui/qwsemb
 src/CMakeFiles/chocagira.dir/genericmonitor.cpp.o: src/CommonBehavior.h
 src/CMakeFiles/chocagira.dir/genericmonitor.cpp.o: src/DifferentialRobot.h
 src/CMakeFiles/chocagira.dir/genericmonitor.cpp.o: src/GotoPoint.h
+src/CMakeFiles/chocagira.dir/genericmonitor.cpp.o: src/JointMotor.h
 src/CMakeFiles/chocagira.dir/genericmonitor.cpp.o: src/Laser.h
 src/CMakeFiles/chocagira.dir/genericmonitor.cpp.o: src/RCISMousePicker.h
 src/CMakeFiles/chocagira.dir/genericmonitor.cpp.o: src/ui_mainUI.h
@@ -1788,6 +1794,7 @@ src/CMakeFiles/chocagira.dir/genericworker.cpp.o: /usr/include/qt4/QtGui/qwsembe
 src/CMakeFiles/chocagira.dir/genericworker.cpp.o: src/CommonBehavior.h
 src/CMakeFiles/chocagira.dir/genericworker.cpp.o: src/DifferentialRobot.h
 src/CMakeFiles/chocagira.dir/genericworker.cpp.o: src/GotoPoint.h
+src/CMakeFiles/chocagira.dir/genericworker.cpp.o: src/JointMotor.h
 src/CMakeFiles/chocagira.dir/genericworker.cpp.o: src/Laser.h
 src/CMakeFiles/chocagira.dir/genericworker.cpp.o: src/RCISMousePicker.h
 src/CMakeFiles/chocagira.dir/genericworker.cpp.o: src/ui_mainUI.h
@@ -2224,6 +2231,7 @@ src/CMakeFiles/chocagira.dir/gotopointI.cpp.o: /usr/include/qt4/QtGui/qwsembedwi
 src/CMakeFiles/chocagira.dir/gotopointI.cpp.o: src/CommonBehavior.h
 src/CMakeFiles/chocagira.dir/gotopointI.cpp.o: src/DifferentialRobot.h
 src/CMakeFiles/chocagira.dir/gotopointI.cpp.o: src/GotoPoint.h
+src/CMakeFiles/chocagira.dir/gotopointI.cpp.o: src/JointMotor.h
 src/CMakeFiles/chocagira.dir/gotopointI.cpp.o: src/Laser.h
 src/CMakeFiles/chocagira.dir/gotopointI.cpp.o: src/RCISMousePicker.h
 src/CMakeFiles/chocagira.dir/gotopointI.cpp.o: src/config.h
@@ -3032,6 +3040,7 @@ src/CMakeFiles/chocagira.dir/main.cpp.o: /usr/include/qt4/QtGui/qwsembedwidget.h
 src/CMakeFiles/chocagira.dir/main.cpp.o: src/CommonBehavior.h
 src/CMakeFiles/chocagira.dir/main.cpp.o: src/DifferentialRobot.h
 src/CMakeFiles/chocagira.dir/main.cpp.o: src/GotoPoint.h
+src/CMakeFiles/chocagira.dir/main.cpp.o: src/JointMotor.h
 src/CMakeFiles/chocagira.dir/main.cpp.o: src/Laser.h
 src/CMakeFiles/chocagira.dir/main.cpp.o: src/RCISMousePicker.h
 src/CMakeFiles/chocagira.dir/main.cpp.o: src/gotopointI.h
@@ -3470,6 +3479,7 @@ src/CMakeFiles/chocagira.dir/rcismousepickerI.cpp.o: /usr/include/qt4/QtGui/qwse
 src/CMakeFiles/chocagira.dir/rcismousepickerI.cpp.o: src/CommonBehavior.h
 src/CMakeFiles/chocagira.dir/rcismousepickerI.cpp.o: src/DifferentialRobot.h
 src/CMakeFiles/chocagira.dir/rcismousepickerI.cpp.o: src/GotoPoint.h
+src/CMakeFiles/chocagira.dir/rcismousepickerI.cpp.o: src/JointMotor.h
 src/CMakeFiles/chocagira.dir/rcismousepickerI.cpp.o: src/Laser.h
 src/CMakeFiles/chocagira.dir/rcismousepickerI.cpp.o: src/RCISMousePicker.h
 src/CMakeFiles/chocagira.dir/rcismousepickerI.cpp.o: src/config.h
@@ -3909,6 +3919,7 @@ src/CMakeFiles/chocagira.dir/specificmonitor.cpp.o: /usr/include/qt4/QtGui/qwsem
 src/CMakeFiles/chocagira.dir/specificmonitor.cpp.o: src/CommonBehavior.h
 src/CMakeFiles/chocagira.dir/specificmonitor.cpp.o: src/DifferentialRobot.h
 src/CMakeFiles/chocagira.dir/specificmonitor.cpp.o: src/GotoPoint.h
+src/CMakeFiles/chocagira.dir/specificmonitor.cpp.o: src/JointMotor.h
 src/CMakeFiles/chocagira.dir/specificmonitor.cpp.o: src/Laser.h
 src/CMakeFiles/chocagira.dir/specificmonitor.cpp.o: src/RCISMousePicker.h
 src/CMakeFiles/chocagira.dir/specificmonitor.cpp.o: src/ui_mainUI.h
@@ -4359,6 +4370,7 @@ src/CMakeFiles/chocagira.dir/specificworker.cpp.o: /usr/include/qt4/QtGui/qwsemb
 src/CMakeFiles/chocagira.dir/specificworker.cpp.o: src/CommonBehavior.h
 src/CMakeFiles/chocagira.dir/specificworker.cpp.o: src/DifferentialRobot.h
 src/CMakeFiles/chocagira.dir/specificworker.cpp.o: src/GotoPoint.h
+src/CMakeFiles/chocagira.dir/specificworker.cpp.o: src/JointMotor.h
 src/CMakeFiles/chocagira.dir/specificworker.cpp.o: src/Laser.h
 src/CMakeFiles/chocagira.dir/specificworker.cpp.o: src/RCISMousePicker.h
 src/CMakeFiles/chocagira.dir/specificworker.cpp.o: src/config.h

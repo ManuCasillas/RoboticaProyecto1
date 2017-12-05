@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CommonBehavior.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/chocagira.dir/CommonBehavior.cpp.o"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/DifferentialRobot.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/chocagira.dir/DifferentialRobot.cpp.o"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/GotoPoint.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/chocagira.dir/GotoPoint.cpp.o"
+  "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/JointMotor.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/chocagira.dir/JointMotor.cpp.o"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/Laser.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/chocagira.dir/Laser.cpp.o"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/RCISMousePicker.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/chocagira.dir/RCISMousePicker.cpp.o"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/chocagira_automoc.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/chocagira.dir/chocagira_automoc.cpp.o"
@@ -56,6 +57,7 @@ set(CMAKE_MULTIPLE_OUTPUT_PAIRS
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CommonBehavior.h" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CommonBehavior.cpp"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/DifferentialRobot.h" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/DifferentialRobot.cpp"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/GotoPoint.h" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/GotoPoint.cpp"
+  "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/JointMotor.h" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/JointMotor.cpp"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/Laser.h" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/Laser.cpp"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/RCISMousePicker.h" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/RCISMousePicker.cpp"
   )

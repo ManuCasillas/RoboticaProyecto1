@@ -102,7 +102,8 @@ void SpecificWorker::newAprilTag(const tagsList& tags)
 
  for (auto d:tags){
    
-  if(d.id == basurero && goBasurero == true){ // 
+  if(d.id == basurero && goBasurero == true){ //
+//     qDebug() << " HOLAHOLA---HOLAHOLA";
     rt = innermodel->transform("world", QVec::vec3(d.tx, 0, d.tz), "robot");
     auxID = d.id;
     auxTX = d.tx;
@@ -246,8 +247,8 @@ void SpecificWorker::gotoT()
 {
   try 
       {
-	gotopoint_proxy->stop(); 
-      
+	//gotopoint_proxy->stop(); 
+//       qDebug() << "Entra tol rato";
       gotopoint_proxy->go("", rt.x(), rt.z(),0);
 	
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
@@ -280,6 +281,9 @@ void SpecificWorker::wait()
     stateTag = StateTag::SEARCH_CORNER;
    
 //     entra = false;
+  }else{
+    // llamar mejor y menos
+    stateTag = StateTag::GOTO;
   }
 }
      

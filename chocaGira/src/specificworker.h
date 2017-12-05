@@ -35,6 +35,7 @@
 #include <innermodel/innermodel.h>
 #include <vector>
 #include <Laser.h>
+#include <JointMotor.h>
 
 
 class SpecificWorker : public GenericWorker
@@ -50,6 +51,8 @@ public:
 	void turn(const float speed);
 	bool atTarget();
 	void stop();
+	void picking_box();
+	void releasing_box();
 	
 	
 	float gaus(float Vrot, float Vx, float h);

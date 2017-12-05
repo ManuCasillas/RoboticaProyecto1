@@ -3,6 +3,7 @@
 0b5b91af7c1a92bdb04cb659ba912b99 src/CommonBehavior.cpp
 cad4b0c61ff1b91304f223eb312ab97b src/DifferentialRobot.cpp
 2570270ccbc27dab031946119f2f6c35 src/GotoPoint.cpp
+6f932aa28074ae72a45ea6b86ad8ec94 src/JointMotor.cpp
 c38808c5e9d9293ac1548d524e2575b8 src/Laser.cpp
 ac84179ed6b0ced70ff22c8211a9c432 src/RCISMousePicker.cpp
 afce4a58c97f8db75e18edd10cb4fa87 src/ui_mainUI.h
