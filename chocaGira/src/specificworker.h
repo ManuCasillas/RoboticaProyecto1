@@ -67,7 +67,7 @@ public:
 	
 	
 private:
-       enum class State{IDLE, GOTO, ROTATE, BORDER, FINISH};
+       enum class State{IDLE, GOTO, ROTATE, BORDER, WAIT, FINISH};
        State state = State::IDLE;
        
        struct Coordinate 

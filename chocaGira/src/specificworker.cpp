@@ -82,6 +82,10 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
       qDebug() << "FINISH";
      finish();
    break;
+   case State::WAIT:
+     qDebug() << "WAIT";
+     
+     break;
    
   }
 
@@ -242,6 +246,8 @@ void SpecificWorker::gotoTarget()
 
    if(distTarget < 400)          // If close to obstacle stop and transit to IDLE
   {
+    //SI COOR.GETNODO == BOX , CAMBIAR A PICKING picking_box
+    //SINO, FINISH
     state = State::FINISH;
 
    return;
@@ -407,15 +413,22 @@ void  SpecificWorker::border()
       
 }
 
+///////////////////////////////////////////////////////
 
 void SpecificWorker::go(const string &nodo, const float x, const float y, const float alpha)
 {
+  if (nodo == "box"){
+    //CAMBIAR ESTADO A PICKING BOX 
+  } else {
     coor.setX(x);
     coor.setZ(y);
 //     qDebug() << "VALOR X EN GO" << x;
 //     qDebug() << "VALOR Y EN GO" << y;
     coor.activateTag();
     coor.activate();
+    
+     
+    }
     
 }
 void SpecificWorker::turn(const float speed)
@@ -450,12 +463,17 @@ void SpecificWorker::stop()
 
 void SpecificWorker::picking_box()
 {
-//   jointmotor_proxy->setPosition(2,0);
+  
+  qDebug() << "PICKING";
+//    jointmotor_proxy->setPosition(2,0);
+//    jointmotor_proxy->
+  //LLAMAMOS A FINISH??
+   
 }
 
 void SpecificWorker::releasing_box()
 {
-  
+  qDebug() << "RELEASING";
 }
 
 

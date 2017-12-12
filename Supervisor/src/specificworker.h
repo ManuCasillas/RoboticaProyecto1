@@ -113,6 +113,8 @@ private:
 	int basurero = 3; //AprilTags que servira como basurero
 	bool goBasurero = false;
 	int cajasRecogidas[10];
+	int distanciaMax  = 99999;
+	
 	
 public slots:
 	void compute(); 	

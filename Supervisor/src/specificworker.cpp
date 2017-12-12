@@ -96,7 +96,7 @@ void SpecificWorker::newAprilTag(const tagsList& tags)
   
   QMutexLocker ml(&mutexCam);
   int auxID = 0;
-  float auxTX  = 0 ,dist = 0, auxTZ = 0, distancia  = 99999;
+  float auxTX  = 0 ,dist = 0, auxTZ = 0;
 //   bool aux = false;
 
 
@@ -116,15 +116,17 @@ void SpecificWorker::newAprilTag(const tagsList& tags)
 	tag.setTZ(auxTZ);
       
       
-      rt = innermodel->transform("world", QVec::vec3(tag.getTX(), 0, tag.getTZ()), "robot");  
+      rt = innermodel->transform("world", QVec::vec3(tag.getTX(), 0, tag.getTZ()), "robot");
+      
+      distanciaMax = 99999;
 
-  }else  if (d.id >= 10 && goBasurero == false && visitado(d.id) == false){
-//   qDebug()<<"Tags mostrados  " << d.id;
+  }else  if (d.id >= primeraCaja && goBasurero == false && visitado(d.id) == false ){
+   qDebug()<<"Tags mostrados  " << d.id;
    QVec rd  = innermodel->transform("world", QVec::vec3(d.tx, 0, d.tz), "robot");
     dist = rd.norm2();
     
-    if(dist < distancia && dist > 250){
-      distancia = dist;
+    if(dist < distanciaMax && dist > 250){
+      distanciaMax = dist;
       auxID = d.id;
       auxTX = d.tx;
       auxTZ = d.tz;
@@ -179,13 +181,15 @@ void SpecificWorker::search()
    for(int i  = 0;i < 10 && !entra; i++){
      
       if(cajasRecogidas[i] == 0 && !entra){
+	 qDebug()<< " --------tagid "<< tag.getID();
 	cajasRecogidas[i] = tag.getID();
 	entra = true;
+	stateTag = StateTag::GOTO;
       }
-      qDebug()<< " --------cajas recodigas "<< cajasRecogidas[i];
+      qDebug()<< " --------cajas recogidas "<< cajasRecogidas[i];
   }
       
-      qDebug()<< " --------tagid "<< tag.getID();
+     
   	
       try 
       {
@@ -193,7 +197,7 @@ void SpecificWorker::search()
 	
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
       
-      stateTag = StateTag::GOTO;
+     
      }
      
 }
@@ -223,11 +227,11 @@ void SpecificWorker::searchCorner()
     } 
     catch(const Ice::Exception &e)  { std::cout << e << std::endl;}
     
-    qDebug()<< " --------tagid Corner "<< tag.getID();
+   
     
     if(tag.getID() == basurero)
     {
-
+	qDebug()<< " --------tagid Corner "<< tag.getID();
       try 
       {
       gotopoint_proxy->stop(); 
@@ -249,6 +253,7 @@ void SpecificWorker::gotoT()
       {
 	//gotopoint_proxy->stop(); 
 //       qDebug() << "Entra tol rato";
+	//LE PASAMOS BOX O BASUSERO mirando la variable basusero
       gotopoint_proxy->go("", rt.x(), rt.z(),0);
 	
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
