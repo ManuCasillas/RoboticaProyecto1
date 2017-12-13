@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CommonBehavior.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/chocagira.dir/CommonBehavior.cpp.o"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/DifferentialRobot.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/chocagira.dir/DifferentialRobot.cpp.o"
+  "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/GetAprilTags.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/chocagira.dir/GetAprilTags.cpp.o"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/GotoPoint.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/chocagira.dir/GotoPoint.cpp.o"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/JointMotor.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/chocagira.dir/JointMotor.cpp.o"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/Laser.cpp" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CMakeFiles/chocagira.dir/Laser.cpp.o"
@@ -56,6 +57,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 set(CMAKE_MULTIPLE_OUTPUT_PAIRS
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CommonBehavior.h" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/CommonBehavior.cpp"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/DifferentialRobot.h" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/DifferentialRobot.cpp"
+  "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/GetAprilTags.h" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/GetAprilTags.cpp"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/GotoPoint.h" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/GotoPoint.cpp"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/JointMotor.h" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/JointMotor.cpp"
   "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/Laser.h" "/home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/Laser.cpp"

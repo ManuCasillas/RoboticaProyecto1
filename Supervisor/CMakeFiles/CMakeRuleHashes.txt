@@ -3,5 +3,6 @@
 ac2b378a1a756f4f2983b5c0d7e9bb6d src/CMakeFiles/Supervisor_automoc
 4333cb1c3a62ebd0b700b9d463616204 src/CommonBehavior.cpp
 f924cef8a0a483bd57087cc74a48ca02 src/DifferentialRobot.cpp
+e7f39f07a6f72850ca20a382504a829b src/GetAprilTags.cpp
 7993a3d6ff99e910fc7d21c08880cae2 src/GotoPoint.cpp
 425be8c7955c824a3e7421f24b01e3dc src/ui_mainUI.h

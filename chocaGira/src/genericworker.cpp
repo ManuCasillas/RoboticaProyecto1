@@ -28,9 +28,10 @@ QObject()
 #endif
 
 {
-	jointmotor_proxy = (*(JointMotorPrx*)mprx["JointMotorProxy"]);
-	differentialrobot_proxy = (*(DifferentialRobotPrx*)mprx["DifferentialRobotProxy"]);
 	laser_proxy = (*(LaserPrx*)mprx["LaserProxy"]);
+	jointmotor_proxy = (*(JointMotorPrx*)mprx["JointMotorProxy"]);
+	getapriltags_proxy = (*(GetAprilTagsPrx*)mprx["GetAprilTagsProxy"]);
+	differentialrobot_proxy = (*(DifferentialRobotPrx*)mprx["DifferentialRobotProxy"]);
 
 
 

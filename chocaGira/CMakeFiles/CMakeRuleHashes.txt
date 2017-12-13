@@ -2,6 +2,7 @@
 7715ec84b1f7f4c84b03fa3ab6812976 src/CMakeFiles/chocagira_automoc
 0b5b91af7c1a92bdb04cb659ba912b99 src/CommonBehavior.cpp
 cad4b0c61ff1b91304f223eb312ab97b src/DifferentialRobot.cpp
+688e914010aaa9f3030f8a6ddf1b415e src/GetAprilTags.cpp
 2570270ccbc27dab031946119f2f6c35 src/GotoPoint.cpp
 6f932aa28074ae72a45ea6b86ad8ec94 src/JointMotor.cpp
 c38808c5e9d9293ac1548d524e2575b8 src/Laser.cpp

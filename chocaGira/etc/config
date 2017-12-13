@@ -8,6 +8,7 @@ JointMotorProxy = jointmotor:tcp -h localhost -p 10007
 RCISMousePickerTopic.Endpoints=tcp -p 15000
 TopicManager.Proxy=IceStorm/TopicManager:default -p 9999
 GotoPoint.Endpoints=tcp -p 10005
+GetAprilTagsProxy = getapriltags:tcp -h localhost -p 14311
 
 
 

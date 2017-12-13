@@ -51,8 +51,9 @@ public:
 	void turn(const float speed);
 	bool atTarget();
 	void stop();
-	void picking_box();
-	void releasing_box();
+	void pickingBox();
+	void releasingBox();
+	bool pickedBox();
 	
 	
 	float gaus(float Vrot, float Vx, float h);
@@ -67,7 +68,7 @@ public:
 	
 	
 private:
-       enum class State{IDLE, GOTO, ROTATE, BORDER, WAIT, FINISH};
+       enum class State{IDLE, GOTO, ROTATE, BORDER, PICKING , RELEASING, FINISH};
        State state = State::IDLE;
        
        struct Coordinate 

@@ -46,9 +46,22 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 void SpecificWorker::compute()
 {
   RoboCompDifferentialRobot::TBaseState bState;
-  differentialrobot_proxy->getBaseState(bState);
-//   
-//   
+  try
+    {
+     differentialrobot_proxy->getBaseState(bState);
+    } 
+    catch(const Ice::Exception &e)  { std::cout<<" getBaseState - " << e << std::endl;}
+
+  RoboCompGetAprilTags::listaMarcas tagifisnd;
+  const tagsList tags;
+     try
+    {
+    tagifisnd = getapriltags_proxy->checkMarcas();
+    } 
+    catch(const Ice::Exception &e)  { std::cout <<"checkMarcas - " <<e << std::endl;}
+
+  newAprilTag(tagifisnd);
+    
   innermodel->updateTransformValues("robot", bState.x, 0, bState.z, 0, bState.alpha, 0);
   
   
@@ -91,7 +104,7 @@ void SpecificWorker::compute()
 
 }
 	
-void SpecificWorker::newAprilTag(const tagsList& tags)
+void SpecificWorker::newAprilTag(RoboCompGetAprilTags::listaMarcas& tags)
 { 
   
   QMutexLocker ml(&mutexCam);
@@ -103,7 +116,7 @@ void SpecificWorker::newAprilTag(const tagsList& tags)
  for (auto d:tags){
    
   if(d.id == basurero && goBasurero == true){ //
-//     qDebug() << " HOLAHOLA---HOLAHOLA";
+     //qDebug() << " HOLAHOLA---HOLAHOLA";
     rt = innermodel->transform("world", QVec::vec3(d.tx, 0, d.tz), "robot");
     auxID = d.id;
     auxTX = d.tx;
@@ -120,7 +133,7 @@ void SpecificWorker::newAprilTag(const tagsList& tags)
       
       distanciaMax = 99999;
 
-  }else  if (d.id >= primeraCaja && goBasurero == false && visitado(d.id) == false ){
+  }else  if (d.id >= primeraCaja && goBasurero == false && (visitado(d.id) == false || idActual == d.id) ){
    qDebug()<<"Tags mostrados  " << d.id;
    QVec rd  = innermodel->transform("world", QVec::vec3(d.tx, 0, d.tz), "robot");
     dist = rd.norm2();
@@ -159,7 +172,7 @@ void SpecificWorker::initial()
   for(int i  = 0; i < 10 ; i++){
     cajasRecogidas[i] = 0;
   }
-  
+  tag.setID(0);
   stateTag = StateTag::SEARCH;
 }
 
@@ -183,6 +196,7 @@ void SpecificWorker::search()
       if(cajasRecogidas[i] == 0 && !entra){
 	 qDebug()<< " --------tagid "<< tag.getID();
 	cajasRecogidas[i] = tag.getID();
+	idActual = tag.getID();
 	entra = true;
 	stateTag = StateTag::GOTO;
       }
@@ -254,7 +268,10 @@ void SpecificWorker::gotoT()
 	//gotopoint_proxy->stop(); 
 //       qDebug() << "Entra tol rato";
 	//LE PASAMOS BOX O BASUSERO mirando la variable basusero
-      gotopoint_proxy->go("", rt.x(), rt.z(),0);
+      if(basurero == true)
+	gotopoint_proxy->go("basurero", rt.x(), rt.z(),0);
+      else
+	gotopoint_proxy->go("box", rt.x(), rt.z(),0);
 	
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
       
@@ -279,15 +296,19 @@ void SpecificWorker::wait()
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
     
    goBasurero = !goBasurero;
- 
-   if(goBasurero == false)
-    stateTag = StateTag::SEARCH;
-   else
-    stateTag = StateTag::SEARCH_CORNER;
+
    
-//     entra = false;
+   // SI ESTA EN TARGET Y PICKEDBOX = FALSE, LLAMAR A PICKING pickingBoX, ELSE LLAMAR A LO QUE ESTA COMENTADO DEBAJO
+   
+   if(goBasurero == true)
+         gotopoint_proxy->pickingBox();
+ 
+//    if(goBasurero == false)
+//     stateTag = StateTag::SEARCH;
+//    else
+//     stateTag = StateTag::SEARCH_CORNER;
+   
   }else{
-    // llamar mejor y menos
     stateTag = StateTag::GOTO;
   }
 }

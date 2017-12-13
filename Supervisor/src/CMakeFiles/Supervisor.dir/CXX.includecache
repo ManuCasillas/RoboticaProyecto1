@@ -76,6 +76,20 @@ Ice/Object.h
 IceUtil/Iterator.h
 -
 
+/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/GetAprilTags.cpp
+GetAprilTags.h
+-
+Ice/LocalException.h
+-
+Ice/ObjectFactory.h
+-
+Ice/BasicStream.h
+-
+Ice/Object.h
+-
+IceUtil/Iterator.h
+-
+
 /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/GotoPoint.cpp
 GotoPoint.h
 -
@@ -91,8 +105,6 @@ IceUtil/Iterator.h
 -
 
 /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/Supervisor_automoc.cpp
-moc_apriltagsI.cpp
-/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/moc_apriltagsI.cpp
 moc_commonbehaviorI.cpp
 /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/moc_commonbehaviorI.cpp
 moc_genericmonitor.cpp
@@ -103,22 +115,6 @@ moc_specificmonitor.cpp
 /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/moc_specificmonitor.cpp
 moc_specificworker.cpp
 /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/moc_specificworker.cpp
-
-/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/apriltagsI.cpp
-apriltagsI.h
-/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/apriltagsI.h
-
-/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/apriltagsI.h
-QtCore/QObject
--
-Ice/Ice.h
--
-AprilTags.h
--
-config.h
--
-genericworker.h
-/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/genericworker.h
 
 /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/commonbehaviorI.cpp
 commonbehaviorI.h
@@ -181,7 +177,7 @@ DifferentialRobot.h
 -
 AprilTags.h
 -
-IceStorm/IceStorm.h
+GetAprilTags.h
 -
 
 /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/main.cpp
@@ -213,18 +209,14 @@ specificmonitor.h
 /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/specificmonitor.h
 commonbehaviorI.h
 /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/commonbehaviorI.h
-apriltagsI.h
--
 AprilTags.h
 -
 DifferentialRobot.h
 -
 GotoPoint.h
 -
-
-/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/moc_apriltagsI.cpp
-apriltagsI.h
-/home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/apriltagsI.h
+GetAprilTags.h
+-
 
 /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor/src/moc_commonbehaviorI.cpp
 commonbehaviorI.h
@@ -4332,6 +4324,38 @@ Ice/StreamF.h
 Ice/UndefSysMacros.h
 -
 
+src/GetAprilTags.h
+Ice/ProxyF.h
+-
+Ice/ObjectF.h
+-
+Ice/Exception.h
+-
+Ice/LocalObject.h
+-
+Ice/StreamHelpers.h
+-
+Ice/Proxy.h
+-
+Ice/Object.h
+-
+Ice/Outgoing.h
+-
+Ice/OutgoingAsync.h
+-
+Ice/Incoming.h
+-
+Ice/Direct.h
+-
+IceUtil/ScopedArray.h
+-
+IceUtil/Optional.h
+-
+Ice/StreamF.h
+-
+Ice/UndefSysMacros.h
+-
+
 src/GotoPoint.h
 Ice/ProxyF.h
 -
@@ -4400,18 +4424,6 @@ DifferentialRobot.h
 Ice/UndefSysMacros.h
 -
 
-src/apriltagsI.h
-QtCore/QObject
--
-Ice/Ice.h
--
-AprilTags.h
--
-config.h
--
-genericworker.h
-src/genericworker.h
-
 src/config.h
 
 src/genericworker.h
@@ -4433,7 +4445,7 @@ DifferentialRobot.h
 -
 AprilTags.h
 -
-IceStorm/IceStorm.h
+GetAprilTags.h
 -
 
 src/ui_mainUI.h

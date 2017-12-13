@@ -38,12 +38,13 @@ public:
 	GotoPointI( GenericWorker *_worker, QObject *parent = 0 );
 	~GotoPointI();
 	
-	void picking_box(const Ice::Current&);
-	void releasing_box(const Ice::Current&);
+	void pickingBox(const Ice::Current&);
 	void stop(const Ice::Current&);
 	bool atTarget(const Ice::Current&);
 	void turn(const float  speed, const Ice::Current&);
 	void go(const string  &nodo, const float  x, const float  y, const float  alpha, const Ice::Current&);
+	bool pickedBox(const Ice::Current&);
+	void releasingBox(const Ice::Current&);
 
 	QMutex *mutex;
 private:

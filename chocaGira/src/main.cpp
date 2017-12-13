@@ -88,6 +88,7 @@
 #include <RCISMousePicker.h>
 #include <GotoPoint.h>
 #include <JointMotor.h>
+#include <GetAprilTags.h>
 
 
 // User includes here
@@ -97,11 +98,12 @@ using namespace std;
 using namespace RoboCompCommonBehavior;
 
 
-using namespace RoboCompGotoPoint;
 using namespace RoboCompDifferentialRobot;
-using namespace RoboCompRCISMousePicker;
-using namespace RoboCompLaser;
+using namespace RoboCompGetAprilTags;
+using namespace RoboCompGotoPoint;
 using namespace RoboCompJointMotor;
+using namespace RoboCompLaser;
+using namespace RoboCompRCISMousePicker;
 
 
 class chocagira : public RoboComp::Application
@@ -144,9 +146,10 @@ int ::chocagira::run(int argc, char* argv[])
 
 	int status=EXIT_SUCCESS;
 
-	JointMotorPrx jointmotor_proxy;
-	DifferentialRobotPrx differentialrobot_proxy;
 	LaserPrx laser_proxy;
+	DifferentialRobotPrx differentialrobot_proxy;
+	JointMotorPrx jointmotor_proxy;
+	GetAprilTagsPrx getapriltags_proxy;
 
 	string proxy, tmp;
 	initialize();
@@ -154,19 +157,19 @@ int ::chocagira::run(int argc, char* argv[])
 
 	try
 	{
-		if (not GenericMonitor::configGetString(communicator(), prefix, "JointMotorProxy", proxy, ""))
+		if (not GenericMonitor::configGetString(communicator(), prefix, "LaserProxy", proxy, ""))
 		{
-			cout << "[" << PROGRAM_NAME << "]: Can't read configuration for proxy JointMotorProxy\n";
+			cout << "[" << PROGRAM_NAME << "]: Can't read configuration for proxy LaserProxy\n";
 		}
-		jointmotor_proxy = JointMotorPrx::uncheckedCast( communicator()->stringToProxy( proxy ) );
+		laser_proxy = LaserPrx::uncheckedCast( communicator()->stringToProxy( proxy ) );
 	}
 	catch(const Ice::Exception& ex)
 	{
 		cout << "[" << PROGRAM_NAME << "]: Exception: " << ex;
 		return EXIT_FAILURE;
 	}
-	rInfo("JointMotorProxy initialized Ok!");
-	mprx["JointMotorProxy"] = (::IceProxy::Ice::Object*)(&jointmotor_proxy);//Remote server proxy creation example
+	rInfo("LaserProxy initialized Ok!");
+	mprx["LaserProxy"] = (::IceProxy::Ice::Object*)(&laser_proxy);//Remote server proxy creation example
 
 
 	try
@@ -188,19 +191,36 @@ int ::chocagira::run(int argc, char* argv[])
 
 	try
 	{
-		if (not GenericMonitor::configGetString(communicator(), prefix, "LaserProxy", proxy, ""))
+		if (not GenericMonitor::configGetString(communicator(), prefix, "JointMotorProxy", proxy, ""))
 		{
-			cout << "[" << PROGRAM_NAME << "]: Can't read configuration for proxy LaserProxy\n";
+			cout << "[" << PROGRAM_NAME << "]: Can't read configuration for proxy JointMotorProxy\n";
 		}
-		laser_proxy = LaserPrx::uncheckedCast( communicator()->stringToProxy( proxy ) );
+		jointmotor_proxy = JointMotorPrx::uncheckedCast( communicator()->stringToProxy( proxy ) );
 	}
 	catch(const Ice::Exception& ex)
 	{
 		cout << "[" << PROGRAM_NAME << "]: Exception: " << ex;
 		return EXIT_FAILURE;
 	}
-	rInfo("LaserProxy initialized Ok!");
-	mprx["LaserProxy"] = (::IceProxy::Ice::Object*)(&laser_proxy);//Remote server proxy creation example
+	rInfo("JointMotorProxy initialized Ok!");
+	mprx["JointMotorProxy"] = (::IceProxy::Ice::Object*)(&jointmotor_proxy);//Remote server proxy creation example
+
+
+	try
+	{
+		if (not GenericMonitor::configGetString(communicator(), prefix, "GetAprilTagsProxy", proxy, ""))
+		{
+			cout << "[" << PROGRAM_NAME << "]: Can't read configuration for proxy GetAprilTagsProxy\n";
+		}
+		getapriltags_proxy = GetAprilTagsPrx::uncheckedCast( communicator()->stringToProxy( proxy ) );
+	}
+	catch(const Ice::Exception& ex)
+	{
+		cout << "[" << PROGRAM_NAME << "]: Exception: " << ex;
+		return EXIT_FAILURE;
+	}
+	rInfo("GetAprilTagsProxy initialized Ok!");
+	mprx["GetAprilTagsProxy"] = (::IceProxy::Ice::Object*)(&getapriltags_proxy);//Remote server proxy creation example
 
 	IceStorm::TopicManagerPrx topicManager;
 	try{

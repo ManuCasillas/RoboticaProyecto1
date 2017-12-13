@@ -7,6 +7,9 @@ src/CMakeFiles/chocagira.dir/CommonBehavior.cpp.o
 src/CMakeFiles/chocagira.dir/DifferentialRobot.cpp.o
  /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/DifferentialRobot.cpp
  src/DifferentialRobot.h
+src/CMakeFiles/chocagira.dir/GetAprilTags.cpp.o
+ /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/GetAprilTags.cpp
+ src/GetAprilTags.h
 src/CMakeFiles/chocagira.dir/GotoPoint.cpp.o
  /home/salabeta/robocomp/components/RoboticaProyecto1/chocaGira/src/GotoPoint.cpp
  src/GotoPoint.h
@@ -479,6 +482,7 @@ src/CMakeFiles/chocagira.dir/chocagira_automoc.cpp.o
  /usr/include/qt4/QtGui/qwsembedwidget.h
  src/CommonBehavior.h
  src/DifferentialRobot.h
+ src/GetAprilTags.h
  src/GotoPoint.h
  src/JointMotor.h
  src/Laser.h
@@ -918,6 +922,7 @@ src/CMakeFiles/chocagira.dir/commonbehaviorI.cpp.o
  /usr/include/qt4/QtGui/qwsembedwidget.h
  src/CommonBehavior.h
  src/DifferentialRobot.h
+ src/GetAprilTags.h
  src/GotoPoint.h
  src/JointMotor.h
  src/Laser.h
@@ -1357,6 +1362,7 @@ src/CMakeFiles/chocagira.dir/genericmonitor.cpp.o
  /usr/include/qt4/QtGui/qwsembedwidget.h
  src/CommonBehavior.h
  src/DifferentialRobot.h
+ src/GetAprilTags.h
  src/GotoPoint.h
  src/JointMotor.h
  src/Laser.h
@@ -1794,6 +1800,7 @@ src/CMakeFiles/chocagira.dir/genericworker.cpp.o
  /usr/include/qt4/QtGui/qwsembedwidget.h
  src/CommonBehavior.h
  src/DifferentialRobot.h
+ src/GetAprilTags.h
  src/GotoPoint.h
  src/JointMotor.h
  src/Laser.h
@@ -2231,6 +2238,7 @@ src/CMakeFiles/chocagira.dir/gotopointI.cpp.o
  /usr/include/qt4/QtGui/qwsembedwidget.h
  src/CommonBehavior.h
  src/DifferentialRobot.h
+ src/GetAprilTags.h
  src/GotoPoint.h
  src/JointMotor.h
  src/Laser.h
@@ -3040,6 +3048,7 @@ src/CMakeFiles/chocagira.dir/main.cpp.o
  /usr/include/qt4/QtGui/qwsembedwidget.h
  src/CommonBehavior.h
  src/DifferentialRobot.h
+ src/GetAprilTags.h
  src/GotoPoint.h
  src/JointMotor.h
  src/Laser.h
@@ -3479,6 +3488,7 @@ src/CMakeFiles/chocagira.dir/rcismousepickerI.cpp.o
  /usr/include/qt4/QtGui/qwsembedwidget.h
  src/CommonBehavior.h
  src/DifferentialRobot.h
+ src/GetAprilTags.h
  src/GotoPoint.h
  src/JointMotor.h
  src/Laser.h
@@ -3919,6 +3929,7 @@ src/CMakeFiles/chocagira.dir/specificmonitor.cpp.o
  /usr/include/qt4/QtGui/qwsembedwidget.h
  src/CommonBehavior.h
  src/DifferentialRobot.h
+ src/GetAprilTags.h
  src/GotoPoint.h
  src/JointMotor.h
  src/Laser.h
@@ -4370,6 +4381,7 @@ src/CMakeFiles/chocagira.dir/specificworker.cpp.o
  /usr/include/qt4/QtGui/qwsembedwidget.h
  src/CommonBehavior.h
  src/DifferentialRobot.h
+ src/GetAprilTags.h
  src/GotoPoint.h
  src/JointMotor.h
  src/Laser.h

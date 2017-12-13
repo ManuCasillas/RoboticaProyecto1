@@ -82,8 +82,14 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
       qDebug() << "FINISH";
      finish();
    break;
-   case State::WAIT:
-     qDebug() << "WAIT";
+   case State::PICKING:
+     qDebug() << "PICKING";
+     pickingBox();
+     
+     break;
+     case State::RELEASING:
+     qDebug() << "RELEASING";
+     releasingBox();
      
      break;
    
@@ -417,8 +423,9 @@ void  SpecificWorker::border()
 
 void SpecificWorker::go(const string &nodo, const float x, const float y, const float alpha)
 {
-  if (nodo == "box"){
+  if (nodo == "box" && atTarget()){
     //CAMBIAR ESTADO A PICKING BOX 
+     state = State::PICKING;
   } else {
     coor.setX(x);
     coor.setZ(y);
@@ -461,17 +468,23 @@ void SpecificWorker::stop()
   
 }
 
-void SpecificWorker::picking_box()
+void SpecificWorker::pickingBox()
 {
+  differentialrobot_proxy->setSpeedBase(0 , 0);
   
-  qDebug() << "PICKING";
 //    jointmotor_proxy->setPosition(2,0);
 //    jointmotor_proxy->
   //LLAMAMOS A FINISH??
    
 }
 
-void SpecificWorker::releasing_box()
+bool SpecificWorker::pickedBox()
+{
+  //devolver true cuando este recogida
+ return true; 
+}
+
+void SpecificWorker::releasingBox()
 {
   qDebug() << "RELEASING";
 }

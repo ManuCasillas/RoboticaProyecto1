@@ -29,6 +29,7 @@ QObject()
 
 {
 	differentialrobot_proxy = (*(DifferentialRobotPrx*)mprx["DifferentialRobotProxy"]);
+	getapriltags_proxy = (*(GetAprilTagsPrx*)mprx["GetAprilTagsProxy"]);
 	gotopoint_proxy = (*(GotoPointPrx*)mprx["GotoPointProxy"]);
 
 
@@ -68,6 +69,5 @@ void GenericWorker::setPeriod(int p)
 	Period = p;
 	timer.start(Period);
 }
-
 
 

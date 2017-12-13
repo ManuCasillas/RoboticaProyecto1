@@ -29,14 +29,9 @@ GotoPointI::~GotoPointI()
 {
 }
 
-void GotoPointI::picking_box(const Ice::Current&)
+void GotoPointI::pickingBox(const Ice::Current&)
 {
-	worker->picking_box();
-}
-
-void GotoPointI::releasing_box(const Ice::Current&)
-{
-	worker->releasing_box();
+	worker->pickingBox();
 }
 
 void GotoPointI::stop(const Ice::Current&)
@@ -57,6 +52,16 @@ void GotoPointI::turn(const float  speed, const Ice::Current&)
 void GotoPointI::go(const string  &nodo, const float  x, const float  y, const float  alpha, const Ice::Current&)
 {
 	worker->go(nodo, x, y, alpha);
+}
+
+bool GotoPointI::pickedBox(const Ice::Current&)
+{
+	return worker->pickedBox();
+}
+
+void GotoPointI::releasingBox(const Ice::Current&)
+{
+	worker->releasingBox();
 }
 
 

@@ -48,6 +48,12 @@ const ::std::string __RoboCompGotoPoint__GotoPoint__stop_name = "stop";
 
 const ::std::string __RoboCompGotoPoint__GotoPoint__atTarget_name = "atTarget";
 
+const ::std::string __RoboCompGotoPoint__GotoPoint__pickingBox_name = "pickingBox";
+
+const ::std::string __RoboCompGotoPoint__GotoPoint__releasingBox_name = "releasingBox";
+
+const ::std::string __RoboCompGotoPoint__GotoPoint__pickedBox_name = "pickedBox";
+
 }
 ::IceProxy::Ice::Object* ::IceProxy::RoboCompGotoPoint::upCast(::IceProxy::RoboCompGotoPoint::GotoPoint* p) { return p; }
 
@@ -296,6 +302,179 @@ IceProxy::RoboCompGotoPoint::GotoPoint::end_atTarget(const ::Ice::AsyncResultPtr
     }
 }
 
+void
+IceProxy::RoboCompGotoPoint::GotoPoint::pickingBox(const ::Ice::Context* __ctx)
+{
+    ::IceInternal::InvocationObserver __observer(this, __RoboCompGotoPoint__GotoPoint__pickingBox_name, __ctx);
+    int __cnt = 0;
+    while(true)
+    {
+        ::IceInternal::Handle< ::IceDelegate::Ice::Object> __delBase;
+        try
+        {
+            __delBase = __getDelegate(false);
+            ::IceDelegate::RoboCompGotoPoint::GotoPoint* __del = dynamic_cast< ::IceDelegate::RoboCompGotoPoint::GotoPoint*>(__delBase.get());
+            __del->pickingBox(__ctx, __observer);
+            return;
+        }
+        catch(const ::IceInternal::LocalExceptionWrapper& __ex)
+        {
+            __handleExceptionWrapper(__delBase, __ex, __observer);
+        }
+        catch(const ::Ice::LocalException& __ex)
+        {
+            __handleException(__delBase, __ex, true, __cnt, __observer);
+        }
+    }
+}
+
+::Ice::AsyncResultPtr
+IceProxy::RoboCompGotoPoint::GotoPoint::begin_pickingBox(const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+{
+    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __RoboCompGotoPoint__GotoPoint__pickingBox_name, __del, __cookie);
+    try
+    {
+        __result->__prepare(__RoboCompGotoPoint__GotoPoint__pickingBox_name, ::Ice::Normal, __ctx);
+        __result->__writeEmptyParams();
+        __result->__send(true);
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        __result->__exceptionAsync(__ex);
+    }
+    return __result;
+}
+
+void
+IceProxy::RoboCompGotoPoint::GotoPoint::end_pickingBox(const ::Ice::AsyncResultPtr& __result)
+{
+    __end(__result, __RoboCompGotoPoint__GotoPoint__pickingBox_name);
+}
+
+void
+IceProxy::RoboCompGotoPoint::GotoPoint::releasingBox(const ::Ice::Context* __ctx)
+{
+    ::IceInternal::InvocationObserver __observer(this, __RoboCompGotoPoint__GotoPoint__releasingBox_name, __ctx);
+    int __cnt = 0;
+    while(true)
+    {
+        ::IceInternal::Handle< ::IceDelegate::Ice::Object> __delBase;
+        try
+        {
+            __delBase = __getDelegate(false);
+            ::IceDelegate::RoboCompGotoPoint::GotoPoint* __del = dynamic_cast< ::IceDelegate::RoboCompGotoPoint::GotoPoint*>(__delBase.get());
+            __del->releasingBox(__ctx, __observer);
+            return;
+        }
+        catch(const ::IceInternal::LocalExceptionWrapper& __ex)
+        {
+            __handleExceptionWrapper(__delBase, __ex, __observer);
+        }
+        catch(const ::Ice::LocalException& __ex)
+        {
+            __handleException(__delBase, __ex, true, __cnt, __observer);
+        }
+    }
+}
+
+::Ice::AsyncResultPtr
+IceProxy::RoboCompGotoPoint::GotoPoint::begin_releasingBox(const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+{
+    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __RoboCompGotoPoint__GotoPoint__releasingBox_name, __del, __cookie);
+    try
+    {
+        __result->__prepare(__RoboCompGotoPoint__GotoPoint__releasingBox_name, ::Ice::Normal, __ctx);
+        __result->__writeEmptyParams();
+        __result->__send(true);
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        __result->__exceptionAsync(__ex);
+    }
+    return __result;
+}
+
+void
+IceProxy::RoboCompGotoPoint::GotoPoint::end_releasingBox(const ::Ice::AsyncResultPtr& __result)
+{
+    __end(__result, __RoboCompGotoPoint__GotoPoint__releasingBox_name);
+}
+
+bool
+IceProxy::RoboCompGotoPoint::GotoPoint::pickedBox(const ::Ice::Context* __ctx)
+{
+    ::IceInternal::InvocationObserver __observer(this, __RoboCompGotoPoint__GotoPoint__pickedBox_name, __ctx);
+    int __cnt = 0;
+    while(true)
+    {
+        ::IceInternal::Handle< ::IceDelegate::Ice::Object> __delBase;
+        try
+        {
+            __checkTwowayOnly(__RoboCompGotoPoint__GotoPoint__pickedBox_name);
+            __delBase = __getDelegate(false);
+            ::IceDelegate::RoboCompGotoPoint::GotoPoint* __del = dynamic_cast< ::IceDelegate::RoboCompGotoPoint::GotoPoint*>(__delBase.get());
+            return __del->pickedBox(__ctx, __observer);
+        }
+        catch(const ::IceInternal::LocalExceptionWrapper& __ex)
+        {
+            __handleExceptionWrapper(__delBase, __ex, __observer);
+        }
+        catch(const ::Ice::LocalException& __ex)
+        {
+            __handleException(__delBase, __ex, true, __cnt, __observer);
+        }
+    }
+}
+
+::Ice::AsyncResultPtr
+IceProxy::RoboCompGotoPoint::GotoPoint::begin_pickedBox(const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+{
+    __checkAsyncTwowayOnly(__RoboCompGotoPoint__GotoPoint__pickedBox_name);
+    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __RoboCompGotoPoint__GotoPoint__pickedBox_name, __del, __cookie);
+    try
+    {
+        __result->__prepare(__RoboCompGotoPoint__GotoPoint__pickedBox_name, ::Ice::Normal, __ctx);
+        __result->__writeEmptyParams();
+        __result->__send(true);
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        __result->__exceptionAsync(__ex);
+    }
+    return __result;
+}
+
+bool
+IceProxy::RoboCompGotoPoint::GotoPoint::end_pickedBox(const ::Ice::AsyncResultPtr& __result)
+{
+    ::Ice::AsyncResult::__check(__result, this, __RoboCompGotoPoint__GotoPoint__pickedBox_name);
+    bool __ret;
+    bool __ok = __result->__wait();
+    try
+    {
+        if(!__ok)
+        {
+            try
+            {
+                __result->__throwUserException();
+            }
+            catch(const ::Ice::UserException& __ex)
+            {
+                throw ::Ice::UnknownUserException(__FILE__, __LINE__, __ex.ice_name());
+            }
+        }
+        ::IceInternal::BasicStream* __is = __result->__startReadParams();
+        __is->read(__ret);
+        __result->__endReadParams();
+        return __ret;
+    }
+    catch(const ::Ice::LocalException& ex)
+    {
+        __result->__getObserver().failed(ex.ice_name());
+        throw;
+    }
+}
+
 const ::std::string&
 IceProxy::RoboCompGotoPoint::GotoPoint::ice_staticId()
 {
@@ -438,6 +617,100 @@ bool
 IceDelegateM::RoboCompGotoPoint::GotoPoint::atTarget(const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
 {
     ::IceInternal::Outgoing __og(__handler.get(), __RoboCompGotoPoint__GotoPoint__atTarget_name, ::Ice::Normal, __context, __observer);
+    __og.writeEmptyParams();
+    bool __ok = __og.invoke();
+    bool __ret;
+    try
+    {
+        if(!__ok)
+        {
+            try
+            {
+                __og.throwUserException();
+            }
+            catch(const ::Ice::UserException& __ex)
+            {
+                ::Ice::UnknownUserException __uue(__FILE__, __LINE__, __ex.ice_name());
+                throw __uue;
+            }
+        }
+        ::IceInternal::BasicStream* __is = __og.startReadParams();
+        __is->read(__ret);
+        __og.endReadParams();
+        return __ret;
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        throw ::IceInternal::LocalExceptionWrapper(__ex, false);
+    }
+}
+
+void
+IceDelegateM::RoboCompGotoPoint::GotoPoint::pickingBox(const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
+{
+    ::IceInternal::Outgoing __og(__handler.get(), __RoboCompGotoPoint__GotoPoint__pickingBox_name, ::Ice::Normal, __context, __observer);
+    __og.writeEmptyParams();
+    bool __ok = __og.invoke();
+    if(__og.hasResponse())
+    {
+        try
+        {
+            if(!__ok)
+            {
+                try
+                {
+                    __og.throwUserException();
+                }
+                catch(const ::Ice::UserException& __ex)
+                {
+                    ::Ice::UnknownUserException __uue(__FILE__, __LINE__, __ex.ice_name());
+                    throw __uue;
+                }
+            }
+            __og.readEmptyParams();
+        }
+        catch(const ::Ice::LocalException& __ex)
+        {
+            throw ::IceInternal::LocalExceptionWrapper(__ex, false);
+        }
+    }
+}
+
+void
+IceDelegateM::RoboCompGotoPoint::GotoPoint::releasingBox(const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
+{
+    ::IceInternal::Outgoing __og(__handler.get(), __RoboCompGotoPoint__GotoPoint__releasingBox_name, ::Ice::Normal, __context, __observer);
+    __og.writeEmptyParams();
+    bool __ok = __og.invoke();
+    if(__og.hasResponse())
+    {
+        try
+        {
+            if(!__ok)
+            {
+                try
+                {
+                    __og.throwUserException();
+                }
+                catch(const ::Ice::UserException& __ex)
+                {
+                    ::Ice::UnknownUserException __uue(__FILE__, __LINE__, __ex.ice_name());
+                    throw __uue;
+                }
+            }
+            __og.readEmptyParams();
+        }
+        catch(const ::Ice::LocalException& __ex)
+        {
+            throw ::IceInternal::LocalExceptionWrapper(__ex, false);
+        }
+    }
+}
+
+bool
+IceDelegateM::RoboCompGotoPoint::GotoPoint::pickedBox(const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
+{
+    ::IceInternal::Outgoing __og(__handler.get(), __RoboCompGotoPoint__GotoPoint__pickedBox_name, ::Ice::Normal, __context, __observer);
     __og.writeEmptyParams();
     bool __ok = __og.invoke();
     bool __ret;
@@ -728,6 +1001,196 @@ IceDelegateD::RoboCompGotoPoint::GotoPoint::atTarget(const ::Ice::Context* __con
     return __result;
 }
 
+void
+IceDelegateD::RoboCompGotoPoint::GotoPoint::pickingBox(const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
+{
+    class _DirectI : public ::IceInternal::Direct
+    {
+    public:
+
+        _DirectI(const ::Ice::Current& __current) : 
+            ::IceInternal::Direct(__current)
+        {
+        }
+        
+        virtual ::Ice::DispatchStatus
+        run(::Ice::Object* object)
+        {
+            ::RoboCompGotoPoint::GotoPoint* servant = dynamic_cast< ::RoboCompGotoPoint::GotoPoint*>(object);
+            if(!servant)
+            {
+                throw ::Ice::OperationNotExistException(__FILE__, __LINE__, _current.id, _current.facet, _current.operation);
+            }
+            servant->pickingBox(_current);
+            return ::Ice::DispatchOK;
+        }
+        
+    private:
+        
+    };
+    
+    ::Ice::Current __current;
+    __initCurrent(__current, __RoboCompGotoPoint__GotoPoint__pickingBox_name, ::Ice::Normal, __context);
+    try
+    {
+        _DirectI __direct(__current);
+        try
+        {
+            __direct.getServant()->__collocDispatch(__direct);
+        }
+        catch(...)
+        {
+            __direct.destroy();
+            throw;
+        }
+        __direct.destroy();
+    }
+    catch(const ::Ice::SystemException&)
+    {
+        throw;
+    }
+    catch(const ::IceInternal::LocalExceptionWrapper&)
+    {
+        throw;
+    }
+    catch(const ::std::exception& __ex)
+    {
+        ::IceInternal::LocalExceptionWrapper::throwWrapper(__ex);
+    }
+    catch(...)
+    {
+        throw ::IceInternal::LocalExceptionWrapper(::Ice::UnknownException(__FILE__, __LINE__, "unknown c++ exception"), false);
+    }
+}
+
+void
+IceDelegateD::RoboCompGotoPoint::GotoPoint::releasingBox(const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
+{
+    class _DirectI : public ::IceInternal::Direct
+    {
+    public:
+
+        _DirectI(const ::Ice::Current& __current) : 
+            ::IceInternal::Direct(__current)
+        {
+        }
+        
+        virtual ::Ice::DispatchStatus
+        run(::Ice::Object* object)
+        {
+            ::RoboCompGotoPoint::GotoPoint* servant = dynamic_cast< ::RoboCompGotoPoint::GotoPoint*>(object);
+            if(!servant)
+            {
+                throw ::Ice::OperationNotExistException(__FILE__, __LINE__, _current.id, _current.facet, _current.operation);
+            }
+            servant->releasingBox(_current);
+            return ::Ice::DispatchOK;
+        }
+        
+    private:
+        
+    };
+    
+    ::Ice::Current __current;
+    __initCurrent(__current, __RoboCompGotoPoint__GotoPoint__releasingBox_name, ::Ice::Normal, __context);
+    try
+    {
+        _DirectI __direct(__current);
+        try
+        {
+            __direct.getServant()->__collocDispatch(__direct);
+        }
+        catch(...)
+        {
+            __direct.destroy();
+            throw;
+        }
+        __direct.destroy();
+    }
+    catch(const ::Ice::SystemException&)
+    {
+        throw;
+    }
+    catch(const ::IceInternal::LocalExceptionWrapper&)
+    {
+        throw;
+    }
+    catch(const ::std::exception& __ex)
+    {
+        ::IceInternal::LocalExceptionWrapper::throwWrapper(__ex);
+    }
+    catch(...)
+    {
+        throw ::IceInternal::LocalExceptionWrapper(::Ice::UnknownException(__FILE__, __LINE__, "unknown c++ exception"), false);
+    }
+}
+
+bool
+IceDelegateD::RoboCompGotoPoint::GotoPoint::pickedBox(const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
+{
+    class _DirectI : public ::IceInternal::Direct
+    {
+    public:
+
+        _DirectI(bool& __result, const ::Ice::Current& __current) : 
+            ::IceInternal::Direct(__current),
+            _result(__result)
+        {
+        }
+        
+        virtual ::Ice::DispatchStatus
+        run(::Ice::Object* object)
+        {
+            ::RoboCompGotoPoint::GotoPoint* servant = dynamic_cast< ::RoboCompGotoPoint::GotoPoint*>(object);
+            if(!servant)
+            {
+                throw ::Ice::OperationNotExistException(__FILE__, __LINE__, _current.id, _current.facet, _current.operation);
+            }
+            _result = servant->pickedBox(_current);
+            return ::Ice::DispatchOK;
+        }
+        
+    private:
+        
+        bool& _result;
+    };
+    
+    ::Ice::Current __current;
+    __initCurrent(__current, __RoboCompGotoPoint__GotoPoint__pickedBox_name, ::Ice::Normal, __context);
+    bool __result;
+    try
+    {
+        _DirectI __direct(__result, __current);
+        try
+        {
+            __direct.getServant()->__collocDispatch(__direct);
+        }
+        catch(...)
+        {
+            __direct.destroy();
+            throw;
+        }
+        __direct.destroy();
+    }
+    catch(const ::Ice::SystemException&)
+    {
+        throw;
+    }
+    catch(const ::IceInternal::LocalExceptionWrapper&)
+    {
+        throw;
+    }
+    catch(const ::std::exception& __ex)
+    {
+        ::IceInternal::LocalExceptionWrapper::throwWrapper(__ex);
+    }
+    catch(...)
+    {
+        throw ::IceInternal::LocalExceptionWrapper(::Ice::UnknownException(__FILE__, __LINE__, "unknown c++ exception"), false);
+    }
+    return __result;
+}
+
 ::Ice::Object* RoboCompGotoPoint::upCast(::RoboCompGotoPoint::GotoPoint* p) { return p; }
 
 namespace
@@ -818,6 +1281,38 @@ RoboCompGotoPoint::GotoPoint::___atTarget(::IceInternal::Incoming& __inS, const 
     return ::Ice::DispatchOK;
 }
 
+::Ice::DispatchStatus
+RoboCompGotoPoint::GotoPoint::___pickingBox(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
+{
+    __checkMode(::Ice::Normal, __current.mode);
+    __inS.readEmptyParams();
+    pickingBox(__current);
+    __inS.__writeEmptyParams();
+    return ::Ice::DispatchOK;
+}
+
+::Ice::DispatchStatus
+RoboCompGotoPoint::GotoPoint::___releasingBox(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
+{
+    __checkMode(::Ice::Normal, __current.mode);
+    __inS.readEmptyParams();
+    releasingBox(__current);
+    __inS.__writeEmptyParams();
+    return ::Ice::DispatchOK;
+}
+
+::Ice::DispatchStatus
+RoboCompGotoPoint::GotoPoint::___pickedBox(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
+{
+    __checkMode(::Ice::Normal, __current.mode);
+    __inS.readEmptyParams();
+    bool __ret = pickedBox(__current);
+    ::IceInternal::BasicStream* __os = __inS.__startWriteParams(::Ice::DefaultFormat);
+    __os->write(__ret);
+    __inS.__endWriteParams(true);
+    return ::Ice::DispatchOK;
+}
+
 namespace
 {
 const ::std::string __RoboCompGotoPoint__GotoPoint_all[] =
@@ -828,6 +1323,9 @@ const ::std::string __RoboCompGotoPoint__GotoPoint_all[] =
     "ice_ids",
     "ice_isA",
     "ice_ping",
+    "pickedBox",
+    "pickingBox",
+    "releasingBox",
     "stop",
     "turn"
 };
@@ -837,7 +1335,7 @@ const ::std::string __RoboCompGotoPoint__GotoPoint_all[] =
 ::Ice::DispatchStatus
 RoboCompGotoPoint::GotoPoint::__dispatch(::IceInternal::Incoming& in, const ::Ice::Current& current)
 {
-    ::std::pair< const ::std::string*, const ::std::string*> r = ::std::equal_range(__RoboCompGotoPoint__GotoPoint_all, __RoboCompGotoPoint__GotoPoint_all + 8, current.operation);
+    ::std::pair< const ::std::string*, const ::std::string*> r = ::std::equal_range(__RoboCompGotoPoint__GotoPoint_all, __RoboCompGotoPoint__GotoPoint_all + 11, current.operation);
     if(r.first == r.second)
     {
         throw ::Ice::OperationNotExistException(__FILE__, __LINE__, current.id, current.facet, current.operation);
@@ -871,9 +1369,21 @@ RoboCompGotoPoint::GotoPoint::__dispatch(::IceInternal::Incoming& in, const ::Ic
         }
         case 6:
         {
-            return ___stop(in, current);
+            return ___pickedBox(in, current);
         }
         case 7:
+        {
+            return ___pickingBox(in, current);
+        }
+        case 8:
+        {
+            return ___releasingBox(in, current);
+        }
+        case 9:
+        {
+            return ___stop(in, current);
+        }
+        case 10:
         {
             return ___turn(in, current);
         }

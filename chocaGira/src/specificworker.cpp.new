@@ -61,12 +61,7 @@ void SpecificWorker::compute()
 }
 
 
-void SpecificWorker::picking_box()
-{
-
-}
-
-void SpecificWorker::releasing_box()
+void SpecificWorker::pickingBox()
 {
 
 }
@@ -87,6 +82,16 @@ void SpecificWorker::turn(const float speed)
 }
 
 void SpecificWorker::go(const string &nodo, const float x, const float y, const float alpha)
+{
+
+}
+
+bool SpecificWorker::pickedBox()
+{
+
+}
+
+void SpecificWorker::releasingBox()
 {
 
 }

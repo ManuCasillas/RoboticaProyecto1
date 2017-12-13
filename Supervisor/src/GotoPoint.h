@@ -91,6 +91,15 @@ typedef ::IceUtil::Handle< Callback_GotoPoint_stop_Base> Callback_GotoPoint_stop
 class Callback_GotoPoint_atTarget_Base : virtual public ::IceInternal::CallbackBase { };
 typedef ::IceUtil::Handle< Callback_GotoPoint_atTarget_Base> Callback_GotoPoint_atTargetPtr;
 
+class Callback_GotoPoint_pickingBox_Base : virtual public ::IceInternal::CallbackBase { };
+typedef ::IceUtil::Handle< Callback_GotoPoint_pickingBox_Base> Callback_GotoPoint_pickingBoxPtr;
+
+class Callback_GotoPoint_releasingBox_Base : virtual public ::IceInternal::CallbackBase { };
+typedef ::IceUtil::Handle< Callback_GotoPoint_releasingBox_Base> Callback_GotoPoint_releasingBoxPtr;
+
+class Callback_GotoPoint_pickedBox_Base : virtual public ::IceInternal::CallbackBase { };
+typedef ::IceUtil::Handle< Callback_GotoPoint_pickedBox_Base> Callback_GotoPoint_pickedBoxPtr;
+
 }
 
 namespace IceProxy
@@ -425,6 +434,259 @@ private:
     ::Ice::AsyncResultPtr begin_atTarget(const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
     
 public:
+
+    void pickingBox()
+    {
+        pickingBox(0);
+    }
+    void pickingBox(const ::Ice::Context& __ctx)
+    {
+        pickingBox(&__ctx);
+    }
+#ifdef ICE_CPP11
+    ::Ice::AsyncResultPtr
+    begin_pickingBox(const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    {
+        return begin_pickingBox(0, new ::IceInternal::Cpp11FnOnewayCallbackNC(__response, __exception, __sent));
+    }
+    ::Ice::AsyncResultPtr
+    begin_pickingBox(const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    {
+        return begin_pickingBox(0, ::Ice::newCallback(__completed, __sent), 0);
+    }
+    ::Ice::AsyncResultPtr
+    begin_pickingBox(const ::Ice::Context& __ctx, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    {
+        return begin_pickingBox(&__ctx, new ::IceInternal::Cpp11FnOnewayCallbackNC(__response, __exception, __sent), 0);
+    }
+    ::Ice::AsyncResultPtr
+    begin_pickingBox(const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    {
+        return begin_pickingBox(&__ctx, ::Ice::newCallback(__completed, __sent));
+    }
+#endif
+
+    ::Ice::AsyncResultPtr begin_pickingBox()
+    {
+        return begin_pickingBox(0, ::IceInternal::__dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_pickingBox(const ::Ice::Context& __ctx)
+    {
+        return begin_pickingBox(&__ctx, ::IceInternal::__dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_pickingBox(const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_pickingBox(0, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_pickingBox(const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_pickingBox(&__ctx, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_pickingBox(const ::RoboCompGotoPoint::Callback_GotoPoint_pickingBoxPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_pickingBox(0, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_pickingBox(const ::Ice::Context& __ctx, const ::RoboCompGotoPoint::Callback_GotoPoint_pickingBoxPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_pickingBox(&__ctx, __del, __cookie);
+    }
+
+    void end_pickingBox(const ::Ice::AsyncResultPtr&);
+    
+private:
+
+    void pickingBox(const ::Ice::Context*);
+    ::Ice::AsyncResultPtr begin_pickingBox(const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
+    
+public:
+
+    void releasingBox()
+    {
+        releasingBox(0);
+    }
+    void releasingBox(const ::Ice::Context& __ctx)
+    {
+        releasingBox(&__ctx);
+    }
+#ifdef ICE_CPP11
+    ::Ice::AsyncResultPtr
+    begin_releasingBox(const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    {
+        return begin_releasingBox(0, new ::IceInternal::Cpp11FnOnewayCallbackNC(__response, __exception, __sent));
+    }
+    ::Ice::AsyncResultPtr
+    begin_releasingBox(const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    {
+        return begin_releasingBox(0, ::Ice::newCallback(__completed, __sent), 0);
+    }
+    ::Ice::AsyncResultPtr
+    begin_releasingBox(const ::Ice::Context& __ctx, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    {
+        return begin_releasingBox(&__ctx, new ::IceInternal::Cpp11FnOnewayCallbackNC(__response, __exception, __sent), 0);
+    }
+    ::Ice::AsyncResultPtr
+    begin_releasingBox(const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    {
+        return begin_releasingBox(&__ctx, ::Ice::newCallback(__completed, __sent));
+    }
+#endif
+
+    ::Ice::AsyncResultPtr begin_releasingBox()
+    {
+        return begin_releasingBox(0, ::IceInternal::__dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_releasingBox(const ::Ice::Context& __ctx)
+    {
+        return begin_releasingBox(&__ctx, ::IceInternal::__dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_releasingBox(const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_releasingBox(0, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_releasingBox(const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_releasingBox(&__ctx, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_releasingBox(const ::RoboCompGotoPoint::Callback_GotoPoint_releasingBoxPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_releasingBox(0, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_releasingBox(const ::Ice::Context& __ctx, const ::RoboCompGotoPoint::Callback_GotoPoint_releasingBoxPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_releasingBox(&__ctx, __del, __cookie);
+    }
+
+    void end_releasingBox(const ::Ice::AsyncResultPtr&);
+    
+private:
+
+    void releasingBox(const ::Ice::Context*);
+    ::Ice::AsyncResultPtr begin_releasingBox(const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
+    
+public:
+
+    bool pickedBox()
+    {
+        return pickedBox(0);
+    }
+    bool pickedBox(const ::Ice::Context& __ctx)
+    {
+        return pickedBox(&__ctx);
+    }
+#ifdef ICE_CPP11
+    ::Ice::AsyncResultPtr
+    begin_pickedBox(const ::IceInternal::Function<void (bool)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    {
+        return __begin_pickedBox(0, __response, __exception, __sent);
+    }
+    ::Ice::AsyncResultPtr
+    begin_pickedBox(const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    {
+        return begin_pickedBox(0, ::Ice::newCallback(__completed, __sent), 0);
+    }
+    ::Ice::AsyncResultPtr
+    begin_pickedBox(const ::Ice::Context& __ctx, const ::IceInternal::Function<void (bool)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    {
+        return __begin_pickedBox(&__ctx, __response, __exception, __sent);
+    }
+    ::Ice::AsyncResultPtr
+    begin_pickedBox(const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    {
+        return begin_pickedBox(&__ctx, ::Ice::newCallback(__completed, __sent));
+    }
+    
+private:
+
+    ::Ice::AsyncResultPtr __begin_pickedBox(const ::Ice::Context* __ctx, const ::IceInternal::Function<void (bool)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent)
+    {
+        class Cpp11CB : public ::IceInternal::Cpp11FnCallbackNC
+        {
+        public:
+
+            Cpp11CB(const ::std::function<void (bool)>& responseFunc, const ::std::function<void (const ::Ice::Exception&)>& exceptionFunc, const ::std::function<void (bool)>& sentFunc) :
+                ::IceInternal::Cpp11FnCallbackNC(exceptionFunc, sentFunc),
+                _response(responseFunc)
+            {
+                CallbackBase::checkCallback(true, responseFunc || exceptionFunc != nullptr);
+            }
+
+            virtual void __completed(const ::Ice::AsyncResultPtr& __result) const
+            {
+                ::RoboCompGotoPoint::GotoPointPrx __proxy = ::RoboCompGotoPoint::GotoPointPrx::uncheckedCast(__result->getProxy());
+                bool __ret;
+                try
+                {
+                    __ret = __proxy->end_pickedBox(__result);
+                }
+                catch(::Ice::Exception& ex)
+                {
+                    Cpp11FnCallbackNC::__exception(__result, ex);
+                    return;
+                }
+                if(_response != nullptr)
+                {
+                    _response(__ret);
+                }
+            }
+        
+        private:
+            
+            ::std::function<void (bool)> _response;
+        };
+        return begin_pickedBox(__ctx, new Cpp11CB(__response, __exception, __sent));
+    }
+    
+public:
+#endif
+
+    ::Ice::AsyncResultPtr begin_pickedBox()
+    {
+        return begin_pickedBox(0, ::IceInternal::__dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_pickedBox(const ::Ice::Context& __ctx)
+    {
+        return begin_pickedBox(&__ctx, ::IceInternal::__dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_pickedBox(const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_pickedBox(0, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_pickedBox(const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_pickedBox(&__ctx, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_pickedBox(const ::RoboCompGotoPoint::Callback_GotoPoint_pickedBoxPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_pickedBox(0, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_pickedBox(const ::Ice::Context& __ctx, const ::RoboCompGotoPoint::Callback_GotoPoint_pickedBoxPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_pickedBox(&__ctx, __del, __cookie);
+    }
+
+    bool end_pickedBox(const ::Ice::AsyncResultPtr&);
+    
+private:
+
+    bool pickedBox(const ::Ice::Context*);
+    ::Ice::AsyncResultPtr begin_pickedBox(const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
+    
+public:
     
     ::IceInternal::ProxyHandle<GotoPoint> ice_context(const ::Ice::Context& __context) const
     {
@@ -556,6 +818,12 @@ public:
     virtual void stop(const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
 
     virtual bool atTarget(const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
+
+    virtual void pickingBox(const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
+
+    virtual void releasingBox(const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
+
+    virtual bool pickedBox(const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
 };
 
 }
@@ -580,6 +848,12 @@ public:
     virtual void stop(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 
     virtual bool atTarget(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
+
+    virtual void pickingBox(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
+
+    virtual void releasingBox(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
+
+    virtual bool pickedBox(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 };
 
 }
@@ -604,6 +878,12 @@ public:
     virtual void stop(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 
     virtual bool atTarget(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
+
+    virtual void pickingBox(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
+
+    virtual void releasingBox(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
+
+    virtual bool pickedBox(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 };
 
 }
@@ -636,6 +916,15 @@ public:
 
     virtual bool atTarget(const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___atTarget(::IceInternal::Incoming&, const ::Ice::Current&);
+
+    virtual void pickingBox(const ::Ice::Current& = ::Ice::Current()) = 0;
+    ::Ice::DispatchStatus ___pickingBox(::IceInternal::Incoming&, const ::Ice::Current&);
+
+    virtual void releasingBox(const ::Ice::Current& = ::Ice::Current()) = 0;
+    ::Ice::DispatchStatus ___releasingBox(::IceInternal::Incoming&, const ::Ice::Current&);
+
+    virtual bool pickedBox(const ::Ice::Current& = ::Ice::Current()) = 0;
+    ::Ice::DispatchStatus ___pickedBox(::IceInternal::Incoming&, const ::Ice::Current&);
 
     virtual ::Ice::DispatchStatus __dispatch(::IceInternal::Incoming&, const ::Ice::Current&);
 
@@ -1007,6 +1296,270 @@ template<class T, typename CT> Callback_GotoPoint_atTargetPtr
 newCallback_GotoPoint_atTarget(T* instance, void (T::*cb)(bool, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
 {
     return new Callback_GotoPoint_atTarget<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T>
+class CallbackNC_GotoPoint_pickingBox : public Callback_GotoPoint_pickingBox_Base, public ::IceInternal::OnewayCallbackNC<T>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception&);
+    typedef void (T::*Sent)(bool);
+    typedef void (T::*Response)();
+
+    CallbackNC_GotoPoint_pickingBox(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::OnewayCallbackNC<T>(obj, cb, excb, sentcb)
+    {
+    }
+};
+
+template<class T> Callback_GotoPoint_pickingBoxPtr
+newCallback_GotoPoint_pickingBox(const IceUtil::Handle<T>& instance, void (T::*cb)(), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_GotoPoint_pickingBox<T>(instance, cb, excb, sentcb);
+}
+
+template<class T> Callback_GotoPoint_pickingBoxPtr
+newCallback_GotoPoint_pickingBox(const IceUtil::Handle<T>& instance, void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_GotoPoint_pickingBox<T>(instance, 0, excb, sentcb);
+}
+
+template<class T> Callback_GotoPoint_pickingBoxPtr
+newCallback_GotoPoint_pickingBox(T* instance, void (T::*cb)(), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_GotoPoint_pickingBox<T>(instance, cb, excb, sentcb);
+}
+
+template<class T> Callback_GotoPoint_pickingBoxPtr
+newCallback_GotoPoint_pickingBox(T* instance, void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_GotoPoint_pickingBox<T>(instance, 0, excb, sentcb);
+}
+
+template<class T, typename CT>
+class Callback_GotoPoint_pickingBox : public Callback_GotoPoint_pickingBox_Base, public ::IceInternal::OnewayCallback<T, CT>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception& , const CT&);
+    typedef void (T::*Sent)(bool , const CT&);
+    typedef void (T::*Response)(const CT&);
+
+    Callback_GotoPoint_pickingBox(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::OnewayCallback<T, CT>(obj, cb, excb, sentcb)
+    {
+    }
+};
+
+template<class T, typename CT> Callback_GotoPoint_pickingBoxPtr
+newCallback_GotoPoint_pickingBox(const IceUtil::Handle<T>& instance, void (T::*cb)(const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_GotoPoint_pickingBox<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_GotoPoint_pickingBoxPtr
+newCallback_GotoPoint_pickingBox(const IceUtil::Handle<T>& instance, void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_GotoPoint_pickingBox<T, CT>(instance, 0, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_GotoPoint_pickingBoxPtr
+newCallback_GotoPoint_pickingBox(T* instance, void (T::*cb)(const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_GotoPoint_pickingBox<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_GotoPoint_pickingBoxPtr
+newCallback_GotoPoint_pickingBox(T* instance, void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_GotoPoint_pickingBox<T, CT>(instance, 0, excb, sentcb);
+}
+
+template<class T>
+class CallbackNC_GotoPoint_releasingBox : public Callback_GotoPoint_releasingBox_Base, public ::IceInternal::OnewayCallbackNC<T>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception&);
+    typedef void (T::*Sent)(bool);
+    typedef void (T::*Response)();
+
+    CallbackNC_GotoPoint_releasingBox(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::OnewayCallbackNC<T>(obj, cb, excb, sentcb)
+    {
+    }
+};
+
+template<class T> Callback_GotoPoint_releasingBoxPtr
+newCallback_GotoPoint_releasingBox(const IceUtil::Handle<T>& instance, void (T::*cb)(), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_GotoPoint_releasingBox<T>(instance, cb, excb, sentcb);
+}
+
+template<class T> Callback_GotoPoint_releasingBoxPtr
+newCallback_GotoPoint_releasingBox(const IceUtil::Handle<T>& instance, void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_GotoPoint_releasingBox<T>(instance, 0, excb, sentcb);
+}
+
+template<class T> Callback_GotoPoint_releasingBoxPtr
+newCallback_GotoPoint_releasingBox(T* instance, void (T::*cb)(), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_GotoPoint_releasingBox<T>(instance, cb, excb, sentcb);
+}
+
+template<class T> Callback_GotoPoint_releasingBoxPtr
+newCallback_GotoPoint_releasingBox(T* instance, void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_GotoPoint_releasingBox<T>(instance, 0, excb, sentcb);
+}
+
+template<class T, typename CT>
+class Callback_GotoPoint_releasingBox : public Callback_GotoPoint_releasingBox_Base, public ::IceInternal::OnewayCallback<T, CT>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception& , const CT&);
+    typedef void (T::*Sent)(bool , const CT&);
+    typedef void (T::*Response)(const CT&);
+
+    Callback_GotoPoint_releasingBox(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::OnewayCallback<T, CT>(obj, cb, excb, sentcb)
+    {
+    }
+};
+
+template<class T, typename CT> Callback_GotoPoint_releasingBoxPtr
+newCallback_GotoPoint_releasingBox(const IceUtil::Handle<T>& instance, void (T::*cb)(const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_GotoPoint_releasingBox<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_GotoPoint_releasingBoxPtr
+newCallback_GotoPoint_releasingBox(const IceUtil::Handle<T>& instance, void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_GotoPoint_releasingBox<T, CT>(instance, 0, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_GotoPoint_releasingBoxPtr
+newCallback_GotoPoint_releasingBox(T* instance, void (T::*cb)(const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_GotoPoint_releasingBox<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_GotoPoint_releasingBoxPtr
+newCallback_GotoPoint_releasingBox(T* instance, void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_GotoPoint_releasingBox<T, CT>(instance, 0, excb, sentcb);
+}
+
+template<class T>
+class CallbackNC_GotoPoint_pickedBox : public Callback_GotoPoint_pickedBox_Base, public ::IceInternal::TwowayCallbackNC<T>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception&);
+    typedef void (T::*Sent)(bool);
+    typedef void (T::*Response)(bool);
+
+    CallbackNC_GotoPoint_pickedBox(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::TwowayCallbackNC<T>(obj, cb != 0, excb, sentcb), response(cb)
+    {
+    }
+
+    virtual void __completed(const ::Ice::AsyncResultPtr& __result) const
+    {
+        ::RoboCompGotoPoint::GotoPointPrx __proxy = ::RoboCompGotoPoint::GotoPointPrx::uncheckedCast(__result->getProxy());
+        bool __ret;
+        try
+        {
+            __ret = __proxy->end_pickedBox(__result);
+        }
+        catch(::Ice::Exception& ex)
+        {
+            ::IceInternal::CallbackNC<T>::__exception(__result, ex);
+            return;
+        }
+        if(response)
+        {
+            (::IceInternal::CallbackNC<T>::callback.get()->*response)(__ret);
+        }
+    }
+
+    Response response;
+};
+
+template<class T> Callback_GotoPoint_pickedBoxPtr
+newCallback_GotoPoint_pickedBox(const IceUtil::Handle<T>& instance, void (T::*cb)(bool), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_GotoPoint_pickedBox<T>(instance, cb, excb, sentcb);
+}
+
+template<class T> Callback_GotoPoint_pickedBoxPtr
+newCallback_GotoPoint_pickedBox(T* instance, void (T::*cb)(bool), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_GotoPoint_pickedBox<T>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT>
+class Callback_GotoPoint_pickedBox : public Callback_GotoPoint_pickedBox_Base, public ::IceInternal::TwowayCallback<T, CT>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception& , const CT&);
+    typedef void (T::*Sent)(bool , const CT&);
+    typedef void (T::*Response)(bool, const CT&);
+
+    Callback_GotoPoint_pickedBox(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::TwowayCallback<T, CT>(obj, cb != 0, excb, sentcb), response(cb)
+    {
+    }
+
+    virtual void __completed(const ::Ice::AsyncResultPtr& __result) const
+    {
+        ::RoboCompGotoPoint::GotoPointPrx __proxy = ::RoboCompGotoPoint::GotoPointPrx::uncheckedCast(__result->getProxy());
+        bool __ret;
+        try
+        {
+            __ret = __proxy->end_pickedBox(__result);
+        }
+        catch(::Ice::Exception& ex)
+        {
+            ::IceInternal::Callback<T, CT>::__exception(__result, ex);
+            return;
+        }
+        if(response)
+        {
+            (::IceInternal::Callback<T, CT>::callback.get()->*response)(__ret, CT::dynamicCast(__result->getCookie()));
+        }
+    }
+
+    Response response;
+};
+
+template<class T, typename CT> Callback_GotoPoint_pickedBoxPtr
+newCallback_GotoPoint_pickedBox(const IceUtil::Handle<T>& instance, void (T::*cb)(bool, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_GotoPoint_pickedBox<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_GotoPoint_pickedBoxPtr
+newCallback_GotoPoint_pickedBox(T* instance, void (T::*cb)(bool, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_GotoPoint_pickedBox<T, CT>(instance, cb, excb, sentcb);
 }
 
 }

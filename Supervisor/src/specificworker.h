@@ -45,7 +45,7 @@ public:
 	~SpecificWorker();
 	bool setParams(RoboCompCommonBehavior::ParameterList params);
 	
-	void newAprilTag(const tagsList& tags);
+	void newAprilTag(RoboCompGetAprilTags::listaMarcas& tags);
 	
 	
 private:
@@ -114,6 +114,7 @@ private:
 	bool goBasurero = false;
 	int cajasRecogidas[10];
 	int distanciaMax  = 99999;
+	int idActual = 0;
 	
 	
 public slots:

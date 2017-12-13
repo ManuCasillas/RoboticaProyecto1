@@ -265,6 +265,33 @@ DifferentialRobot.cpp.s:
 	cd /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor && $(MAKE) -f src/CMakeFiles/Supervisor.dir/build.make src/CMakeFiles/Supervisor.dir/DifferentialRobot.cpp.s
 .PHONY : DifferentialRobot.cpp.s
 
+GetAprilTags.o: GetAprilTags.cpp.o
+
+.PHONY : GetAprilTags.o
+
+# target to build an object file
+GetAprilTags.cpp.o:
+	cd /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor && $(MAKE) -f src/CMakeFiles/Supervisor.dir/build.make src/CMakeFiles/Supervisor.dir/GetAprilTags.cpp.o
+.PHONY : GetAprilTags.cpp.o
+
+GetAprilTags.i: GetAprilTags.cpp.i
+
+.PHONY : GetAprilTags.i
+
+# target to preprocess a source file
+GetAprilTags.cpp.i:
+	cd /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor && $(MAKE) -f src/CMakeFiles/Supervisor.dir/build.make src/CMakeFiles/Supervisor.dir/GetAprilTags.cpp.i
+.PHONY : GetAprilTags.cpp.i
+
+GetAprilTags.s: GetAprilTags.cpp.s
+
+.PHONY : GetAprilTags.s
+
+# target to generate assembly for a file
+GetAprilTags.cpp.s:
+	cd /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor && $(MAKE) -f src/CMakeFiles/Supervisor.dir/build.make src/CMakeFiles/Supervisor.dir/GetAprilTags.cpp.s
+.PHONY : GetAprilTags.cpp.s
+
 GotoPoint.o: GotoPoint.cpp.o
 
 .PHONY : GotoPoint.o
@@ -318,33 +345,6 @@ Supervisor_automoc.s: Supervisor_automoc.cpp.s
 Supervisor_automoc.cpp.s:
 	cd /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor && $(MAKE) -f src/CMakeFiles/Supervisor.dir/build.make src/CMakeFiles/Supervisor.dir/Supervisor_automoc.cpp.s
 .PHONY : Supervisor_automoc.cpp.s
-
-apriltagsI.o: apriltagsI.cpp.o
-
-.PHONY : apriltagsI.o
-
-# target to build an object file
-apriltagsI.cpp.o:
-	cd /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor && $(MAKE) -f src/CMakeFiles/Supervisor.dir/build.make src/CMakeFiles/Supervisor.dir/apriltagsI.cpp.o
-.PHONY : apriltagsI.cpp.o
-
-apriltagsI.i: apriltagsI.cpp.i
-
-.PHONY : apriltagsI.i
-
-# target to preprocess a source file
-apriltagsI.cpp.i:
-	cd /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor && $(MAKE) -f src/CMakeFiles/Supervisor.dir/build.make src/CMakeFiles/Supervisor.dir/apriltagsI.cpp.i
-.PHONY : apriltagsI.cpp.i
-
-apriltagsI.s: apriltagsI.cpp.s
-
-.PHONY : apriltagsI.s
-
-# target to generate assembly for a file
-apriltagsI.cpp.s:
-	cd /home/salabeta/robocomp/components/RoboticaProyecto1/Supervisor && $(MAKE) -f src/CMakeFiles/Supervisor.dir/build.make src/CMakeFiles/Supervisor.dir/apriltagsI.cpp.s
-.PHONY : apriltagsI.cpp.s
 
 commonbehaviorI.o: commonbehaviorI.cpp.o
 
@@ -585,15 +585,15 @@ help:
 	@echo "... DifferentialRobot.o"
 	@echo "... DifferentialRobot.i"
 	@echo "... DifferentialRobot.s"
+	@echo "... GetAprilTags.o"
+	@echo "... GetAprilTags.i"
+	@echo "... GetAprilTags.s"
 	@echo "... GotoPoint.o"
 	@echo "... GotoPoint.i"
 	@echo "... GotoPoint.s"
 	@echo "... Supervisor_automoc.o"
 	@echo "... Supervisor_automoc.i"
 	@echo "... Supervisor_automoc.s"
-	@echo "... apriltagsI.o"
-	@echo "... apriltagsI.i"
-	@echo "... apriltagsI.s"
 	@echo "... commonbehaviorI.o"
 	@echo "... commonbehaviorI.i"
 	@echo "... commonbehaviorI.s"

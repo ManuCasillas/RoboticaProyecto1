@@ -42,12 +42,13 @@ public:
 	~SpecificWorker();
 	bool setParams(RoboCompCommonBehavior::ParameterList params);
 
-	void picking_box();
-	void releasing_box();
+	void pickingBox();
 	void stop();
 	bool atTarget();
 	void turn(const float speed);
 	void go(const string &nodo, const float x, const float y, const float alpha);
+	bool pickedBox();
+	void releasingBox();
 	void setPick(const Pick &myPick);
 
 public slots:

@@ -3,12 +3,13 @@ import "/robocomp/interfaces/IDSLs/DifferentialRobot.idsl";
 import "/robocomp/interfaces/IDSLs/RCISMousePicker.idsl";
 import "/robocomp/interfaces/IDSLs/GotoPoint.idsl";
 import "/robocomp/interfaces/IDSLs/JointMotor.idsl";
+import "/robocomp/interfaces/IDSLs/GetAprilTags.idsl";
 
 Component chocagira
 {
 	Communications
 	{
-		requires Laser, DifferentialRobot, JointMotor;
+		requires Laser, DifferentialRobot, JointMotor, GetAprilTags;
 		subscribesTo RCISMousePicker;
 		implements GotoPoint;
 
