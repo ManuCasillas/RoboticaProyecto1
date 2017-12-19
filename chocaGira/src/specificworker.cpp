@@ -471,8 +471,11 @@ void SpecificWorker::stop()
 void SpecificWorker::pickingBox()
 {
   differentialrobot_proxy->setSpeedBase(0 , 0);
+  qDebug()<< "Esperando a picking";
+  usleep(2000);
+  qDebug()<< "Terminado picking";
   
-//    jointmotor_proxy->setPosition(2,0);
+    jointmotor_proxy->setPosition(2,0);
 //    jointmotor_proxy->
   //LLAMAMOS A FINISH??
    
