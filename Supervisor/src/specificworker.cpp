@@ -295,13 +295,22 @@ void SpecificWorker::wait()
 	gotopoint_proxy->stop();
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
     
+      
+     try{
+       
+       gotopoint_proxy->stop();
+    }catch(const Ice::Exception &e) { std::cout << e << std::endl;}
+    
    goBasurero = !goBasurero;
 
    
    // SI ESTA EN TARGET Y PICKEDBOX = FALSE, LLAMAR A PICKING pickingBoX, ELSE LLAMAR A LO QUE ESTA COMENTADO DEBAJO
    
-   if(goBasurero == true)
-         gotopoint_proxy->pickingBox();
+//    if(goBasurero == true){
+//      qDebug() << "Llama al pickingBox";
+//          //gotopoint_proxy->pickingBox();
+//    }
+
  
 //    if(goBasurero == false)
 //     stateTag = StateTag::SEARCH;

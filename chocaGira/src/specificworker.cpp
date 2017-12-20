@@ -37,6 +37,19 @@ SpecificWorker::~SpecificWorker()
 bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 {
 	innermodel = new InnerModel("/home/salabeta/robocomp/files/innermodel/betaWorldArm.xml");
+
+	goHome();
+	sleep(1);
+	
+	try 
+	{ mList = jointmotor_proxy->getAllMotorParams();}
+	catch(const Ice::Exception &e){ std::cout << e << std::endl;}
+	
+	joints << "shoulder_right_1"<<"shoulder_right_2"<<"shoulder_right_3"<<"elbow_right" << "wrist_right_1" << "wrist_right_2";
+	// Check that these names are in mList
+	motores = QVec::zeros(joints.size());
+	
+	
 	timer.start(Period);
 	return true;
 }
@@ -252,9 +265,14 @@ void SpecificWorker::gotoTarget()
 
    if(distTarget < 400)          // If close to obstacle stop and transit to IDLE
   {
+    
+    if (box){
+      state = State::PICKING;
+    } else
     //SI COOR.GETNODO == BOX , CAMBIAR A PICKING picking_box
     //SINO, FINISH
     state = State::FINISH;
+    
 
    return;
 
@@ -423,19 +441,19 @@ void  SpecificWorker::border()
 
 void SpecificWorker::go(const string &nodo, const float x, const float y, const float alpha)
 {
-  if (nodo == "box" && atTarget()){
+  std::cout << "Nodo" << nodo << std::endl;
+   if (nodo == "box"){
     //CAMBIAR ESTADO A PICKING BOX 
-     state = State::PICKING;
-  } else {
+    box = true;
+    qDebug() << "ENTRA EN go & nodo == basurero";
+  }
+    qDebug() << "ENTRA EN go & nodo != basurero";
     coor.setX(x);
     coor.setZ(y);
 //     qDebug() << "VALOR X EN GO" << x;
 //     qDebug() << "VALOR Y EN GO" << y;
     coor.activateTag();
     coor.activate();
-    
-     
-    }
     
 }
 void SpecificWorker::turn(const float speed)
@@ -456,6 +474,9 @@ bool SpecificWorker::atTarget()
   if (dist < 400){
     return true;
     
+    if (box){
+      state = State::PICKING;
+    } else
     state = State::FINISH;
     
   }else
@@ -472,10 +493,10 @@ void SpecificWorker::pickingBox()
 {
   differentialrobot_proxy->setSpeedBase(0 , 0);
   qDebug()<< "Esperando a picking";
-  usleep(2000);
+  prueba();
   qDebug()<< "Terminado picking";
   
-    jointmotor_proxy->setPosition(2,0);
+//     jointmotor_proxy->setPosition(2,0);
 //    jointmotor_proxy->
   //LLAMAMOS A FINISH??
    
@@ -490,6 +511,175 @@ bool SpecificWorker::pickedBox()
 void SpecificWorker::releasingBox()
 {
   qDebug() << "RELEASING";
+}
+
+
+void SpecificWorker::prueba()
+{
+
+	RoboCompJointMotor::MotorStateMap mMap;
+	RoboCompGetAprilTags::listaMarcas tagR;
+	float auxTX  = 0 ,auxTY = 0, auxTZ = 0;
+	try
+	{
+	  tagR = getapriltags_proxy->checkMarcas();
+	} 
+	  catch(const Ice::Exception &e)  { std::cout <<"checkMarcas - " <<e << std::endl;}
+	qDebug() << "1";
+	
+
+	  qDebug() << "2";
+	
+ 	try
+	{
+		jointmotor_proxy->getAllMotorState(mMap);
+		for(auto m: mMap)
+		{
+			innermodel->updateJointValue(QString::fromStdString(m.first),m.second.pos);
+			//std::cout << m.first << "		" << m.second.pos << std::endl;
+		}
+		std::cout << "--------------------------" << std::endl;
+	}
+	catch(const Ice::Exception &e)
+	{	std::cout << "JoinMotor -- "<<e.what() << std::endl;}
+	
+	//Compute Jacobian for the chain of joints and using as tip "cameraHand" 
+
+	QMat jacobian = innermodel->jacobian(joints, motores, "rgbdHand");
+	qDebug() << "3";
+	RoboCompJointMotor::MotorGoalVelocityList vl;
+	  
+
+	
+	  
+	  
+		try
+		{
+		  qDebug() << "4";
+		  
+			  auxTX = tagR.front().tx;
+			  auxTY = tagR.front().ty;
+			  auxTZ = tagR.front().tz;
+			  
+			  if (auxTX > 10){
+			    rightSlot();
+			  }
+			  if (auxTX < -10){
+			    leftSlot();
+			  }
+			  if (auxTY > 10){
+			    frontSlot();
+			  }
+			  if (auxTY < -10){
+			    backSlot();
+			  }
+			  if (auxTZ > 10){
+			    downSlot();
+			  }
+			  if (auxTZ < -10){
+			    upSlot();
+			  }
+			  
+			
+			QVec incs = jacobian.invert() * error;	
+			qDebug() << "4.75";
+			int i=0;
+			qDebug() << "4.8";
+			for(auto m: joints)
+			{
+				//RoboCompJointMotor::MotorGoalPosition mg = {mMap.find(m.toStdString())->second.pos + incs[i], 1.0, m.toStdString()};
+				RoboCompJointMotor::MotorGoalVelocity vg{FACTOR*incs[i], 1.0, m.toStdString()};
+				//ml.push_back(mg);
+				vl.push_back(vg);
+				i++;
+			}
+			qDebug() << "5";
+		}	
+		catch(const QString &e)
+		{ qDebug() << e << "Error inverting matrix";}
+		
+// 	sleep(4);
+// 	  qDebug() << "6";
+// 		for(auto m: joints)
+// 		{
+// 			RoboCompJointMotor::MotorGoalVelocity vg{0.0, 1.0, m.toStdString()};
+// 			vl.push_back(vg);
+// 		}
+// 	
+// 	//Do the thing
+// 	try
+// 	{ 
+// 	  qDebug() << "7";
+// 		jointmotor_proxy->setSyncVelocity(vl);
+// 	}
+// 	catch(const Ice::Exception &e)
+// 	{	std::cout << "SetSyncVelocity "<<e.what() << std::endl;}
+} 	
+	
+	
+void SpecificWorker::goHome()
+{
+	RoboCompJointMotor::MotorStateMap mMap;
+	try
+	{
+		jointmotor_proxy->getAllMotorState(mMap);
+		for(auto m: mMap)
+		{
+			RoboCompJointMotor::MotorGoalPosition mg = { innermodel->getJoint(m.first)->home, 1.0, m.first };
+			jointmotor_proxy->setPosition(mg);
+		}
+		sleep(1);
+	}
+	catch(const Ice::Exception &e)
+	{	std::cout << e.what() << std::endl;}	
+}
+
+
+bool SpecificWorker::isPushed()
+{
+	if (box && atTarget()) {
+	  return true;
+	} else
+	  return false;
+}
+
+//////////////////
+/// SLOTS
+/////////////////
+
+void SpecificWorker::leftSlot()
+{
+	error = QVec::vec6(INCREMENT,0,0,0,0,0);
+}
+
+void SpecificWorker::rightSlot()
+{
+	error = QVec::vec6(-INCREMENT,0,0,0,0,0);
+}
+
+void SpecificWorker::frontSlot()
+{
+	error = QVec::vec6(0,-INCREMENT,0,0,0,0);
+}
+
+void SpecificWorker::backSlot()
+{
+	error = QVec::vec6(0,INCREMENT,0,0,0,0);
+}
+
+void SpecificWorker::upSlot()
+{
+	error = QVec::vec6(0,0,INCREMENT,0,0,0);
+}
+
+void SpecificWorker::downSlot()
+{
+	error = QVec::vec6(0,0,-INCREMENT,0,0,0);
+}
+
+void SpecificWorker::changeSpeed(int s)
+{
+	FACTOR = s;
 }
 
 

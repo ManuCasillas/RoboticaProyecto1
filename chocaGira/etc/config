@@ -4,7 +4,7 @@ CommonBehavior.Endpoints=tcp -p 12000
 # Proxies for required interfaces
 DifferentialRobotProxy = differentialrobot:tcp -h localhost -p 10004
 LaserProxy = laser:tcp -h localhost -p 10003
-JointMotorProxy = jointmotor:tcp -h localhost -p 10007
+JointMotorProxy = jointmotor:tcp -h localhost -p 20000
 RCISMousePickerTopic.Endpoints=tcp -p 15000
 TopicManager.Proxy=IceStorm/TopicManager:default -p 9999
 GotoPoint.Endpoints=tcp -p 10005

@@ -33,9 +33,12 @@
 
 #include <genericworker.h>
 #include <innermodel/innermodel.h>
+// #include <innermodel/innermodelmgr.h>
 #include <vector>
 #include <Laser.h>
 #include <JointMotor.h>
+
+#define INCREMENT 10
 
 
 class SpecificWorker : public GenericWorker
@@ -65,6 +68,7 @@ public:
 	void finish();
 	void border();
 	bool shock();
+	void prueba();
 	
 	
 private:
@@ -141,15 +145,34 @@ private:
 	  QMutex mutex;
 	  QVec vec;
 	  
+	  
        };
        InnerModel *innermodel;
 
 	//Tag tag;
 	float distTarget;
 	Coordinate coor;
+// 	InnerModelMgr innerModel;
+	RoboCompJointMotor::MotorParamsList mList;
+	QStringList joints;
+	QVec motores;
+	QVec error;
+	bool pushedButton = false;
+	int FACTOR = 1;
+	bool box = false;
+	
+bool isPushed();
 	 
 public slots:
-	void compute(); 	
+	void compute(); 
+	void leftSlot();
+	void rightSlot();
+	void upSlot();
+	void downSlot();
+	void frontSlot();
+	void backSlot();
+	void goHome();
+	void changeSpeed(int);
 
 	
 };
