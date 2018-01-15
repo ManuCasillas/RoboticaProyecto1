@@ -447,7 +447,12 @@ void SpecificWorker::go(const string &nodo, const float x, const float y, const 
     box = true;
     qDebug() << "ENTRA EN go & nodo == basurero";
   }
-    qDebug() << "ENTRA EN go & nodo != basurero";
+  if (nodo == "basurero") {
+    
+   box = false;
+   qDebug() << "ENTRA EN go & nodo != basurero";
+  }
+//     qDebug() << "ENTRA EN go & nodo != basurero";
     coor.setX(x);
     coor.setZ(y);
 //     qDebug() << "VALOR X EN GO" << x;
@@ -472,15 +477,20 @@ bool SpecificWorker::atTarget()
   qDebug() << "Distancia al objetivo: ---------------" << dist;
   
   if (dist < 400){
-    return true;
+     return true;
     
     if (box){
       state = State::PICKING;
-    } else
+//       return 
+    } else{
     state = State::FINISH;
+//     return false;
+    }
     
   }else
     return false; 
+  
+    
  
 }
 void SpecificWorker::stop()
@@ -504,8 +514,10 @@ void SpecificWorker::pickingBox()
 
 bool SpecificWorker::pickedBox()
 {
-  //devolver true cuando este recogida
- return true; 
+  if(box == false)
+      return true;
+  
+  return false;
 }
 
 void SpecificWorker::releasingBox()
@@ -549,10 +561,7 @@ void SpecificWorker::prueba()
 	qDebug() << "3";
 	RoboCompJointMotor::MotorGoalVelocityList vl;
 	  
-
-	
-	  
-	  
+	  if (!tagR.empty()){
 		try
 		{
 		  qDebug() << "4";
@@ -560,7 +569,7 @@ void SpecificWorker::prueba()
 			  auxTX = tagR.front().tx;
 			  auxTY = tagR.front().ty;
 			  auxTZ = tagR.front().tz;
-			  
+			  // ESTO ES CORRECTO
 			  if (auxTX > 10){
 			    rightSlot();
 			  }
@@ -597,23 +606,41 @@ void SpecificWorker::prueba()
 		}	
 		catch(const QString &e)
 		{ qDebug() << e << "Error inverting matrix";}
+	  }
+	  else {
+	    qDebug()<< "Caja Cogida";
+		for(auto m: joints)
+		{
+			RoboCompJointMotor::MotorGoalVelocity vg{0.0, 1.0, m.toStdString()};
+			vl.push_back(vg);
+		}
+	qDebug() << "Brazo Parado";
+	qDebug() << "Llamar a coger caja";
+	box = false;
+ 	goHome();
+	
+	  }
 		
-// 	sleep(4);
-// 	  qDebug() << "6";
+// // 	//sleep(4);
+	  qDebug() << "6";
 // 		for(auto m: joints)
 // 		{
 // 			RoboCompJointMotor::MotorGoalVelocity vg{0.0, 1.0, m.toStdString()};
 // 			vl.push_back(vg);
 // 		}
-// 	
-// 	//Do the thing
-// 	try
-// 	{ 
-// 	  qDebug() << "7";
-// 		jointmotor_proxy->setSyncVelocity(vl);
-// 	}
-// 	catch(const Ice::Exception &e)
-// 	{	std::cout << "SetSyncVelocity "<<e.what() << std::endl;}
+	
+	//Do the thing
+	try
+	{ 
+	  qDebug() << "7";
+		jointmotor_proxy->setSyncVelocity(vl);
+	}
+	catch(const Ice::Exception &e)
+	{	std::cout << "SetSyncVelocity "<<e.what() << std::endl;}
+	if (pickedBox()){
+	  state = State::GOTO;
+	}
+	  
 } 	
 	
 	

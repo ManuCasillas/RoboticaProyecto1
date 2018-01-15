@@ -251,7 +251,7 @@ void SpecificWorker::searchCorner()
       gotopoint_proxy->stop(); 
 	
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
-      
+     // goBasurero = !goBasurero;
       stateTag = StateTag::GOTO;
      }
      
@@ -268,14 +268,16 @@ void SpecificWorker::gotoT()
 	//gotopoint_proxy->stop(); 
 //       qDebug() << "Entra tol rato";
 	//LE PASAMOS BOX O BASUSERO mirando la variable basusero
-      if(basurero == true)
+      if(goBasurero == true)
 	gotopoint_proxy->go("basurero", rt.x(), rt.z(),0);
       else
 	gotopoint_proxy->go("box", rt.x(), rt.z(),0);
 	
+      
+      stateTag = StateTag::WAIT; 
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
       
-      stateTag = StateTag::WAIT;   
+        
   
 }
 
@@ -288,20 +290,25 @@ void SpecificWorker::wait()
       aux = gotopoint_proxy->atTarget();
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
 
-  
-  if(aux == true){
+  if(aux == false){
+     stateTag = StateTag::GOTO;
+     
+  }else 
+    if(aux == true && gotopoint_proxy->pickedBox() == true ){//si esta en el objetivo y se ha recogido la caja
     try 
       {
 	gotopoint_proxy->stop();
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
     
-      
-     try{
+//        goBasurero = !goBasurero;
+       goBasurero = true;
+//         if(goBasurero == false)
+// 	  stateTag = StateTag::SEARCH;
+// 	else
+// 	  stateTag = StateTag::SEARCH_CORNER;
        
-       gotopoint_proxy->stop();
-    }catch(const Ice::Exception &e) { std::cout << e << std::endl;}
-    
-   goBasurero = !goBasurero;
+       stateTag = StateTag::SEARCH_CORNER;
+//        stateTag = StateTag::GOTO;
 
    
    // SI ESTA EN TARGET Y PICKEDBOX = FALSE, LLAMAR A PICKING pickingBoX, ELSE LLAMAR A LO QUE ESTA COMENTADO DEBAJO
@@ -311,14 +318,21 @@ void SpecificWorker::wait()
 //          //gotopoint_proxy->pickingBox();
 //    }
 
- 
-//    if(goBasurero == false)
+    }
+  else if(aux == true && gotopoint_proxy->pickedBox() == false){  // si  esta en el objetivo o si no ha sido recogida
+    goBasurero = false;
+   // stateTag = StateTag::SEARCH;
+  }
+//  stateTag = StateTag::SEARCH;
+//   if(goBasurero == false)
 //     stateTag = StateTag::SEARCH;
 //    else
-//     stateTag = StateTag::SEARCH_CORNER;
-   
-  }else{
-    stateTag = StateTag::GOTO;
-  }
+    //stateTag = StateTag::SEARCH_CORNER;
+  
+  
+//   if (gotopoint_proxy->pickedBox()){
+//     
+//     stateTag = StateTag::GOTO;
+//   }
 }
      
