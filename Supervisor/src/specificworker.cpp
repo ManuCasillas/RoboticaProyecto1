@@ -116,7 +116,8 @@ void SpecificWorker::newAprilTag(RoboCompGetAprilTags::listaMarcas& tags)
  for (auto d:tags){
    
   if(d.id == basurero && goBasurero == true){ //
-     //qDebug() << " HOLAHOLA---HOLAHOLA";
+//      qDebug() << " HOLAHOLA---HOLAHOLA";
+     
     rt = innermodel->transform("world", QVec::vec3(d.tx, 0, d.tz), "robot");
     auxID = d.id;
     auxTX = d.tx;
@@ -132,8 +133,11 @@ void SpecificWorker::newAprilTag(RoboCompGetAprilTags::listaMarcas& tags)
       rt = innermodel->transform("world", QVec::vec3(tag.getTX(), 0, tag.getTZ()), "robot");
       
       distanciaMax = 99999;
+      
+//         goBasurero = !goBasurero;
 
   }else  if (d.id >= primeraCaja && goBasurero == false && (visitado(d.id) == false || idActual == d.id) ){
+     
    qDebug()<<"Tags mostrados  " << d.id;
    QVec rd  = innermodel->transform("world", QVec::vec3(d.tx, 0, d.tz), "robot");
     dist = rd.norm2();
@@ -161,7 +165,7 @@ void SpecificWorker::newAprilTag(RoboCompGetAprilTags::listaMarcas& tags)
   
 //   rt = innermodel->transform("world", QVec::vec3(tag.getTX(), 0, tag.getTZ()), "robot");  
  
- 
+//   goBasurero = !goBasurero;
 }
 
 void SpecificWorker::initial()
@@ -178,7 +182,7 @@ void SpecificWorker::initial()
 
 void SpecificWorker::search()
 {
-  
+ goBasurero = false; 
    try
     { 
     gotopoint_proxy->turn(1);
@@ -198,7 +202,9 @@ void SpecificWorker::search()
 	cajasRecogidas[i] = tag.getID();
 	idActual = tag.getID();
 	entra = true;
+	
 	stateTag = StateTag::GOTO;
+	
       }
       qDebug()<< " --------cajas recogidas "<< cajasRecogidas[i];
   }
@@ -233,7 +239,7 @@ bool SpecificWorker::visitado(int id){
  
 void SpecificWorker::searchCorner()
 {
- 
+  goBasurero = true;
   
    try
     { 
@@ -242,7 +248,7 @@ void SpecificWorker::searchCorner()
     catch(const Ice::Exception &e)  { std::cout << e << std::endl;}
     
    
-    
+    qDebug() << "GET ID" <<tag.getID() ;
     if(tag.getID() == basurero)
     {
 	qDebug()<< " --------tagid Corner "<< tag.getID();
@@ -251,7 +257,8 @@ void SpecificWorker::searchCorner()
       gotopoint_proxy->stop(); 
 	
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
-     // goBasurero = !goBasurero;
+//       goBasurero = !goBasurero;
+      
       stateTag = StateTag::GOTO;
      }
      
@@ -268,11 +275,13 @@ void SpecificWorker::gotoT()
 	//gotopoint_proxy->stop(); 
 //       qDebug() << "Entra tol rato";
 	//LE PASAMOS BOX O BASUSERO mirando la variable basusero
-      if(goBasurero == true)
+      if(goBasurero == true){
+// 	goBasurero = false;
 	gotopoint_proxy->go("basurero", rt.x(), rt.z(),0);
-      else
+      }else{
+// 	goBasurero = true;
 	gotopoint_proxy->go("box", rt.x(), rt.z(),0);
-	
+      }
       
       stateTag = StateTag::WAIT; 
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
@@ -280,6 +289,49 @@ void SpecificWorker::gotoT()
         
   
 }
+
+
+
+
+// void SpecificWorker::wait()
+// {
+//   bool aux = false;
+//   
+//   try 
+//       {
+//       aux = gotopoint_proxy->atTarget();
+//       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
+// 
+//   if(aux == false){
+//      qDebug()<<"aux";
+//      stateTag = StateTag::GOTO;
+//      
+//   }else 
+//     if( gotopoint_proxy->pickedBox() == true ){//si esta en el objetivo y se ha recogido la caja
+//     try 
+//       {
+// 	gotopoint_proxy->stop();
+//       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
+//           qDebug()<< "true";
+// //        if(goBasurero == false)
+// // 	stateTag = StateTag::SEARCH;
+// //        else 
+// // 	 stateTag = StateTag::SEARCH_CORNER;
+// 
+//       
+//        
+// //        goBasurero = true;
+//        stateTag = StateTag::SEARCH_CORNER;
+// 
+//        
+//     }
+//   else if(gotopoint_proxy->pickedBox() == false){  // si  esta en el objetivo o si no ha sido recogida
+// // //     goBasurero = false;
+//     qDebug()<< "false";
+//    // stateTag = StateTag::SEARCH;
+//   }
+//     
+// }
 
 void SpecificWorker::wait()
 {
@@ -290,49 +342,37 @@ void SpecificWorker::wait()
       aux = gotopoint_proxy->atTarget();
       } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
 
-  if(aux == false){
-     stateTag = StateTag::GOTO;
-     
-  }else 
-    if(aux == true && gotopoint_proxy->pickedBox() == true ){//si esta en el objetivo y se ha recogido la caja
-    try 
-      {
-	gotopoint_proxy->stop();
-      } catch(const Ice::Exception &e) { std::cout << e << std::endl;}
+  
+  if(aux == true){
     
-//        goBasurero = !goBasurero;
-       goBasurero = true;
-//         if(goBasurero == false)
-// 	  stateTag = StateTag::SEARCH;
-// 	else
-// 	  stateTag = StateTag::SEARCH_CORNER;
+     try{
        
-       stateTag = StateTag::SEARCH_CORNER;
-//        stateTag = StateTag::GOTO;
-
-   
-   // SI ESTA EN TARGET Y PICKEDBOX = FALSE, LLAMAR A PICKING pickingBoX, ELSE LLAMAR A LO QUE ESTA COMENTADO DEBAJO
-   
-//    if(goBasurero == true){
-//      qDebug() << "Llama al pickingBox";
-//          //gotopoint_proxy->pickingBox();
-//    }
-
+       gotopoint_proxy->stop();
+    }catch(const Ice::Exception &e) { std::cout << e << std::endl;}
+    
+//    
+    
+     if (gotopoint_proxy->pickedBox() == false){ //esperando a que baje el brazo
+//         goBasurero = true;
+    } else  
+     if(goBasurero == true){
+       
+    stateTag = StateTag::SEARCH;
+//     goBasurero = true;
+    
+     }
+     else {
+       
+	stateTag = StateTag::SEARCH_CORNER;
+// 	 goBasurero = false;
+	
     }
-  else if(aux == true && gotopoint_proxy->pickedBox() == false){  // si  esta en el objetivo o si no ha sido recogida
-    goBasurero = false;
-   // stateTag = StateTag::SEARCH;
+
+//     goBasurero = !goBasurero;
+   
+  }else{
+    stateTag = StateTag::GOTO;
   }
-//  stateTag = StateTag::SEARCH;
-//   if(goBasurero == false)
-//     stateTag = StateTag::SEARCH;
-//    else
-    //stateTag = StateTag::SEARCH_CORNER;
-  
-  
-//   if (gotopoint_proxy->pickedBox()){
-//     
-//     stateTag = StateTag::GOTO;
-//   }
 }
-     
+
+

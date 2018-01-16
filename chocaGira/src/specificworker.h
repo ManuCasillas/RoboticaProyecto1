@@ -68,7 +68,7 @@ public:
 	void finish();
 	void border();
 	bool shock();
-	void prueba();
+	void moveArm();
 	
 	
 private:

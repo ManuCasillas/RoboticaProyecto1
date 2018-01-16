@@ -503,7 +503,7 @@ void SpecificWorker::pickingBox()
 {
   differentialrobot_proxy->setSpeedBase(0 , 0);
   qDebug()<< "Esperando a picking";
-  prueba();
+  moveArm();
   qDebug()<< "Terminado picking";
   
 //     jointmotor_proxy->setPosition(2,0);
@@ -526,7 +526,7 @@ void SpecificWorker::releasingBox()
 }
 
 
-void SpecificWorker::prueba()
+void SpecificWorker::moveArm()
 {
 
 	RoboCompJointMotor::MotorStateMap mMap;
@@ -638,7 +638,7 @@ void SpecificWorker::prueba()
 	catch(const Ice::Exception &e)
 	{	std::cout << "SetSyncVelocity "<<e.what() << std::endl;}
 	if (pickedBox()){
-	  state = State::GOTO;
+	  state = State::FINISH;
 	}
 	  
 } 	
