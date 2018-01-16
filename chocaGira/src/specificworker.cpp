@@ -522,7 +522,14 @@ bool SpecificWorker::pickedBox()
 
 void SpecificWorker::releasingBox()
 {
-  qDebug() << "RELEASING";
+  //mover brazo hacia abajo
+  // hasta que toque el suelo -> verruga suelta la caja
+  // box = true
+  //gohome();
+  
+  //llamar cuando estemos en corner y que haya llegado al objetivo
+  
+  
 }
 
 
@@ -607,13 +614,18 @@ void SpecificWorker::moveArm()
 		catch(const QString &e)
 		{ qDebug() << e << "Error inverting matrix";}
 	  }
-	  else {
+	  else { //DEJA DE VER LA CAJA	
+	    //EJECUTAR LA VERRUGA
+	    //CERRAR DEDOS Y BAJAR  _--> CREAR METODO PARA CERRAR  -> PARA ABRIR= GOHOME
+	    
+	    
 	    qDebug()<< "Caja Cogida";
 		for(auto m: joints)
 		{
 			RoboCompJointMotor::MotorGoalVelocity vg{0.0, 1.0, m.toStdString()};
 			vl.push_back(vg);
 		}
+	
 	qDebug() << "Brazo Parado";
 	qDebug() << "Llamar a coger caja";
 	box = false;
