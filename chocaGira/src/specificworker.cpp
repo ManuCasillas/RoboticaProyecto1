@@ -268,10 +268,11 @@ void SpecificWorker::gotoTarget()
     
     if (box){
       state = State::PICKING;
-    } else
+    } else {
     //SI COOR.GETNODO == BOX , CAMBIAR A PICKING picking_box
     //SINO, FINISH
-    state = State::FINISH;
+    state = State::RELEASING;
+    }
     
 
    return;
@@ -483,7 +484,7 @@ bool SpecificWorker::atTarget()
       state = State::PICKING;
 //       return 
     } else{
-    state = State::FINISH;
+    state = State::RELEASING;
 //     return false;
     }
     
@@ -529,6 +530,11 @@ void SpecificWorker::releasingBox()
   
   //llamar cuando estemos en corner y que haya llegado al objetivo
   
+  differentialrobot_proxy->setSpeedBase(0 , 0);
+  moveDownArm();
+  state = State::FINISH;
+  
+  
   
 }
 
@@ -567,32 +573,40 @@ void SpecificWorker::moveArm()
 	QMat jacobian = innermodel->jacobian(joints, motores, "rgbdHand");
 	qDebug() << "3";
 	RoboCompJointMotor::MotorGoalVelocityList vl;
+	error = QVec::vec6(0,0,0,0,0,0);
 	  
 	  if (!tagR.empty()){
+// 	    auxTX = tagR.front().tx;
+// 			  auxTY = tagR.front().ty;
+// 			  auxTZ = tagR.front().tz;
+	    
+	    
+	    //while()
 		try
 		{
-		  qDebug() << "4";
 		  
-			  auxTX = tagR.front().tx;
+		  
+			  auxTX = tagR.front().tx; //objetivo final 
 			  auxTY = tagR.front().ty;
 			  auxTZ = tagR.front().tz;
+			  qDebug() << "auxTX: "<< auxTX << " auxTY: " << auxTY << "AuxTZ: " << auxTZ;
 			  // ESTO ES CORRECTO
-			  if (auxTX > 10){
+			  if (auxTX > INCREMENT){
 			    rightSlot();
 			  }
-			  if (auxTX < -10){
+			  if (auxTX < -INCREMENT){
 			    leftSlot();
 			  }
-			  if (auxTY > 10){
+			  if (auxTY > INCREMENT){
 			    frontSlot();
 			  }
-			  if (auxTY < -10){
+			  if (auxTY < -INCREMENT){
 			    backSlot();
 			  }
-			  if (auxTZ > 10){
+			  if (auxTZ > INCREMENT){
 			    downSlot();
 			  }
-			  if (auxTZ < -10){
+			  if (auxTZ < -INCREMENT){
 			    upSlot();
 			  }
 			  
@@ -609,15 +623,19 @@ void SpecificWorker::moveArm()
 				vl.push_back(vg);
 				i++;
 			}
+			
 			qDebug() << "5";
 		}	
 		catch(const QString &e)
 		{ qDebug() << e << "Error inverting matrix";}
 	  }
-	  else { //DEJA DE VER LA CAJA	
+	  else { 
+	    closeHand();
+	    sleep(2);	
 	    //EJECUTAR LA VERRUGA
 	    //CERRAR DEDOS Y BAJAR  _--> CREAR METODO PARA CERRAR  -> PARA ABRIR= GOHOME
 	    
+	    //msleep(500);
 	    
 	    qDebug()<< "Caja Cogida";
 		for(auto m: joints)
@@ -653,7 +671,31 @@ void SpecificWorker::moveArm()
 	  state = State::FINISH;
 	}
 	  
-} 	
+} 
+
+void SpecificWorker::moveDownArm()
+{
+  RoboCompJointMotor::MotorGoalVelocityList vl;
+  QMat jacobian = innermodel->jacobian(joints, motores, "rgbdHand");
+  error = QVec::vec6(0,0,0,0,0,0);
+  downSlot();
+  QVec incs = jacobian.invert() * error;
+  int i=0;
+  qDebug() << "4.8";
+  for(auto m: joints)
+  {
+    //RoboCompJointMotor::MotorGoalPosition mg = {mMap.find(m.toStdString())->second.pos + incs[i], 1.0, m.toStdString()};
+    RoboCompJointMotor::MotorGoalVelocity vg{FACTOR*incs[i], 1.0, m.toStdString()};
+    //ml.push_back(mg);
+    vl.push_back(vg);
+    i++;
+  }
+  sleep(3);
+  
+  goHome();
+  
+}
+
 	
 	
 void SpecificWorker::goHome()
@@ -673,6 +715,25 @@ void SpecificWorker::goHome()
 	{	std::cout << e.what() << std::endl;}	
 }
 
+	
+void SpecificWorker::closeHand()
+{
+	RoboCompJointMotor::MotorGoalPosition finger_right_1, finger_right_2;
+	
+	finger_right_1.name = "finger_right_1";
+	finger_right_1.position = -0.6;
+	finger_right_1.maxSpeed = 1;
+	
+	finger_right_2.name = "finger_right_2";
+	finger_right_2.position = 0.6;
+	finger_right_2.maxSpeed = 1;
+	
+	jointmotor_proxy->setPosition(finger_right_1);
+	jointmotor_proxy->setPosition(finger_right_2);
+		
+}
+
+
 
 bool SpecificWorker::isPushed()
 {
@@ -688,32 +749,32 @@ bool SpecificWorker::isPushed()
 
 void SpecificWorker::leftSlot()
 {
-	error = QVec::vec6(INCREMENT,0,0,0,0,0);
+	error += QVec::vec6(INCREMENT,0,0,0,0,0);
 }
 
 void SpecificWorker::rightSlot()
 {
-	error = QVec::vec6(-INCREMENT,0,0,0,0,0);
+	error += QVec::vec6(-INCREMENT,0,0,0,0,0);
 }
 
 void SpecificWorker::frontSlot()
 {
-	error = QVec::vec6(0,-INCREMENT,0,0,0,0);
+	error += QVec::vec6(0,-INCREMENT,0,0,0,0);
 }
 
 void SpecificWorker::backSlot()
 {
-	error = QVec::vec6(0,INCREMENT,0,0,0,0);
+	error += QVec::vec6(0,INCREMENT,0,0,0,0);
 }
 
 void SpecificWorker::upSlot()
 {
-	error = QVec::vec6(0,0,INCREMENT,0,0,0);
+	error += QVec::vec6(0,0,INCREMENT,0,0,0);
 }
 
 void SpecificWorker::downSlot()
 {
-	error = QVec::vec6(0,0,-INCREMENT,0,0,0);
+	error += QVec::vec6(0,0,-INCREMENT,0,0,0);
 }
 
 void SpecificWorker::changeSpeed(int s)

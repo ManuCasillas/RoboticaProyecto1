@@ -22,7 +22,7 @@ static const uint qt_meta_data_SpecificWorker[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      10,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -39,6 +39,7 @@ static const uint qt_meta_data_SpecificWorker[] = {
       81,   15,   15,   15, 0x0a,
       92,   15,   15,   15, 0x0a,
      101,   15,   15,   15, 0x0a,
+     113,   15,   15,   15, 0x0a,
 
        0        // eod
 };
@@ -47,7 +48,7 @@ static const char qt_meta_stringdata_SpecificWorker[] = {
     "SpecificWorker\0\0compute()\0leftSlot()\0"
     "rightSlot()\0upSlot()\0downSlot()\0"
     "frontSlot()\0backSlot()\0goHome()\0"
-    "changeSpeed(int)\0"
+    "closeHand()\0changeSpeed(int)\0"
 };
 
 void SpecificWorker::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -64,7 +65,8 @@ void SpecificWorker::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 5: _t->frontSlot(); break;
         case 6: _t->backSlot(); break;
         case 7: _t->goHome(); break;
-        case 8: _t->changeSpeed((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 8: _t->closeHand(); break;
+        case 9: _t->changeSpeed((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -102,9 +104,9 @@ int SpecificWorker::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 10;
     }
     return _id;
 }

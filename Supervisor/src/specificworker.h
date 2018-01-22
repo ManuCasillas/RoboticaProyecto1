@@ -109,7 +109,7 @@ private:
 // 	int current = 10;//make the robot turn until the tag.id == current
 	Tag tag;
 // 	bool entra = false;
-	int primeraCaja = 11; //para resetear mas facilmente
+	int primeraCaja = 10; //para resetear mas facilmente
 	int basurero = 3; //AprilTags que servira como basurero
 	bool goBasurero = false;
 	int cajasRecogidas[10];

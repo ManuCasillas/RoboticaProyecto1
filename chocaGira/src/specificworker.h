@@ -38,7 +38,7 @@
 #include <Laser.h>
 #include <JointMotor.h>
 
-#define INCREMENT 10
+#define INCREMENT 20
 
 
 class SpecificWorker : public GenericWorker
@@ -69,6 +69,7 @@ public:
 	void border();
 	bool shock();
 	void moveArm();
+	void moveDownArm();
 	
 	
 private:
@@ -172,6 +173,7 @@ public slots:
 	void frontSlot();
 	void backSlot();
 	void goHome();
+	void closeHand();
 	void changeSpeed(int);
 
 	
