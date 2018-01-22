@@ -531,8 +531,10 @@ void SpecificWorker::releasingBox()
   //llamar cuando estemos en corner y que haya llegado al objetivo
   
   differentialrobot_proxy->setSpeedBase(0 , 0);
+  box = true;
   moveDownArm();
   state = State::FINISH;
+   box = false;
   
   
   
@@ -631,7 +633,7 @@ void SpecificWorker::moveArm()
 	  }
 	  else { 
 	    closeHand();
-	    sleep(2);	
+	    sleep(3);	
 	    //EJECUTAR LA VERRUGA
 	    //CERRAR DEDOS Y BAJAR  _--> CREAR METODO PARA CERRAR  -> PARA ABRIR= GOHOME
 	    
@@ -674,14 +676,26 @@ void SpecificWorker::moveArm()
 } 
 
 void SpecificWorker::moveDownArm()
-{
+{/*
+  RoboCompJointMotor::MotorStateMap mMap;
+  jointmotor_proxy->getAllMotorState(mMap);
+  for(auto m: mMap)
+  {
+    innermodel->updateJointValue(QString::fromStdString(m.first),m.second.pos);
+    //std::cout << m.first << "		" << m.second.pos << std::endl;
+  }
+  std::cout << "--------------------------" << std::endl;
   RoboCompJointMotor::MotorGoalVelocityList vl;
   QMat jacobian = innermodel->jacobian(joints, motores, "rgbdHand");
+  
   error = QVec::vec6(0,0,0,0,0,0);
   downSlot();
+  
   QVec incs = jacobian.invert() * error;
+  
   int i=0;
   qDebug() << "4.8";
+  
   for(auto m: joints)
   {
     //RoboCompJointMotor::MotorGoalPosition mg = {mMap.find(m.toStdString())->second.pos + incs[i], 1.0, m.toStdString()};
@@ -690,6 +704,17 @@ void SpecificWorker::moveDownArm()
     vl.push_back(vg);
     i++;
   }
+  */
+    differentialrobot_proxy->setSpeedBase(0 , 0);
+
+  	RoboCompJointMotor::MotorGoalPosition shoulder_right_2;
+	
+	shoulder_right_2.name = "shoulder_right_2";
+	shoulder_right_2.position = -0.35;
+	shoulder_right_2.maxSpeed = 0.5;
+	
+	
+	jointmotor_proxy->setPosition(shoulder_right_2);
   sleep(3);
   
   goHome();
